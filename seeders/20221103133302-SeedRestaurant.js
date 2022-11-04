@@ -3,11 +3,15 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     const dataRestaurant = require("../data/restaurants.json");
-    dataRestaurant.forEach((el) => {
+    dataRestaurant.restaurants.forEach((el) => {
       el.createdAt = el.updatedAt = new Date();
     });
 
-    await queryInterface.bulkInsert("Restaurants", dataRestaurant, {});
+    await queryInterface.bulkInsert(
+      "Restaurants",
+      dataRestaurant.restaurants,
+      {}
+    );
     /**
      * Add seed commands here.
      *

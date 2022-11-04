@@ -22,6 +22,18 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      description: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Description is required",
+          },
+          notEmpty: {
+            msg: "Description is required",
+          },
+        },
+      },
       rate: {
         type: DataTypes.FLOAT,
         allowNull: false,
@@ -154,7 +166,7 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      longtitude: {
+      longitude: {
         type: DataTypes.FLOAT,
         allowNull: false,
       },

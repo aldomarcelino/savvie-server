@@ -37,7 +37,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.FLOAT,
       },
-      longtitude: {
+      longitude: {
         allowNull: false,
         type: Sequelize.FLOAT,
       },

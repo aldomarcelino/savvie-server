@@ -97,7 +97,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
-      longtitude: {
+      longitude: {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
