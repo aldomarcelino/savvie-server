@@ -40,7 +40,6 @@ class Controller {
   static async createRestaurant(req, res, next) {
     try {
       const { id } = req.user;
-      const username = req.user.email;
       const {
         name,
         rate,
@@ -56,7 +55,7 @@ class Controller {
         address,
         longitude,
         latitude,
-        UserId,
+        UserId = id,
       } = req.body;
       const restaurant = await Restaurant.create({
         name,

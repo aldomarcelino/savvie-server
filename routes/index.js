@@ -12,10 +12,9 @@ router.use("/", users);
 router.use("/restaurants", restaurants);
 router.use("/food", foods);
 router.use("/categories", categorys);
-router.use("/favorite", favourites);
+router.use("/favorites", favourites);
 
-router.use(authentication)
-router.use("/resto/food", resto)
-
+router.use(authentication);
+router.use("/resto/food", resto);
 
 module.exports = router;

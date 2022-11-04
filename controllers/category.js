@@ -7,9 +7,7 @@ class Controller {
         include: [{ model: CategoryResto }, { model: Food }],
       });
 
-      res.status(200).json({
-        category,
-      });
+      res.status(200).json(category);
     } catch (error) {
       next(error);
     }
@@ -25,9 +23,7 @@ class Controller {
 
       if (!category) throw { name: "Not found", msg: "Id not found" };
 
-      res.status(200).json({
-        category,
-      });
+      res.status(200).json(category);
     } catch (error) {
       next(error);
     }

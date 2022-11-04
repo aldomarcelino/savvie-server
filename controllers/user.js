@@ -1,9 +1,23 @@
 const { comparePass } = require("../helpers/bcrypt");
 const { createSign } = require("../helpers/jwt");
-const { User } = require("../models");
+const { User, Restaurant } = require("../models");
 const { OAuth2Client } = require("google-auth-library");
 
 class Controller {
+  static async allUser(req, res, next) {
+    try {
+      const user = await User.findAll({
+        include: [Restaurant],
+      });
+      res.status(200).json({
+        statusCode: 200,
+        user,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async createUser(req, res, next) {
     try {
       const { fullName, email, password, phoneNumber, address } = req.body;
