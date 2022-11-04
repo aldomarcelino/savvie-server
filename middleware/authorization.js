@@ -1,13 +1,13 @@
-const { Job } = require("../models");
+const { Favourite } = require("../models");
 
 const authorization = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { role, id: authorId } = req.user;
-    const job = await Job.findByPk(id);
-    if (!job) throw { name: "Not found", msg: "Id not found" };
+    const favourite = await Favourite.findByPk(id);
+    if (!favourite) throw { name: "Not found", message: "Id not found" };
 
-    if (role === "Staff" && job.authorId === authorId) {
+    if (role === "Staff" && Favourite.authorId === authorId) {
       next();
     } else if (role === "Admin") {
       next();

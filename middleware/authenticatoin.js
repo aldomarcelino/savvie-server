@@ -5,11 +5,11 @@ const authentication = async (req, res, next) => {
   try {
     const { access_token } = req.headers;
     if (!access_token) {
-      throw { name: "Unauthorized", msg: "Missing token" };
+      throw { name: "Unauthorized", message: "Missing token" };
     }
     const payload = verifyToken(access_token, process.env.SECRET_KEY);
     const user = await User.findByPk(+payload.id);
-    if (!user) throw { name: "Unauthorized", msg: "Invalid token" };
+    if (!user) throw { name: "Unauthorized", message: "Invalid token" };
 
     req.user = {
       id: user.id,
