@@ -11,9 +11,7 @@ class Controller {
         ],
       });
 
-      res.status(200).json({
-        restaurant,
-      });
+      res.status(200).json(restaurant);
     } catch (error) {
       next(error);
     }
@@ -33,9 +31,7 @@ class Controller {
 
       if (!restaurant) throw { name: "Not found", msg: "Id not found" };
 
-      res.status(200).json({
-        restaurant,
-      });
+      res.status(200).json(restaurant);
     } catch (error) {
       next(error);
     }

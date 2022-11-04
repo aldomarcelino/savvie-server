@@ -8,7 +8,7 @@ const favourites = require("./favourite");
 const resto = require("./resto");
 const authentication = require("../middleware/authenticatoin");
 
-router.use("/user", users);
+router.use("/", users);
 router.use("/restaurants", restaurants);
 router.use("/food", foods);
 router.use("/categories", categorys);

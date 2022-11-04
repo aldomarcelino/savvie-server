@@ -6,8 +6,7 @@ const { OAuth2Client } = require("google-auth-library");
 class Controller {
   static async createUser(req, res, next) {
     try {
-      const { fullName, email, password, phoneNumber, address, imageUrl } =
-        req.body;
+      const { fullName, email, password, phoneNumber, address } = req.body;
       const user = await User.create({
         fullName,
         email,
@@ -15,7 +14,6 @@ class Controller {
         role: "Admin",
         phoneNumber,
         address,
-        imageUrl,
       });
 
       res.status(201).json({
