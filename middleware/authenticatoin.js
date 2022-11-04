@@ -1,5 +1,5 @@
 const { verifyToken } = require("../helpers/jwt");
-const { User, Restaurant } = require("../models");
+const { User } = require("../models");
 
 const authentication = async (req, res, next) => {
   try {
@@ -8,16 +8,12 @@ const authentication = async (req, res, next) => {
       throw { name: "Unauthorized", message: "Missing token" };
     }
     const payload = verifyToken(access_token, process.env.SECRET_KEY);
-    const user = await User.findByPk(+payload.id, {
-      include: [Restaurant]
-    });
+    const user = await User.findByPk(+payload.id);
     if (!user) throw { name: "Unauthorized", message: "Invalid token" };
 
     req.user = {
       id: user.id,
       email: user.email,
-      role: user.role,
-      restoId: user.Restaurant.id
     };
     next();
   } catch (error) {

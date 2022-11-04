@@ -8,27 +8,19 @@ class Controller {
           { model: User, attributes: { exclude: ["password"] } },
           { model: Food },
         ],
+        where: { UserId: req.user.id },
       });
 
-      res.status(200).json({
-        favourite,
-      });
+      res.status(200).json(favourite);
     } catch (error) {
       next(error);
     }
   }
 
   static async createFavourite(req, res, next) {
-    const { id } = req.params;
     try {
-      const food = await Food.findOne({
-        where: { id },
-      });
-      if (!food) {
-        throw { name: "Data not found" };
-      }
       await Favourite.create({
-        FoodId: id,
+        FoodId: req.body.FoodId,
         UserId: req.user.id,
       });
       res.status(201).json({
@@ -43,7 +35,7 @@ class Controller {
     try {
       const { id } = req.params;
       const favourite = await Favourite.destroy({
-        where: { id },
+        where: { id, UserId: req.user.id },
       });
 
       if (!favourite) throw { name: "Not found", msg: "Id not found" };
