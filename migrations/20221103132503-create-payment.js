@@ -8,27 +8,29 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      UserId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Users",
+          key: "id",
+        },
+        onDelete: "cascade",
+        onUpdate: "cascade",
+      },
       deliveryFee: {
         allowNull: false,
         type: Sequelize.INTEGER,
-      },
-      paid: {
-        allowNull: false,
-        type: Sequelize.STRING,
       },
       status: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      orderCode: {
+      paymentCode: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      sales: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-      },
-      active: {
+      is_delivery: {
         allowNull: false,
         type: Sequelize.BOOLEAN,
       },

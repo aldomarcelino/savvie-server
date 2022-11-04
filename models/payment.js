@@ -9,11 +9,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Payment.hasOne(models.Order);
+      Payment.belongsTo(models.User);
+      Payment.hasMany(models.OrderItem);
     }
   }
   Payment.init(
     {
+      UserId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       deliveryFee: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -23,18 +28,6 @@ module.exports = (sequelize, DataTypes) => {
           },
           notEmpty: {
             msg: "DeliveryFee is required",
-          },
-        },
-      },
-      paid: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notNull: {
-            msg: "Paid is required",
-          },
-          notEmpty: {
-            msg: "Paid is required",
           },
         },
       },
@@ -50,39 +43,27 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      orderCode: {
+      paymentCode: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notNull: {
-            msg: "Order Code is required",
+            msg: "Payment Code is required",
           },
           notEmpty: {
-            msg: "Order Code is required",
+            msg: "Payment Code is required",
           },
         },
       },
-      sales: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-          notNull: {
-            msg: "Sales is required",
-          },
-          notEmpty: {
-            msg: "Sales is required",
-          },
-        },
-      },
-      active: {
+      is_delivery: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         validate: {
           notNull: {
-            msg: "Active is required",
+            msg: "is_delivery is required",
           },
           notEmpty: {
-            msg: "Active is required",
+            msg: "is_delivery is required",
           },
         },
       },
