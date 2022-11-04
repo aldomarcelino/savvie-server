@@ -6,7 +6,7 @@ const foods = require("./food");
 const categorys = require("./category");
 const favourites = require("./favourite");
 
-router.use("/user", users);
+router.use("/", users);
 router.use("/restaurants", restaurants);
 router.use("/food", foods);
 router.use("/categories", categorys);

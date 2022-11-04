@@ -1,11 +1,4 @@
-const {
-  Food,
-  Category,
-  Restaurant,
-  Favourite,
-  Basket,
-  OrderItem,
-} = require("../models");
+const { Food, Category, Restaurant } = require("../models");
 
 class Controller {
   static async allFood(req, res, next) {
@@ -14,9 +7,7 @@ class Controller {
         include: [{ model: Category }, { model: Restaurant }],
       });
 
-      res.status(200).json({
-        food,
-      });
+      res.status(200).json(food);
     } catch (error) {
       next(error);
     }
@@ -27,21 +18,12 @@ class Controller {
       const { id } = req.params;
       const food = await Food.findOne({
         where: { id },
-        include: [
-          { model: User, attributes: { exclude: ["password"] } },
-          { model: Category },
-          { model: Restaurant },
-          { model: Favourite },
-          { model: Basket },
-          { model: OrderItem },
-        ],
+        include: [{ model: Category }, { model: Restaurant }],
       });
 
       if (!food) throw { name: "Not found", msg: "Id not found" };
 
-      res.status(200).json({
-        food,
-      });
+      res.status(200).json(food);
     } catch (error) {
       next(error);
     }
