@@ -15,8 +15,8 @@
 
 ### Restaurant
 
-- `GET /restaurant`
-- `GET /restaurant/:id`
+- `GET /restaurants`
+- `GET /restaurants/:id`
 
 ### Category
 
@@ -61,15 +61,13 @@ _201 - Created_
 
 ```json
 {
-  "data": {
-    "id": INTEGER,
-    "fullName": STRING,
-    "email": STRING,
-    "phoneNumber": INTEGER,
-    "address": STRING,
-    "updatedAt": DATE,
-    "createdAt": DATE,
-  }
+  "id": INTEGER,
+  "fullName": STRING,
+  "email": STRING,
+  "phoneNumber": INTEGER,
+  "address": STRING,
+  "updatedAt": DATE,
+  "createdAt": DATE,
 }
 ```
 
@@ -117,8 +115,6 @@ Request:
   "password": STRING,
 }
 ```
-
-&nbsp;
 
 #### Response
 
@@ -204,29 +200,22 @@ _200 - OK_
 ```json
 [
   {
-      "id": Integer,
-      "name": String,
-      "price": Integer,
-      "description": Text,
-      "imgUrl": String,
-      "createdAt": Date,
-      "updatedAt": Date,
-      "categoryId": Integer,
-      "Category": Obj,
-
+    "id": Integer,
+    "name": String,
+    "price": Integer,
+    "discount":Integer,
+    "description": Text,
+    "imageUrl": String,
+    "quantity" : Integer,
+    "sales":Integer,
+    "status":String,
+    "categoryId": Integer,
+    "createdAt": Date,
+    "updatedAt": Date,
+    "Category": Obj,
+    "RestaurantId":Integer,
+    "Restaurant":obj,
   },
-  {
-      "id": 5,
-      "name": "Nugget Tempe",
-      "price": 50000,
-      "discount":50,
-      "CategoryId":2,
-      "description": "Bahan :\r\n500 gr tempe (kukus)\r\nTelur ayam 2 butir\r\nMerica bubuk 1/2 sdt\r\nSecukupnya garam\r\nBawang polong 1 batang (dicincang halus)\r\nBawang putih 3 siung (dihaluskan)\r\nBawang merah 3 butir (dihaluskan)\r\nSeledri 1 batang (dicincang halus)\r\nSecukupnya tepung roti\r\n\r\nCara membuat :\r\n1. Tempe dikukus lebih dulu\r\n2. Haluskan tempe kukus tersebut\r\n3. Campur tempe dengan bumbu halus, telur dan tepung roti\r\n4. Tambahkan merica bubuk, garam, bawang polong dan seledri\r\n5. Semua bahan diaduk menggunakan tangan sampai tercampur rata\r\n6. Siapkan loyang kotak yang sudah dioles dengan sedikit minyak, lalu masukkan adonan ke dalamnya.\r\n7. Kukus nugget hingga matang (kira-kira 35 menit)",
-      "imageUrl": "https://contohgambar.herokuapp.com/05.jpg",
-      "quantity" : 10,
-      "sales":19,
-      "status":"popular"
-    },
   ...
 ]
 ```
@@ -245,20 +234,23 @@ Request:
 {
   "access_token": STRING
 }
-
 ```
 
 - body:
 
 ```json
 {
-  "name": STRING,
-  "description": STRING,
-  "price": INTEGER,
-  "imgUrl": STRING,
-  "authorId": INTEGER,
-  "categoryId": INTEGER
-}
+  "name": String,
+  "price": Integer,
+  "discount":Integer,
+  "description": Text,
+  "imageUrl": String,
+  "quantity" : Integer,
+  "sales":Integer,
+  "status":String,
+  "categoryId": Integer,
+  "RestaurantId":Integer,
+},
 ```
 
 #### Response
@@ -267,15 +259,11 @@ _201 - Created_
 
 ```json
 {
-  "id": Integer,
-  "name": String,
-  "description": String,
-  "price": Integer,
-  "imgUrl": String,
-  "authorId": Integer,
-  "categoryId": Integer,
-  "updatedAt": Date,
-  "createdAt": Date
+  "data": {
+    "id": Integer,
+    "name": String
+    },
+  "message": String
 }
 ```
 
@@ -283,14 +271,23 @@ _400 - Bad Request_
 
 ```json
 {
-  "message": [
-      "name is required",
-      "category is required",
-      "description is required",
-      "price is required",
-      "image is required",
-      ...
-    ]
+  "message": "Name is required"
+}
+OR
+{
+  "message": "Category is required"
+}
+OR
+{
+  "message": "Description is required"
+}
+OR
+{
+  "message": "Price is required"
+}
+OR
+{
+  "message": "Image is required"
 }
 ```
 
@@ -300,6 +297,80 @@ _401 - Unauthorized_
 {
   "message": "Invalid Token"
 }
+```
+
+### 6. GET /food/:id
+
+#### Description
+
+- Get one food data
+
+#### Response
+
+_200 - OK_
+
+```json
+{
+  "id": Integer,
+  "name": String,
+  "price": Integer,
+  "discount":Integer,
+  "description": Text,
+  "imageUrl": String,
+  "quantity" : Integer,
+  "sales":Integer,
+  "status":String,
+  "categoryId": Integer,
+  "createdAt": Date,
+  "updatedAt": Date,
+  "Category": Obj,
+  "RestaurantId":Integer,
+  "Restaurant":obj,
+}
+```
+
+_404 - Not Found_
+
+```json
+{
+  "message": "Data Not Found"
+}
+```
+
+### 7. GET /restaurants
+
+#### Description
+
+- Show all restaurants from database
+
+#### Response
+
+_200 - OK_
+
+```json
+[
+   {
+      "id": Integer,
+      "UserId": Integer,
+      "name": String,
+      "is_open": Boolean,
+      "open_time": Time,
+      "close_time": Time,
+      "rating": Float,
+      "review_count": Integer,
+      "latitude": Float,
+      "longitude": Float,
+      "address":Text,
+      "is_delivery":Boolean,
+      "is_pickup":Boolean,
+      "income":Integer,
+      "type":String,
+      "logoUrl":Text,
+      "createdAt":Date,
+      "updatedAt":Date,
+    },
+    ...
+]
 ```
 
 ### 6. GET /categories
@@ -422,60 +493,6 @@ _200 - OK_
     }
     ...
 ]
-```
-
-### 9. GET /food/:id
-
-#### Description
-
-- Get one food data
-
-Request:
-
-- headers:
-
-```json
-{
-  "access_token": STRING
-}
-
-```
-
-#### Response
-
-_200 - OK_
-
-```json
-{
-    "id": Integer,
-    "name": String,
-    "description": Text,
-    "price": Integer,
-    "imgUrl": String,
-    "authorId": Integer,
-    "categoryId": Integer,
-    "createdAt": Date,
-    "updatedAt": Date,
-    "User": Obj,
-    "Category": Obj
-
-}
-```
-
-_401 - Unauthorized_
-
-```json
-{
-  "message": "Invalid Token"
-}
-```
-
-_404 - Not Found_
-
-```json
-{
-  "message": "Data Not Found"
-}
 ```
 
 ### 10. PUT /food/:id
