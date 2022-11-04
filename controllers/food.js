@@ -11,14 +11,7 @@ class Controller {
   static async allFood(req, res, next) {
     try {
       const food = await Food.findAll({
-        include: [
-          { model: User, attributes: { exclude: ["password"] } },
-          { model: Category },
-          { model: Restaurant },
-          { model: Favourite },
-          { model: Basket },
-          { model: OrderItem },
-        ],
+        include: [{ model: Category }, { model: Restaurant }],
       });
 
       res.status(200).json({

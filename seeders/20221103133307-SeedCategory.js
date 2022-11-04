@@ -3,11 +3,11 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     const dataCategory = require("../data/categories.json");
-    dataCategory.forEach((el) => {
+    dataCategory.categories.forEach((el) => {
       el.createdAt = el.updatedAt = new Date();
     });
 
-    await queryInterface.bulkInsert("Categories", dataCategory, {});
+    await queryInterface.bulkInsert("Categories", dataCategory.categories, {});
     /**
      * Add seed commands here.
      *

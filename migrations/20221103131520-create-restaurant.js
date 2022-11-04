@@ -12,6 +12,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
+      description: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
       rate: {
         allowNull: false,
         type: Sequelize.FLOAT,
@@ -56,7 +60,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT,
       },
-      longtitude: {
+      longitude: {
         allowNull: false,
         type: Sequelize.FLOAT,
       },

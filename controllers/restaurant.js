@@ -58,7 +58,7 @@ class Controller {
         is_delivery,
         review_count,
         address,
-        longtitude,
+        longitude,
         latitude,
         UserId,
       } = req.body;
@@ -75,7 +75,7 @@ class Controller {
         is_delivery,
         review_count,
         address,
-        longtitude,
+        longitude,
         latitude,
         UserId,
       });
