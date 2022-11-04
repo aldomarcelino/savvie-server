@@ -9,7 +9,7 @@ const authentication = async (req, res, next) => {
     }
     const payload = verifyToken(access_token, process.env.SECRET_KEY);
     const user = await User.findByPk(+payload.id, {
-      include: [ Restaurant],
+      include: [Restaurant]
     });
     if (!user) throw { name: "Unauthorized", message: "Invalid token" };
 
@@ -17,7 +17,7 @@ const authentication = async (req, res, next) => {
       id: user.id,
       email: user.email,
       role: user.role,
-      restoId: user.Restaurant.id,
+      restoId: user.Restaurant.id
     };
     next();
   } catch (error) {
