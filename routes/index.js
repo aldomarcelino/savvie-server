@@ -8,13 +8,10 @@ const categorysResto = require("./category-resto");
 const favourites = require("./favourite");
 
 router.use("/user", users);
-router.use("/restaurant", restaurants);
+router.use("/restaurants", restaurants);
 router.use("/food", foods);
-router.use("/category", categorys);
-router.use("/resto", categorysResto);
-router.use("/favourite", favourites);
-
-// 
-
+router.use("/categories", categorys);
+router.use("/categoryresto", categorysResto);
+router.use("/favorite", favourites);
 
 module.exports = router;

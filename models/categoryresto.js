@@ -11,26 +11,10 @@ module.exports = (sequelize, DataTypes) => {
       RestaurantId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        validate: {
-          notNull: {
-            msg: "RestaurantId is required",
-          },
-          notEmpty: {
-            msg: "RestaurantId is required",
-          },
-        },
       },
       CategoryId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        validate: {
-          notNull: {
-            msg: "CategoryId is required",
-          },
-          notEmpty: {
-            msg: "CategoryId is required",
-          },
-        },
       },
     },
     {

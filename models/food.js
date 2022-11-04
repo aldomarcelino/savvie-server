@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       Food.belongsTo(models.Restaurant);
       Food.hasMany(models.Favourite);
       Food.hasMany(models.Basket);
+      Food.hasMany(models.OrderItem);
     }
   }
   Food.init(
@@ -122,38 +123,14 @@ module.exports = (sequelize, DataTypes) => {
       CategoryId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        validate: {
-          notNull: {
-            msg: "CategoryId is required",
-          },
-          notEmpty: {
-            msg: "CategoryId is required",
-          },
-        },
       },
       RestaurantId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        validate: {
-          notNull: {
-            msg: "RestaurantId is required",
-          },
-          notEmpty: {
-            msg: "RestaurantId is required",
-          },
-        },
       },
       is_active: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        // validate: {
-        //   notNull: {
-        //     msg: "RestaurantId is required",
-        //   },
-        //   notEmpty: {
-        //     msg: "RestaurantId is required",
-        //   },
-        // },
       },
     },
     {

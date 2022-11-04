@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       User.hasOne(models.Restaurant);
       User.hasMany(models.Favourite);
       User.hasMany(models.Basket);
+      User.hasMany(models.Order);
     }
   }
   User.init(
@@ -92,26 +93,10 @@ module.exports = (sequelize, DataTypes) => {
       latitude: {
         type: DataTypes.FLOAT,
         allowNull: false,
-        validate: {
-          notNull: {
-            msg: "Latitude is required",
-          },
-          notEmpty: {
-            msg: "Latitude is required",
-          },
-        },
       },
       longtitude: {
         type: DataTypes.FLOAT,
         allowNull: false,
-        validate: {
-          notNull: {
-            msg: "Longtitude is required",
-          },
-          notEmpty: {
-            msg: "Longtitude is required",
-          },
-        },
       },
       address: {
         type: DataTypes.TEXT,

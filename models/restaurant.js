@@ -157,38 +157,14 @@ module.exports = (sequelize, DataTypes) => {
       longtitude: {
         type: DataTypes.FLOAT,
         allowNull: false,
-        validate: {
-          notNull: {
-            msg: "Longtitude is required",
-          },
-          notEmpty: {
-            msg: "Longtitude is required",
-          },
-        },
       },
       latitude: {
         type: DataTypes.FLOAT,
         allowNull: false,
-        validate: {
-          notNull: {
-            msg: "Latitude is required",
-          },
-          notEmpty: {
-            msg: "Latitude is required",
-          },
-        },
       },
       UserId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        validate: {
-          notNull: {
-            msg: "UserId is required",
-          },
-          notEmpty: {
-            msg: "UserId is required",
-          },
-        },
       },
     },
     {

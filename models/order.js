@@ -9,33 +9,20 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Order.belongsTo(models.User);
+      Order.hasMany(models.OrderItem);
+      Order.belongsTo(models.Payment);
     }
   }
   Order.init(
     {
-      BasketId: {
+      UserId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        validate: {
-          notNull: {
-            msg: "BasketId is required",
-          },
-          notEmpty: {
-            msg: "BasketId is required",
-          },
-        },
       },
       PaymentId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        validate: {
-          notNull: {
-            msg: "PaymentId is required",
-          },
-          notEmpty: {
-            msg: "PaymentId is required",
-          },
-        },
       },
     },
     {

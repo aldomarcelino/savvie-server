@@ -12,38 +12,10 @@ module.exports = (sequelize, DataTypes) => {
       UserId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        validate: {
-          notNull: {
-            msg: "UserId is required",
-          },
-          notEmpty: {
-            msg: "UserId is required",
-          },
-        },
       },
       FoodId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        validate: {
-          notNull: {
-            msg: "FoodId is required",
-          },
-          notEmpty: {
-            msg: "FoodId is required",
-          },
-        },
-      },
-      comition: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-          notNull: {
-            msg: "Comition is required",
-          },
-          notEmpty: {
-            msg: "Comition is required",
-          },
-        },
       },
     },
     {
