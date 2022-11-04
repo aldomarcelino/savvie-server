@@ -1,0 +1,40 @@
+{
+  "restaurants": [
+    {
+      "id": "1",
+      "UserId": "1",
+      "name": "Martabak pak syukur",
+      "is_open": false,
+      "open_time": "10:00",
+      "close_time": "22:00",
+      "rating": 5,
+      "review_count": 1000,
+      "latitude": 40.736218,
+      "longitude": -73.99597,
+      "address": "cilandak, jakarta selatan",
+      "is_delivery": true,
+      "is_pickup": true,
+      "income": 1000000,
+      "type": "Cemilan/Hidangan Penutup",
+      "logoUrl": "https://vectorpic.com/wp-content/uploads/2017/08/kesenian-angklung-logo-free-vector.jpg"
+    },
+    {
+      "id": "2",
+      "UserId": "2",
+      "name": "Raven Resto",
+      "is_open": false,
+      "open_time": "10:00",
+      "close_time": "22:00",
+      "rating": 5,
+      "review_count": 1644,
+      "latitude": 40.72761,
+      "longitude": -73.98373,
+      "address": "haji nawi, jakarta selatan",
+      "is_delivery": true,
+      "is_pickup": true,
+      "income": 10900000,
+      "type": "Restoran",
+      "logoUrl": "https://vectorpic.com/wp-content/uploads/2017/08/marhaban-ya-ramadhan-typography-design-free-vector.jpg"
+    }
+  ]
+}
