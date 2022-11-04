@@ -12,16 +12,26 @@
 
 - `GET /food`
 - `GET /food/:id`
+- `POST /food` (cms)
+- `DELETE /food/:id` (cms)
+- `PUT /food/:id` (cms)
+- `PATCH /food/:id` (cms - editstock or isActive)
 
 ### Restaurant
 
 - `GET /restaurants`
 - `GET /restaurants/:id`
+- `POST /restaurants` (cms)
+- `DELETE /restaurants/:id` (cms)
+- `PUT /restaurants/:id` (cms)
 
 ### Category
 
 - `GET /categories`
 - `GET /categories/:id`
+- `POST /categories` (cms)
+- `DELETE /categories/:id` (cms)
+- `PUT /categories/:id` (cms)
 
 ### CategoryResto
 
@@ -34,6 +44,15 @@
 - `GET /favorite`
 - `GET /favorite/:id`
 - `DELETE /favorite/:id`
+
+### RESTO
+- `GET /resto/food`
+- `GET /resto/food/:id`
+- `POST /resto/food` 
+- `DELETE /resto/food/:id` 
+- `PUT /resto/food/:id` 
+- `PATCH /resto/food/:id`
+
 
 ### 1. POST /signup
 
