@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      OrderItem.belongsTo(models.Order);
+      OrderItem.belongsTo(models.Payment);
       OrderItem.belongsTo(models.Food);
     }
   }
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      OrderId: {
+      PaymentId: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
