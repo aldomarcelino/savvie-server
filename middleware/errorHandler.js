@@ -21,6 +21,12 @@ const errorHandler = async (err, req, res, next) => {
   } else if (err.name === "Login failed") {
     code = 401;
     message = "Invalid email or password";
+  } else if (err.name === "Email is required") {
+    code = 401;
+    message = "Email is required";
+  } else if (err.name === "Password is required") {
+    code = 401;
+    message = "Password is required";
   } else if (err.name === "Forbidden") {
     code = 403;
     message = "You have no access";
