@@ -42,6 +42,12 @@ class Controller {
   static async userLogin(req, res, next) {
     try {
       const { email, password } = req.body;
+      if (!email) {
+        throw { name: "Email is required"}
+      }
+      if (!password) {
+        throw { name: "Password is required"}
+      }
       const user = await User.findOne({
         where: { email },
       });

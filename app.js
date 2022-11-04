@@ -13,8 +13,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/", router);
 app.use(errorHandler);
 
-app.listen(port, () => {
-  console.log(`Sevvie listening to port ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Sevvie listening to port ${port}`);
+// });
 
-// module.exports = app;
+module.exports = app;
