@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       User.hasOne(models.Restaurant);
       User.hasMany(models.Favourite);
       User.hasMany(models.Basket);
-      User.hasMany(models.Order);
+      User.hasMany(models.Payment);
     }
   }
   User.init(
