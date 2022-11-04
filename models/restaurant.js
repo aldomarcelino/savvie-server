@@ -1,22 +1,18 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Restaurant extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      Restaurant.hasMany(models.CategoryResto);
+      Restaurant.hasMany(models.Food);
+      Restaurant.belongsTo(models.User);
     }
   }
-  Restaurant.init({
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
+  Restaurant.init(
+    {
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
         validate: {
           notNull: {
             msg: "Name is required",
@@ -25,10 +21,10 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Name is required",
           },
         },
-    },
-    rate: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
+      },
+      rate: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
         validate: {
           notNull: {
             msg: "Rate is required",
@@ -37,10 +33,10 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Rate is required",
           },
         },
-    },
-    logoUrl: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      },
+      logoUrl: {
+        type: DataTypes.STRING,
+        allowNull: false,
         validate: {
           notNull: {
             msg: "LogoUrl is required",
@@ -49,10 +45,10 @@ module.exports = (sequelize, DataTypes) => {
             msg: "LogoUrl is required",
           },
         },
-    },
-    income: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      },
+      income: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
         validate: {
           notNull: {
             msg: "Income is required",
@@ -61,10 +57,10 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Income is required",
           },
         },
-    },    
-    type: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      },
+      type: {
+        type: DataTypes.STRING,
+        allowNull: false,
         validate: {
           notNull: {
             msg: "Type is required",
@@ -73,10 +69,10 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Type is required",
           },
         },
-    },
-    is_open: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
+      },
+      is_open: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
         validate: {
           notNull: {
             msg: "Is_Open is required",
@@ -85,10 +81,10 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Is_Open is required",
           },
         },
-    },
-    open_time: {
-      type: DataTypes.TIME,
-      allowNull: false,
+      },
+      open_time: {
+        type: DataTypes.TIME,
+        allowNull: false,
         validate: {
           notNull: {
             msg: "Open_Time is required",
@@ -97,10 +93,10 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Open_Time is required",
           },
         },
-    },
-    close_time: {
-      type: DataTypes.TIME,
-      allowNull: false,
+      },
+      close_time: {
+        type: DataTypes.TIME,
+        allowNull: false,
         validate: {
           notNull: {
             msg: "Close_Time is required",
@@ -109,10 +105,10 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Close_Time is required",
           },
         },
-    },
-    is_pickup: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
+      },
+      is_pickup: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
         validate: {
           notNull: {
             msg: "Is_Pickup is required",
@@ -121,10 +117,10 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Is_Pickup is required",
           },
         },
-    },
-    is_delivery: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
+      },
+      is_delivery: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
         validate: {
           notNull: {
             msg: "Is_Delivery is required",
@@ -133,10 +129,10 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Is_Delivery is required",
           },
         },
-    },
-    review_count: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      },
+      review_count: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
         validate: {
           notNull: {
             msg: "Review_Count is required",
@@ -145,10 +141,10 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Review_Count is required",
           },
         },
-    },
-    address: {
-      type: DataTypes.TEXT,
-      allowNull: false,
+      },
+      address: {
+        type: DataTypes.TEXT,
+        allowNull: false,
         validate: {
           notNull: {
             msg: "Address is required",
@@ -157,10 +153,10 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Address is required",
           },
         },
-    },
-    longtitude: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
+      },
+      longtitude: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
         validate: {
           notNull: {
             msg: "Longtitude is required",
@@ -169,10 +165,10 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Longtitude is required",
           },
         },
-    },
-    latitude: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
+      },
+      latitude: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
         validate: {
           notNull: {
             msg: "Latitude is required",
@@ -181,10 +177,10 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Latitude is required",
           },
         },
-    },
-    UserId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      },
+      UserId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
         validate: {
           notNull: {
             msg: "UserId is required",
@@ -193,10 +189,12 @@ module.exports = (sequelize, DataTypes) => {
             msg: "UserId is required",
           },
         },
+      },
+    },
+    {
+      sequelize,
+      modelName: "Restaurant",
     }
-  }, {
-    sequelize,
-    modelName: 'Restaurant',
-  });
+  );
   return Restaurant;
 };

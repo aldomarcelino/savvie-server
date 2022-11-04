@@ -2,13 +2,11 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Food extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      Food.belongsTo(models.Category);
+      Food.belongsTo(models.Restaurant);
+      Food.hasMany(models.Favourite);
+      Food.hasMany(models.Basket);
     }
   }
   Food.init(
@@ -144,6 +142,18 @@ module.exports = (sequelize, DataTypes) => {
             msg: "RestaurantId is required",
           },
         },
+      },
+      is_active: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        // validate: {
+        //   notNull: {
+        //     msg: "RestaurantId is required",
+        //   },
+        //   notEmpty: {
+        //     msg: "RestaurantId is required",
+        //   },
+        // },
       },
     },
     {

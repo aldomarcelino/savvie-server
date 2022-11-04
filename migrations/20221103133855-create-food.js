@@ -44,6 +44,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
+      is_active: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+      },
       CategoryId: {
         type: Sequelize.INTEGER,
         allowNull: false,
