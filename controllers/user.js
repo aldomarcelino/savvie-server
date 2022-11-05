@@ -1,18 +1,15 @@
 const { comparePass } = require("../helpers/bcrypt");
 const { createSign } = require("../helpers/jwt");
-const { User, Restaurant } = require("../models");
+const { User, Restaurant, Balance } = require("../models");
 const { OAuth2Client } = require("google-auth-library");
 
 class Controller {
-  static async allUser(req, res, next) {
+  static async myProfile(req, res, next) {
     try {
-      const user = await User.findAll({
+      const user = await User.findByPk(req.user.id, {
         include: [Restaurant],
       });
-      res.status(200).json({
-        statusCode: 200,
-        user,
-      });
+      res.status(200).json(user);
     } catch (error) {
       next(error);
     }
@@ -20,15 +17,18 @@ class Controller {
 
   static async createUser(req, res, next) {
     try {
-      const { fullName, email, password, phoneNumber, address } = req.body;
+      const {  email, password, fullName, phoneNumber, address } = req.body;
       const user = await User.create({
-        fullName,
         email,
-        password,
-        role: "Admin",
+        password, 
+        fullName,
         phoneNumber,
         address,
       });
+      await Balance.create({
+        UserId: user.id,
+        balance: 0
+      })
 
       res.status(201).json({
         message: "Create user successfully",
