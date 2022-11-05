@@ -11,24 +11,28 @@ let restaurants = dataRestaurant.restaurants.map((el) => {
     return el;
 });
 
-beforeEach(async () => {
-    // console.log(restaurants, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
-    await queryInterface.bulkInsert("Restaurants", restaurants);
-});
+const user_access_token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZXNjdWVmb29kQGdtYWlsLmNvbSIsImlhdCI6MTY2NzY0OTE1Mn0.Sqkgx312hBggjPziUR-QqYZD4mf8Le70OfR_HEyjhG0";
 
-afterEach(async () => {
-    await queryInterface.bulkDelete(`Restaurants`, null, {
-    truncate: true,
-    cascade: true,
-    restartIdentity: true,
-    });
-});
+// beforeEach(async () => {
+//     // console.log(restaurants, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+//     await queryInterface.bulkInsert("Restaurants", restaurants);
+// });
+
+// afterEach(async () => {
+//     await queryInterface.bulkDelete(`Restaurants`, null, {
+//     truncate: true,
+//     cascade: true,
+//     restartIdentity: true,
+//     });
+// });
 
 describe("Restaurants Routes Test", () => {
     describe("GET /restaurants - return data all restaurants", () => {
         test("200 Success get all restaurants data, return array", (done) => {
         request(app)
             .get("/restaurants")
+            .set({access_token: user_access_token})
             .then((response) => {
                 const { body, status } = response;
                 expect(status).toBe(200);
@@ -42,12 +46,29 @@ describe("Restaurants Routes Test", () => {
                 done(err);
             });
         });
+
+        test("401 Failed get all restaurants with invalid token - should return error unauthorized", (done) => {
+            request(app)
+                .post("/restaurants")
+                .set("access_token", "ini invalid token")
+                .send({FoodId: 1})
+                .then((response) => {
+                    const { body, status } = response;
+                    expect(status).toBe(401);
+                    expect(body).toHaveProperty("message", "Invalid token");
+                    return done();
+                })
+                .catch((err) => {
+                    done(err)
+                })
+        });
     });
 
     describe("GET /restaurants/:id - return data restaurants by Id", () => {
         test("200 Success get one restaurants data, return object", (done) => {
         request(app)
             .get("/restaurants/1")
+            .set({access_token: user_access_token})
             .then((response) => {
                 const { body, status } = response;
                 expect(status).toBe(200);
@@ -63,9 +84,10 @@ describe("Restaurants Routes Test", () => {
             });
         });
 
-        test("404 Failed get one restaurant data, return error", (done) => {
+        test("404 Failed get one restaurant data - data not found, return error", (done) => {
             request(app)
                 .get("/restaurants/100")
+                .set({access_token: user_access_token})
                 .then((response) => {
                     const { body, status } = response;
                     expect(status).toBe(404);
@@ -76,6 +98,22 @@ describe("Restaurants Routes Test", () => {
                     done(err);
                 });
             });
+        });
+
+        test("401 Failed get one restaurants - invalid token - should return error unauthorized", (done) => {
+            request(app)
+                .post("/restaurants/1")
+                .set("access_token", "ini invalid token")
+                .send({FoodId: 1})
+                .then((response) => {
+                    const { body, status } = response;
+                    expect(status).toBe(401);
+                    expect(body).toHaveProperty("message", "Invalid token");
+                    return done();
+                })
+                .catch((err) => {
+                    done(err)
+                })
         });
 
     });
