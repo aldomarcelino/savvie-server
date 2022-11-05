@@ -17,6 +17,6 @@ router.use("/favorites", favourites);
 router.use("/search", search)
 
 router.use(authenticationResto);
-router.use("/resto/food", resto);
+router.use("/resto", resto);
 
 module.exports = router;
