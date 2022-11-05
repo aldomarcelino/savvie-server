@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Favourite);
       User.hasMany(models.Basket);
       User.hasMany(models.Payment);
+      User.hasOne(models.Balance);
     }
   }
   User.init(

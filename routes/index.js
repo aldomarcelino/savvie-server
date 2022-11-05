@@ -7,6 +7,8 @@ const categorys = require("./category");
 const favourites = require("./favourite");
 const resto = require("./resto");
 const search = require("./search");
+const xendit = require("./xendit");
+const midtrans = require("./midtrans");
 const {authenticationResto} = require("../middleware/authentication");
 
 router.use("/", users);
@@ -15,6 +17,8 @@ router.use("/food", foods);
 router.use("/categories", categorys);
 router.use("/favorites", favourites);
 router.use("/search", search)
+router.use("/xendit", xendit)
+router.use("/midtrans", midtrans)
 
 router.use(authenticationResto);
 router.use("/resto", resto);
