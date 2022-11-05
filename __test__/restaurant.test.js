@@ -1,0 +1,81 @@
+const app = require("../app");
+const request = require("supertest");
+const { sequelize, Restaurants } = require("../models");
+const { queryInterface } = sequelize;
+
+jest.setTimeout(1000);
+
+const dataRestaurant = require("../data/restaurants.json");
+let restaurants = dataRestaurant.restaurants.map((el) => {
+    el.createdAt = el.updatedAt = new Date();
+    return el;
+});
+
+beforeEach(async () => {
+    // console.log(restaurants, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+    await queryInterface.bulkInsert("Restaurants", restaurants);
+});
+
+afterEach(async () => {
+    await queryInterface.bulkDelete(`Restaurants`, null, {
+    truncate: true,
+    cascade: true,
+    restartIdentity: true,
+    });
+});
+
+describe("Restaurants Routes Test", () => {
+    describe("GET /restaurants - return data all restaurants", () => {
+        test("200 Success get all restaurants data, return array", (done) => {
+        request(app)
+            .get("/restaurants")
+            .then((response) => {
+                const { body, status } = response;
+                expect(status).toBe(200);
+                expect(body[0]).toBeInstanceOf(Object);
+                expect(body[0].User).toBeInstanceOf(Object);
+                expect(body[0].CategoryRestos).toBeInstanceOf(Array);
+                expect(body[0].Food).toBeInstanceOf(Array);
+                done();
+            })
+            .catch((err) => {
+                done(err);
+            });
+        });
+    });
+
+    describe("GET /restaurants/:id - return data restaurants by Id", () => {
+        test("200 Success get one restaurants data, return object", (done) => {
+        request(app)
+            .get("/restaurants/1")
+            .then((response) => {
+                const { body, status } = response;
+                expect(status).toBe(200);
+                expect(body).toBeInstanceOf(Object);
+                expect(body).toHaveProperty("id", expect.any(Number));
+                expect(body.User).toBeInstanceOf(Object);
+                expect(body.CategoryRestos).toBeInstanceOf(Array);
+                expect(body.Food).toBeInstanceOf(Array);
+                done();
+            })
+            .catch((err) => {
+                done(err);
+            });
+        });
+
+        test("404 Failed get one restaurant data, return error", (done) => {
+            request(app)
+                .get("/restaurants/100")
+                .then((response) => {
+                    const { body, status } = response;
+                    expect(status).toBe(404);
+                    expect(body).toHaveProperty("message", "Id or data not found");
+                    done();
+                })
+                .catch((err) => {
+                    done(err);
+                });
+            });
+        });
+
+    });
