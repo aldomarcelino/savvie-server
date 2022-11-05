@@ -6,7 +6,7 @@ const foods = require("./food");
 const categorys = require("./category");
 const favourites = require("./favourite");
 const resto = require("./resto");
-const authentication = require("../middleware/authenticatoin");
+const {authenticationResto} = require("../middleware/authentication");
 
 router.use("/", users);
 router.use("/restaurants", restaurants);
@@ -14,7 +14,7 @@ router.use("/food", foods);
 router.use("/categories", categorys);
 router.use("/favorites", favourites);
 
-router.use(authentication);
+router.use(authenticationResto);
 router.use("/resto/food", resto);
 
 module.exports = router;

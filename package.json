@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon /bin/www",
-    "store": "node /bin/www",
+    "dev": "nodemon ./bin/www",
+    "store": "node ./bin/www",
     "test": "jest --runInBand --forceExit --verbose",
     "seed": "sequelize db:drop && sequelize-cli db:create && sequelize-cli db:migrate && sequelize-cli db:seed:all",
     "seed-test": "npx sequelize-cli db:drop --env test && npx sequelize-cli db:create --env test && npx sequelize-cli db:migrate --env test && npx sequelize-cli db:seed:all --env test",
-    "start": "node app.js"
+    "start": "node ./bin/www"
   },
   "keywords": [],
   "author": "",

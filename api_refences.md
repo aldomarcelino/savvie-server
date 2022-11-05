@@ -37,8 +37,8 @@
 - `POST /resto/food`
 - `DELETE /resto/food/:id`
 - `PUT /resto/food/:id`
-- `PUT /resto/food-status/:id`
-- `PATCH /resto/food/:id`
+- `PATCH /resto/food-status/:id`
+- `PATCH /resto/food-active/:id`
 
 ### 1. POST /signup
 
