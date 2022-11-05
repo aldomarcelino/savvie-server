@@ -32,35 +32,35 @@ describe("Restaurants Routes Test", () => {
         test("200 Success get all restaurants data, return array", (done) => {
         request(app)
             .get("/restaurants")
-            .set({access_token: user_access_token})
+            .set({ access_token: user_access_token })
             .then((response) => {
-                const { body, status } = response;
-                expect(status).toBe(200);
-                expect(body[0]).toBeInstanceOf(Object);
-                expect(body[0].User).toBeInstanceOf(Object);
-                expect(body[0].CategoryRestos).toBeInstanceOf(Array);
-                expect(body[0].Food).toBeInstanceOf(Array);
-                done();
+            const { body, status } = response;
+            expect(status).toBe(200);
+            expect(body[0]).toBeInstanceOf(Object);
+            expect(body[0].User).toBeInstanceOf(Object);
+            expect(body[0].CategoryRestos).toBeInstanceOf(Array);
+            expect(body[0].Food).toBeInstanceOf(Array);
+            done();
             })
             .catch((err) => {
-                done(err);
+            done(err);
             });
         });
 
         test("401 Failed get all restaurants with invalid token - should return error unauthorized", (done) => {
-            request(app)
-                .post("/restaurants")
-                .set("access_token", "ini invalid token")
-                .send({FoodId: 1})
-                .then((response) => {
-                    const { body, status } = response;
-                    expect(status).toBe(401);
-                    expect(body).toHaveProperty("message", "Invalid token");
-                    return done();
-                })
-                .catch((err) => {
-                    done(err)
-                })
+        request(app)
+            .post("/restaurants")
+            .set("access_token", "ini invalid token")
+            .send({ FoodId: 1 })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(401);
+            expect(body).toHaveProperty("message", "Invalid token");
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
         });
     });
 
@@ -68,52 +68,51 @@ describe("Restaurants Routes Test", () => {
         test("200 Success get one restaurants data, return object", (done) => {
         request(app)
             .get("/restaurants/1")
-            .set({access_token: user_access_token})
+            .set({ access_token: user_access_token })
             .then((response) => {
-                const { body, status } = response;
-                expect(status).toBe(200);
-                expect(body).toBeInstanceOf(Object);
-                expect(body).toHaveProperty("id", expect.any(Number));
-                expect(body.User).toBeInstanceOf(Object);
-                expect(body.CategoryRestos).toBeInstanceOf(Array);
-                expect(body.Food).toBeInstanceOf(Array);
-                done();
+            const { body, status } = response;
+            expect(status).toBe(200);
+            expect(body).toBeInstanceOf(Object);
+            expect(body).toHaveProperty("id", expect.any(Number));
+            expect(body.User).toBeInstanceOf(Object);
+            expect(body.CategoryRestos).toBeInstanceOf(Array);
+            expect(body.Food).toBeInstanceOf(Array);
+            done();
             })
             .catch((err) => {
-                done(err);
+            done(err);
             });
         });
 
         test("404 Failed get one restaurant data - data not found, return error", (done) => {
-            request(app)
-                .get("/restaurants/100")
-                .set({access_token: user_access_token})
-                .then((response) => {
-                    const { body, status } = response;
-                    expect(status).toBe(404);
-                    expect(body).toHaveProperty("message", "Id or data not found");
-                    done();
-                })
-                .catch((err) => {
-                    done(err);
-                });
+        request(app)
+            .get("/restaurants/100")
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(404);
+            expect(body).toHaveProperty("message", "Id or data not found");
+            done();
+            })
+            .catch((err) => {
+            done(err);
             });
         });
-
-        test("401 Failed get one restaurants - invalid token - should return error unauthorized", (done) => {
-            request(app)
-                .post("/restaurants/1")
-                .set("access_token", "ini invalid token")
-                .send({FoodId: 1})
-                .then((response) => {
-                    const { body, status } = response;
-                    expect(status).toBe(401);
-                    expect(body).toHaveProperty("message", "Invalid token");
-                    return done();
-                })
-                .catch((err) => {
-                    done(err)
-                })
-        });
-
     });
+
+    test("401 Failed get one restaurants - invalid token - should return error unauthorized", (done) => {
+        request(app)
+        .post("/restaurants/1")
+        .set("access_token", "ini invalid token")
+        .send({ FoodId: 1 })
+        .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(401);
+            expect(body).toHaveProperty("message", "Invalid token");
+            return done();
+        })
+        .catch((err) => {
+            done(err);
+        });
+    });
+});

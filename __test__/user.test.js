@@ -246,7 +246,7 @@ describe("User Routes Test", () => {
           const { body, status } = response;
           expect(status).toBe(200);
           expect(body).toHaveProperty("statusCode", expect.any(Number));
-          expect(Array.isArray(body))
+          expect(Array.isArray(body));
           expect(body.user.length).toBeGreaterThan(0);
           done();
         })
