@@ -110,7 +110,7 @@ class Controller{
   static async editRestaurant(req, res, next){
     try {
       const { name, type, logoUrl, description, is_open, open_time, close_time, is_pickup, is_delivery, address, longitude, latitude } = req.body;
-      const data = await Restaurant.update({
+      await Restaurant.update({
         name,
         type,
         logoUrl,

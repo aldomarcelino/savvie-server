@@ -9,8 +9,11 @@ class Controller {
       if (name) {
         find = {...find, name: {[Op.iLike]: `%${name}%`}};
       }
-      const food = await Food.findAll({
-        where: find
+      const food = await Restaurant.findAll({
+        include: [{
+          model: Food,
+          where: find
+        }]
       })
       let restaurant = await Restaurant.findAll({
         where: find,
@@ -24,8 +27,14 @@ class Controller {
           where: find
         })
       }
-      const data = {food, restaurant}
-      res.status(200).json(data)
+      let data = [...food, ...restaurant]
+      const seen = new Set();
+      const filteredArr = data.filter(el => {
+        const duplicate = seen.has(el.id);
+        seen.add(el.id);
+        return !duplicate;
+      });
+      res.status(200).json(filteredArr)
     } catch (error) {
       next(error)
     }
