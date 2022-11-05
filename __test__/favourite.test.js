@@ -85,7 +85,6 @@ describe("Favourite Routes Test", () => {
             .then((response) => {
             const { body, status } = response;
             expect(status).toBe(200);
-            // console.log(response.body)
             expect(body[0]).toHaveProperty("id", expect.any(Number));
             expect(body[0]).toHaveProperty("UserId", expect.any(Number));
             expect(body[0]).toHaveProperty("FoodId", expect.any(Number));
@@ -114,41 +113,50 @@ describe("Favourite Routes Test", () => {
         });
     });
     
-});
+    describe("DELETE /favorites/:id - delete favourite by id", () => {
+        test("200 Success deleted favourite", (done) => {
+            request(app)
+            .delete("/favorites/1")
+            .set({access_token: user_access_token})
+            .then((response) => {
+                const { body, status } = response;
+                expect(status).toBe(200);
+                expect(body).toHaveProperty("message", expect.any(String));
+                return done();
+            })
+            .catch((err) => {
+                done(err)
+            })
+        })
 
-//   describe("DELETE /favorites/:id", () => {
-//     describe("Success attempt", () => {
-//       describe("Deleting with valid token", () => {
-//         it("Should return status code 200", async () => {
-//           const response = await request(app)
-//             .delete(`/favorites/${commentId}`)
-//             .set({ access_token: validToken });
-//           const { body, status } = response;
-//           expect(status).toBe(200);
-//           expect(body).toHaveProperty("msg", expect.any(String));
-//         });
-//       });
-//     });
-//     describe("Failed attempt", () => {
-//       describe("Deleting with invalid  token", () => {
-//         it("Should return status code 401", async () => {
-//           const response = await request(app)
-//             .delete("/favorites/1")
-//             .set({ access_token: invalidToken });
-//           const { body, status } = response;
-//           expect(status).toBe(401);
-//           expect(body).toHaveProperty("message", expect.any(String));
-//         });
-//       });
-//       describe("Deleting without params or target for deleting is undefined", () => {
-//         it("Should return status code 404", async () => {
-//           const response = await request(app)
-//             .delete("/favorites/100")
-//             .set({ access_token: validToken });
-//           const { body, status } = response;
-//           expect(status).toBe(404);
-//           expect(body).toHaveProperty("message", expect.any(String));
-//         });
-//       });
-//     });
-//   });
+        test("404 Failed delete favourite data - favourite not found, return error", (done) => {
+            request(app)
+            .delete("/favorites/100")
+            .set({access_token: user_access_token})
+            .then((response) => {
+                const { body, status } = response;
+                expect(status).toBe(404);
+                expect(body).toHaveProperty("message", "Id or data not found");
+                return done();
+            })
+            .catch((err) => {
+                done(err)
+            })
+        })
+
+        test("401 Failed delete favourite data - access token invalid, return error", (done) => {
+            request(app)
+            .delete("/favorites/100")
+            .set({access_token: "akses token salah"})
+            .then((response) => {
+                const { body, status } = response;
+                expect(status).toBe(401);
+                expect(body).toHaveProperty("message", "Invalid token");
+                return done();
+            })
+            .catch((err) => {
+                done(err)
+            })
+        })
+    })
+});
