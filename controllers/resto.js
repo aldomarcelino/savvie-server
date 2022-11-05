@@ -3,7 +3,7 @@ const {Food} = require("../models")
 class Controller{
   static async showFood(req, res, next){
     try {
-      let data = await Food.findAll({
+      const data = await Food.findAll({
         where: {
           RestaurantId: req.user.restoId
         }
@@ -15,8 +15,8 @@ class Controller{
   }
   static async detailFood(req, res, next){
     try {
-      let findData = await Food.findByPk(req.params.id);
-      if (!findData) throw { name: "Food Not Found" };
+      const data = await Food.findByPk(req.params.id);
+      if (!data) throw { name: "Not found" };
       res.status(200).json(data)
     } catch (error) {
       next(error)
@@ -24,74 +24,77 @@ class Controller{
   }
   static async addFood(req, res, next){
     try {
-      let { name, price, rate, imageUrl, description, status, quantity, sales, discount, CategoryId } = req.body;
-      let data = await Food.create({
+      const { name, price, rate, imageUrl, description, quantity, sales, discount = 0, CategoryId } = req.body;
+      const data = await Food.create({
         name,
         price,
         rate,
-        role,
         imageUrl,
         description,
-        status,
+        status: "new",
         quantity,
         sales,
         discount,
+        is_active: true,
         CategoryId,
         RestaurantId: req.user.restoId
       });
       res.status(201).json(data);
-    } catch (err) {
-      next(err);
+    } catch (error) {
+      next(error);
     }
   }
   static async deleteFood(req, res, next){
     try {
-      let findData = await Food.findByPk(req.params.id);
-      if (!findData) throw { name: "Food Not Found" };
-      let data = await Food.destroy(req.params.id);
-      res.status(200).json(data);
-    } catch (err) {
-      next(err);
+      const findData = await Food.findByPk(req.params.id);
+      if (!findData) throw { name: "Not found" };
+      await Food.destroy({where: {id: req.params.id}});
+      res.status(200).json({message: `Food with id ${req.params.id} success to delete`});
+    } catch (error) {
+      next(error);
     }
   }
   static async editFood(req, res, next){
     try {
-      let findData = await Food.findByPk(req.params.id);
-      if (!findData) throw { name: "Food Not Found" };
-      let { username, email, password, phoneNumber, address } = req.body;
-      let data = await Food.update({
-        username,
-        email,
-        password,
-        role,
-        phoneNumber,
-        address,
+      const findData = await Food.findByPk(req.params.id);
+      if (!findData) throw { name: "Not found" };
+      const { name, price, rate, imageUrl, description, quantity, sales, discount, CategoryId } = req.body;
+      await Food.update({
+        name,
+        price,
+        rate,
+        imageUrl,
+        description,
+        quantity,
+        sales,
+        discount,
+        CategoryId
       }, {where: {id: req.params.id}});
-      res.status(200).json(data);
-    } catch (err) {
-      next(err);
+      res.status(200).json({message: `Food with id ${req.params.id} edited success`});
+    } catch (error) {
+      next(error);
     }
   }
   static async statusFood(req, res, next){
     try {
-      let findData = await Food.findByPk(req.params.id);
-      if (!findData) throw { name: "Food Not Found" };
-      let {status} = req.body
+      const findData = await Food.findByPk(req.params.id);
+      if (!findData) throw { name: "Not found" };
+      const {status} = req.body
       await Food.update({status}, {where: {id: req.params.id}})
-      res.status(200).json({msg: "Update status success"});
-    } catch (err) {
-      next(err);
+      res.status(200).json({message: "Update status success"});
+    } catch (error) {
+      next(error);
     }
   }
   static async activeFood(req, res, next){
     try {
-      let findData = await Food.findByPk(req.params.id);
-      if (!findData) throw { name: "Food Not Found" };
-      let {isActive} = req.body
+      const findData = await Food.findByPk(req.params.id);
+      if (!findData) throw { name: "Not found" };
+      const {isActive} = req.body
       await Food.update({isActive}, {where: {id: req.params.id}})
-      res.status(200).json({msg: "Update status success"});
-    } catch (err) {
-      next(err);
+      res.status(200).json({message: "Update status success"});
+    } catch (error) {
+      next(error);
     }
   }
 }
