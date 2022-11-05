@@ -3,6 +3,7 @@ const { User, Restaurant } = require("../models");
 
 const authentication = async (req, res, next) => {
   try {
+    console.log("test");
     const { access_token } = req.headers;
     if (!access_token) {
       throw { name: "Unauthorized", message: "Missing token" };
@@ -23,6 +24,7 @@ const authentication = async (req, res, next) => {
 
 const authenticationResto = async (req, res, next) => {
   try {
+    console.log("test2");
     const { access_token } = req.headers;
     if (!access_token) {
       throw { name: "Unauthorized", message: "Missing token" };
