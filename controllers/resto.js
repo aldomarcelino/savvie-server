@@ -1,4 +1,4 @@
-const {Food} = require("../models")
+const {Food, Restaurant} = require("../models")
 
 class Controller{
   static async showFood(req, res, next){
@@ -93,6 +93,40 @@ class Controller{
       const {isActive} = req.body
       await Food.update({isActive}, {where: {id: req.params.id}})
       res.status(200).json({message: "Update status success"});
+    } catch (error) {
+      next(error);
+    }
+  }
+
+
+
+  static async editRestaurant(req, res, next){
+    try {
+      const { name, type, logoUrl, description, is_open, open_time, close_time, is_pickup, is_delivery, address, longitude, latitude } = req.body;
+      const data = await Restaurant.update({
+        name,
+        type,
+        logoUrl,
+        description,
+        is_open,
+        open_time,
+        close_time,
+        is_pickup, 
+        is_delivery, 
+        address, 
+        longitude, 
+        latitude
+      }, {where: {UserId: req.user.id}});
+      res.status(200).json({message: `Restaurant with id ${req.user.id} edited success`});
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async deleteRestaurant(req, res, next){
+    try {
+      await Restaurant.destroy({where: {UserId: req.user.id}});
+      res.status(200).json({message: `Restaurant with id ${req.user.id} success to delete`});
     } catch (error) {
       next(error);
     }
