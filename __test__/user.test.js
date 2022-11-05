@@ -3,7 +3,6 @@ const request = require("supertest");
 const { sequelize, User } = require("../models");
 const { createSign, verifyToken } = require("../helpers/jwt");
 const { queryInterface } = sequelize;
-const userdata = require("../data/users.json");
 
 jest.setTimeout(2000);
 
@@ -182,7 +181,9 @@ describe("User Routes Test", () => {
           const { body, status } = res;
 
           expect(status).toBe(200);
+          expect(body).toHaveProperty("message", expect.any(String));
           expect(body).toHaveProperty("access_token", expect.any(String));
+          expect(body).toHaveProperty("id", expect.any(Number));
           return done();
         });
     });

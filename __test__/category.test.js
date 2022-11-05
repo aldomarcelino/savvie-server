@@ -11,23 +11,28 @@ let categories = dataCategory.categories.map((el) => {
     return el;
 });
 
-beforeEach(async () => {
-    await queryInterface.bulkInsert("Category", categories);
-});
 
-afterEach(async () => {
-    await queryInterface.bulkDelete("Category", null, {
-    truncate: true,
-    cascade: true,
-    restartIdentity: true,
-    });
-});
+const user_access_token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZXNjdWVmb29kQGdtYWlsLmNvbSIsImlhdCI6MTY2NzY0OTE1Mn0.Sqkgx312hBggjPziUR-QqYZD4mf8Le70OfR_HEyjhG0";
+
+// beforeEach(async () => {
+//     await queryInterface.bulkInsert("Category", categories);
+// });
+
+// afterEach(async () => {
+//     await queryInterface.bulkDelete("Category", null, {
+//     truncate: true,
+//     cascade: true,
+//     restartIdentity: true,
+//     });
+// });
 
 describe("Category Routes Test", () => {
     describe("GET /categories - return data all categories", () => {
         test("200 Success get all categories data, return array", (done) => {
         request(app)
             .get("/categories")
+            .set({access_token: user_access_token})
             .then((response) => {
                 const { body, status } = response;
                 expect(status).toBe(200);
@@ -35,8 +40,22 @@ describe("Category Routes Test", () => {
                 expect(body[0]).toHaveProperty("id", expect.any(Number));
                 expect(body[0]).toHaveProperty("name", expect.any(String));
                 expect(body[0]).toHaveProperty("imageUrl", expect.any(String));
-                // expect(body[0].Food).toBeInstanceOf(Object);
                 expect(body[0].CategoryRestos).toBeInstanceOf(Array);
+                done();
+            })
+            .catch((err) => {
+                done(err);
+            });
+        });
+        
+        test("401 Failed get all categories data with invalid token - should return error unauthorized", (done) => {
+        request(app)
+            .get("/categories")
+            .set("access_token", "ini invalid token")
+            .then((response) => {
+                const { body, status } = response;
+                expect(status).toBe(401);
+                expect(body).toHaveProperty("message", "Invalid token");
                 done();
             })
             .catch((err) => {
@@ -49,6 +68,7 @@ describe("Category Routes Test", () => {
         test("200 Success get one categories data, return object", (done) => {
         request(app)
             .get("/categories/2")
+            .set({access_token: user_access_token})
             .then((response) => {
                 const { body, status } = response;
                 expect(status).toBe(200);
@@ -56,7 +76,6 @@ describe("Category Routes Test", () => {
                 expect(body).toHaveProperty("id", expect.any(Number));
                 expect(body).toHaveProperty("name", expect.any(String));
                 expect(body).toHaveProperty("imageUrl", expect.any(String));
-                // expect(body.Food).toBeInstanceOf(Object);
                 expect(body.CategoryRestos).toBeInstanceOf(Array);
                 done();
             })
@@ -68,6 +87,7 @@ describe("Category Routes Test", () => {
         test("404 Failed get one categories data, return error", (done) => {
             request(app)
                 .get("/categories/100")
+                .set({access_token: user_access_token})
                 .then((response) => {
                     const { body, status } = response;
                     expect(status).toBe(404);
@@ -79,4 +99,19 @@ describe("Category Routes Test", () => {
                 });
             });
         });
-    });
+
+        test("401 Failed get one categories data with invalid token - should return error unauthorized", (done) => {
+            request(app)
+                .get("/categories/1")
+                .set("access_token", "ini invalid token")
+                .then((response) => {
+                    const { body, status } = response;
+                    expect(status).toBe(401);
+                    expect(body).toHaveProperty("message", "Invalid token");
+                    done();
+                })
+                .catch((err) => {
+                    done(err);
+                });
+        })
+    })
