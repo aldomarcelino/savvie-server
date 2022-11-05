@@ -27,10 +27,6 @@ const user2 = {
   phoneNumber: "082267580929",
 };
 
-// beforeEach(async () => {
-//   await queryInterface.bulkInsert("User", userdata);
-// });
-
 // afterEach(async () => {
 //   await queryInterface.bulkDelete(`User`, null, {
 //   truncate: true,

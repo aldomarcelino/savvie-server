@@ -1,8 +1,7 @@
 const app = require("../app");
 const request = require("supertest");
-const { sequelize, User, Food  } = require("../models");
+const { sequelize, Food  } = require("../models");
 const { queryInterface } = sequelize;
-require("dotenv").config();
 
 jest.setTimeout(1000);
 
@@ -60,5 +59,19 @@ describe("Food Routes Test", () => {
                 done(err);
             });
         });
+
+        test("404 Failed get one food data, return error", (done) => {
+            request(app)
+                .get("/food/100")
+                .then((response) => {
+                    const { body, status } = response;
+                    expect(status).toBe(404);
+                    expect(body).toHaveProperty("message", "Id or data not found");
+                    done();
+                })
+                .catch((err) => {
+                    done(err);
+                });
+            });
+        });
     });
-});

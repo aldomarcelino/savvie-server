@@ -1,41 +1,42 @@
 const app = require("../app");
 const request = require("supertest");
-const { sequelize, Restaurants } = require("../models");
+const { sequelize, Category  } = require("../models");
 const { queryInterface } = sequelize;
 
 jest.setTimeout(1000);
 
-const dataRestaurant = require("../data/restaurants.json");
-let restaurants = dataRestaurant.restaurants.map((el) => {
+let dataCategory = require("../data/categories.json");
+let categories = dataCategory.categories.map((el) => {
     el.createdAt = el.updatedAt = new Date();
     return el;
 });
 
 beforeEach(async () => {
-    // console.log(restaurants, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
-    await queryInterface.bulkInsert("Restaurants", restaurants);
+    await queryInterface.bulkInsert("Category", categories);
 });
 
 afterEach(async () => {
-    await queryInterface.bulkDelete(`Restaurants`, null, {
+    await queryInterface.bulkDelete("Category", null, {
     truncate: true,
     cascade: true,
     restartIdentity: true,
     });
 });
 
-describe("Restaurants Routes Test", () => {
-    describe("GET /restaurants - return data all restaurants", () => {
-        test("200 Success get all restaurants data, return array", (done) => {
+describe("Category Routes Test", () => {
+    describe("GET /categories - return data all categories", () => {
+        test("200 Success get all categories data, return array", (done) => {
         request(app)
-            .get("/restaurants")
+            .get("/categories")
             .then((response) => {
                 const { body, status } = response;
                 expect(status).toBe(200);
                 expect(body[0]).toBeInstanceOf(Object);
-                expect(body[0].User).toBeInstanceOf(Object);
+                expect(body[0]).toHaveProperty("id", expect.any(Number));
+                expect(body[0]).toHaveProperty("name", expect.any(String));
+                expect(body[0]).toHaveProperty("imageUrl", expect.any(String));
+                // expect(body[0].Food).toBeInstanceOf(Object);
                 expect(body[0].CategoryRestos).toBeInstanceOf(Array);
-                expect(body[0].Food).toBeInstanceOf(Array);
                 done();
             })
             .catch((err) => {
@@ -44,18 +45,19 @@ describe("Restaurants Routes Test", () => {
         });
     });
 
-    describe("GET /restaurants/:id - return data restaurants by Id", () => {
-        test("200 Success get one restaurants data, return object", (done) => {
+    describe("GET /categories/:id - return data categories by Id", () => {
+        test("200 Success get one categories data, return object", (done) => {
         request(app)
-            .get("/restaurants/1")
+            .get("/categories/2")
             .then((response) => {
                 const { body, status } = response;
                 expect(status).toBe(200);
                 expect(body).toBeInstanceOf(Object);
                 expect(body).toHaveProperty("id", expect.any(Number));
-                expect(body.User).toBeInstanceOf(Object);
+                expect(body).toHaveProperty("name", expect.any(String));
+                expect(body).toHaveProperty("imageUrl", expect.any(String));
+                // expect(body.Food).toBeInstanceOf(Object);
                 expect(body.CategoryRestos).toBeInstanceOf(Array);
-                expect(body.Food).toBeInstanceOf(Array);
                 done();
             })
             .catch((err) => {
@@ -63,9 +65,9 @@ describe("Restaurants Routes Test", () => {
             });
         });
 
-        test("404 Failed get one restaurant data, return error", (done) => {
+        test("404 Failed get one categories data, return error", (done) => {
             request(app)
-                .get("/restaurants/100")
+                .get("/categories/100")
                 .then((response) => {
                     const { body, status } = response;
                     expect(status).toBe(404);
@@ -77,5 +79,4 @@ describe("Restaurants Routes Test", () => {
                 });
             });
         });
-
     });
