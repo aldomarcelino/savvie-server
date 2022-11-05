@@ -1,32 +1,23 @@
 const app = require("../app");
 const request = require("supertest");
-const { sequelize } = require("../models");
+const { sequelize, User, Food  } = require("../models");
 const { queryInterface } = sequelize;
-const { User, Food } = require("../models/index");
-const { createSign } = require("../helpers/jwt");
 require("dotenv").config();
 
 jest.setTimeout(1000);
 
-let access_token = createSign(
-    {
-        id: 1,
-    },
-    process.env.ACCESS_TOKEN
-);
-
 let dataFood = require("../data/foods.json");
-let foods = dataFood.map((el) => {
+let foods = dataFood.food.map((el) => {
     el.createdAt = el.updatedAt = new Date();
     return el;
 });
 
-beforeAll(() => {
-    return queryInterface.bulkInsert("Food", foods);
+beforeEach(async () => {
+    await queryInterface.bulkInsert("Food", foods);
 });
 
-afterAll(() => {
-    return queryInterface.bulkDelete(`Food`, null, {
+afterEach(async () => {
+    await queryInterface.bulkDelete(`Food`, null, {
     truncate: true,
     cascade: true,
     restartIdentity: true,

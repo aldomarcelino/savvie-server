@@ -1,10 +1,11 @@
 const app = require("../app");
 const request = require("supertest");
-const { User } = require("../models");
+const { sequelize, User } = require("../models");
 const { createSign, verifyToken } = require("../helpers/jwt");
+const { queryInterface } = sequelize;
 const userdata = require("../data/users.json");
 
-jest.setTimeout(1000);
+jest.setTimeout(2000);
 
 const user1 = {
   fullName: "User Test",
@@ -26,25 +27,17 @@ const user2 = {
   phoneNumber: "082267580929",
 };
 
-beforeAll((done) => {
-  User.bulkCreate(userdata)
-    .then((_) => {
-      done();
-    })
-    .catch((err) => {
-      done(err);
-    });
-});
+// beforeEach(async () => {
+//   await queryInterface.bulkInsert("User", userdata);
+// });
 
-afterAll((done) => {
-  User.destroy({ truncate: true, cascade: true, restartIdentity: true })
-    .then((_) => {
-      done();
-    })
-    .catch((err) => {
-      done(err);
-    });
-});
+// afterEach(async () => {
+//   await queryInterface.bulkDelete(`User`, null, {
+//   truncate: true,
+//   cascade: true,
+//   restartIdentity: true,
+//   });
+// });
 
 describe("User Routes Test", () => {
   describe("POST /signup - create new user", () => {
