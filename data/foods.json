@@ -1,5 +1,4 @@
-{
-  "food": [
+[
     {
       "name": "Telur Dadar Gulung",
       "price": 20000,
@@ -519,4 +518,4 @@
       "is_active": true
     }
   ]
-}
+

@@ -80,7 +80,7 @@ _400 - Bad Request_
 
 ```json
 {
-  "message": "Email can't null"
+  "message": "Email is required"
 }
 OR
 {
@@ -88,19 +88,19 @@ OR
 }
 OR
 {
-  "message": "Email must be unique"
+  "message": "email must be unique"
 }
 OR
 {
-  "message": "Name can't null"
+  "message": "FullName is required"
 }
 OR
 {
-  "message": "Phone Number can't null"
+  "message": "PhoneNumber is required"
 }
 OR
 {
-  "message": "Password can't null"
+  "message": "Password is required"
 }
 ```
 
