@@ -99,7 +99,14 @@ class Controller{
   }
 
 
-
+  static async myRestaurant(req, res, next) {
+    try {
+      const data = await Restaurant.findByPk(req.user.id);
+      res.status(200).json(data);
+    } catch (error) {
+      next(error);
+    }
+  }
   static async editRestaurant(req, res, next){
     try {
       const { name, type, logoUrl, description, is_open, open_time, close_time, is_pickup, is_delivery, address, longitude, latitude } = req.body;
