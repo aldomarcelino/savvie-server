@@ -4,7 +4,8 @@ class Controller {
   static async allBasket(req, res, next) {
     try {
       const basket = await Basket.findAll({
-        include: [Food]
+        include: [Food],
+        where: {UserId: req.user.id}
       });
 
       res.status(200).json(basket);
@@ -14,9 +15,9 @@ class Controller {
   }
   static async createBasket(req, res, next){
     try {
-      const { FoodId } = req.body;
+      
       const data = await Basket.create({
-        FoodId,
+        FoodId: req.params.id,
         UserId: req.user.id
       });
       res.status(201).json(data);
