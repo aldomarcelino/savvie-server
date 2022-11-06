@@ -15,7 +15,6 @@ class Controller {
   }
   static async createBasket(req, res, next){
     try {
-      
       const data = await Basket.create({
         FoodId: req.params.id,
         UserId: req.user.id

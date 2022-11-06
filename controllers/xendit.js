@@ -14,7 +14,7 @@ class Controller {
             }
         }, { transaction : t })
         const xenditInvoice = await XenditInvoice.createInvoice(findUser.id+'', balance, findUser)
-        console.log(xenditInvoice)
+        // console.log(xenditInvoice)
         await Balance.update({
             balance : +findWallet.balance + +balance
         }, {

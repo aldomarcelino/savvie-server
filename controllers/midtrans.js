@@ -26,7 +26,7 @@ class Controller {
         },
     };
     
-    console.log(parameter)
+    // console.log(parameter)
 
     snap
         .createTransaction(parameter)
