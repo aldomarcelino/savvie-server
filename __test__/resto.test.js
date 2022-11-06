@@ -28,6 +28,21 @@ describe("Resto Routes Test", () => {
             done(err);
             });
         });
+
+        test("401 Failed get foods with invalid token - should return error unauthorized", (done) => {
+        request(app)
+            .get("/resto/food")
+            .set("access_token", "ini invalid token")
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(401);
+            expect(body).toHaveProperty("message", "Invalid token");
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
     });
 
     describe("GET /resto/food/:id - return data one food", () => {
@@ -44,6 +59,36 @@ describe("Resto Routes Test", () => {
             expect(body).toHaveProperty("rate", expect.any(Number));
             expect(body).toHaveProperty("imageUrl", expect.any(String));
             done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("404 Failed get one food data, return error", (done) => {
+        request(app)
+            .get("/resto/food/100")
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(404);
+            expect(body).toHaveProperty("message", "Id or data not found");
+            done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("401 Failed get one food with invalid token - should return error unauthorized", (done) => {
+        request(app)
+            .get("/resto/food/9")
+            .set("access_token", "ini invalid token")
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(401);
+            expect(body).toHaveProperty("message", "Invalid token");
+            return done();
             })
             .catch((err) => {
             done(err);
@@ -81,6 +126,32 @@ describe("Resto Routes Test", () => {
             done(err);
             });
         });
+
+        test("401 Failed create food with invalid token - should return error unauthorized", (done) => {
+        request(app)
+            .post("/resto/food")
+            .send({
+            name: "udang goreng tepung",
+            price: "25000",
+            rate: 0,
+            imageUrl: "https://unsplash.com/photos/HNmcgpzPHag",
+            description: "udang goreng terenak setasikmalaya",
+            quantity: 20,
+            sales: 1,
+            discount: 0,
+            CategoryId: 3,
+            })
+            .set("access_token", "ini invalid token")
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(401);
+            expect(body).toHaveProperty("message", "Invalid token");
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
     });
 
     describe("DELETE /resto/food/:id - delete food resto by id", () => {
@@ -92,6 +163,36 @@ describe("Resto Routes Test", () => {
             const { body, status } = response;
             expect(status).toBe(200);
             expect(body).toHaveProperty("message", expect.any(String));
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("404 Failed delete food - food not found, return error", (done) => {
+        request(app)
+            .delete("/resto/food/100")
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(404);
+            expect(body).toHaveProperty("message", "Id or data not found");
+            done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("401 Failed create food with invalid token - should return error unauthorized", (done) => {
+        request(app)
+            .delete("/resto/food/100")
+            .set("access_token", "ini invalid token")
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(401);
+            expect(body).toHaveProperty("message", "Invalid token");
             return done();
             })
             .catch((err) => {
@@ -126,6 +227,58 @@ describe("Resto Routes Test", () => {
             done(err);
             });
         });
+
+        test("404 Failed edit food - food not found, return error", (done) => {
+        request(app)
+            .put("/resto/food/100")
+            .send({
+            name: "Edit food test",
+            price: "500000",
+            rate: 5,
+            imageUrl: "https://unsplash.com/photos/HNmcgpzPHag",
+            description: "udang goreng terenak setasikmalaya",
+            quantity: 20,
+            sales: 1,
+            discount: 30,
+            CategoryId: 3,
+            })
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(404);
+            expect(body).toHaveProperty("message", "Id or data not found");
+            done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("401 Failed edit food with invalid token - should return error unauthorized", (done) => {
+        request(app)
+            .put("/resto/food/100")
+            .send({
+            name: "Edit food test",
+            price: "500000",
+            rate: 5,
+            imageUrl: "https://unsplash.com/photos/HNmcgpzPHag",
+            description: "udang goreng terenak setasikmalaya",
+            quantity: 20,
+            sales: 1,
+            discount: 30,
+            CategoryId: 3,
+            })
+            .set("access_token", "ini invalid token")
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(401);
+            expect(body).toHaveProperty("message", "Invalid token");
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
     });
 
     describe("PATCH /resto/food/food-status/:id - edit food status", () => {
@@ -139,6 +292,38 @@ describe("Resto Routes Test", () => {
             expect(status).toBe(200);
             expect(body).toHaveProperty("message", expect.any(String));
             done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("404 Failed edit food - food not found, return error", (done) => {
+        request(app)
+            .patch("/resto/food/food-status/100")
+            .send({ status: "popular" })
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(404);
+            expect(body).toHaveProperty("message", "Id or data not found");
+            done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("401 Failed edit food - invalid token - should return error unauthorized", (done) => {
+        request(app)
+            .patch("/resto/food/food-status/17")
+            .send({ status: "popular" })
+            .set("access_token", "ini invalid token")
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(401);
+            expect(body).toHaveProperty("message", "Invalid token");
+            return done();
             })
             .catch((err) => {
             done(err);
@@ -162,6 +347,38 @@ describe("Resto Routes Test", () => {
             done(err);
             });
         });
+
+        test("404 Failed edit food - food not found, return error", (done) => {
+        request(app)
+            .patch("/resto/food/food-active/100")
+            .send({ is_active: false })
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(404);
+            expect(body).toHaveProperty("message", "Id or data not found");
+            done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("401 Failed edit food - invalid token - should return error unauthorized", (done) => {
+        request(app)
+            .patch("/resto/food/food-active/17")
+            .send({ is_active: false })
+            .set("access_token", "ini invalid token")
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(401);
+            expect(body).toHaveProperty("message", "Invalid token");
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
     });
 
     describe("GET /resto/restaurants - return restaurants based on userId", () => {
@@ -177,6 +394,21 @@ describe("Resto Routes Test", () => {
             expect(body).toHaveProperty("description", expect.any(String));
             expect(body).toHaveProperty("logoUrl", expect.any(String));
             done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("401 Failed get restaurant data - invalid token - should return error unauthorized", (done) => {
+        request(app)
+            .get("/resto/restaurants")
+            .set("access_token", "ini invalid token")
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(401);
+            expect(body).toHaveProperty("message", "Invalid token");
+            return done();
             })
             .catch((err) => {
             done(err);
@@ -203,6 +435,25 @@ describe("Resto Routes Test", () => {
             done(err);
             });
         });
+
+        test("401 Failed edit restaurant - invalid token - should return error unauthorized", (done) => {
+        request(app)
+            .put("/resto/restaurants")
+            .send({
+            name: "Markobar",
+            is_open: true,
+            })
+            .set("access_token", "ini invalid token")
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(401);
+            expect(body).toHaveProperty("message", "Invalid token");
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
     });
 
     describe("DELETE /resto/restaurants - delete restaurant by id", () => {
@@ -214,6 +465,21 @@ describe("Resto Routes Test", () => {
             const { body, status } = response;
             expect(status).toBe(200);
             expect(body).toHaveProperty("message", expect.any(String));
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("401 Failed deleted restaurant - invalid token - should return error unauthorized", (done) => {
+        request(app)
+            .delete("/resto/restaurants")
+            .set("access_token", "ini invalid token")
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(401);
+            expect(body).toHaveProperty("message", "Invalid token");
             return done();
             })
             .catch((err) => {
