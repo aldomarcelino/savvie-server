@@ -8,9 +8,9 @@ jest.setTimeout(2000);
 
 const user1 = {
   fullName: "User Test",
-  email: "user.test@mail.com",
+  email: "jamet@mail.com",
   password: "123456",
-  address: "Semarang",
+  address: "Jombang",
   imageUrl:
     "https://images.unsplash.com/photo-1506795660198-e95c77602129?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80",
   phoneNumber: "082267580929",
@@ -25,6 +25,9 @@ const user2 = {
     "https://images.unsplash.com/photo-1506795660198-e95c77602129?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80",
   phoneNumber: "082267580929",
 };
+
+const user_access_token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZXNjdWVmb29kQGdtYWlsLmNvbSIsImlhdCI6MTY2NzY0OTE1Mn0.Sqkgx312hBggjPziUR-QqYZD4mf8Le70OfR_HEyjhG0";
 
 // afterEach(async () => {
 //   await queryInterface.bulkDelete(`User`, null, {
@@ -242,12 +245,14 @@ describe("User Routes Test", () => {
     test("200 Success get user, return array", (done) => {
       request(app)
         .get("/")
+        .set({access_token: user_access_token})
         .then((response) => {
           const { body, status } = response;
           expect(status).toBe(200);
-          expect(body).toHaveProperty("statusCode", expect.any(Number));
-          expect(Array.isArray(body))
-          expect(body.user.length).toBeGreaterThan(0);
+          expect(body).toBeInstanceOf(Object);
+          expect(body).toHaveProperty("id", expect.any(Number));
+          expect(body).toHaveProperty("email", expect.any(String));
+          expect(body).toHaveProperty("fullName", expect.any(String));
           done();
         })
         .catch((err) => {

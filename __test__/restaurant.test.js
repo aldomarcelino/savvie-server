@@ -67,7 +67,7 @@ describe("Restaurants Routes Test", () => {
     describe("GET /restaurants/:id - return data restaurants by Id", () => {
         test("200 Success get one restaurants data, return object", (done) => {
         request(app)
-            .get("/restaurants/1")
+            .get("/restaurants/2")
             .set({access_token: user_access_token})
             .then((response) => {
                 const { body, status } = response;

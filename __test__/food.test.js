@@ -49,7 +49,7 @@ describe("Food Routes Test", () => {
     describe("GET /food/:id - return data food by Id", () => {
         test("200 Success get one food data, return object", (done) => {
         request(app)
-            .get("/food/1")
+            .get("/food/26")
             .set({access_token: user_access_token})
             .then((response) => {
                 const { body, status } = response;

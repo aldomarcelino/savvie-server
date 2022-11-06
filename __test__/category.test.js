@@ -47,21 +47,6 @@ describe("Category Routes Test", () => {
                 done(err);
             });
         });
-        
-        test("401 Failed get all categories data with invalid token - should return error unauthorized", (done) => {
-        request(app)
-            .get("/categories")
-            .set("access_token", "ini invalid token")
-            .then((response) => {
-                const { body, status } = response;
-                expect(status).toBe(401);
-                expect(body).toHaveProperty("message", "Invalid token");
-                done();
-            })
-            .catch((err) => {
-                done(err);
-            });
-        });
     });
 
     describe("GET /categories/:id - return data categories by Id", () => {
@@ -99,19 +84,4 @@ describe("Category Routes Test", () => {
                 });
             });
         });
-
-        test("401 Failed get one categories data with invalid token - should return error unauthorized", (done) => {
-            request(app)
-                .get("/categories/1")
-                .set("access_token", "ini invalid token")
-                .then((response) => {
-                    const { body, status } = response;
-                    expect(status).toBe(401);
-                    expect(body).toHaveProperty("message", "Invalid token");
-                    done();
-                })
-                .catch((err) => {
-                    done(err);
-                });
-        })
     })
