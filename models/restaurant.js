@@ -166,13 +166,17 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      longitude: {
-        type: DataTypes.FLOAT,
+      location: {
+        type: DataTypes.GEOMETRY("POINT"),
         allowNull: false,
-      },
-      latitude: {
-        type: DataTypes.FLOAT,
-        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Location is required",
+          },
+          notNull: {
+            msg: "Location is required",
+          },
+        },
       },
       UserId: {
         type: DataTypes.INTEGER,

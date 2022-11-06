@@ -1,30 +1,31 @@
-const {Food, Restaurant} = require("../models")
+const { Food, Restaurant, Sequelize } = require("../models");
 
-class Controller{
-  static async showFood(req, res, next){
+class Controller {
+  static async showFood(req, res, next) {
     try {
       const data = await Food.findAll({
         where: {
-          RestaurantId: req.user.restoId
-        }
-      })
-      res.status(200).json(data)
+          RestaurantId: req.user.restoId,
+        },
+      });
+      res.status(200).json(data);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
-  static async detailFood(req, res, next){
+  static async detailFood(req, res, next) {
     try {
       const data = await Food.findByPk(req.params.id);
       if (!data) throw { name: "Not found" };
-      res.status(200).json(data)
+      res.status(200).json(data);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
-  static async addFood(req, res, next){
+  static async addFood(req, res, next) {
     try {
-      const { name, price, imageUrl, description, quantity, CategoryId } = req.body;
+      const { name, price, imageUrl, description, quantity, CategoryId } =
+        req.body;
       const data = await Food.create({
         name,
         price,
@@ -38,29 +39,30 @@ class Controller{
         is_active: true,
         CategoryId,
         isActive: true,
-        RestaurantId: req.user.restoId
+        RestaurantId: req.user.restoId,
       });
       res.status(201).json(data);
     } catch (error) {
       next(error);
     }
   }
-  static async deleteFood(req, res, next){
+  static async deleteFood(req, res, next) {
     try {
       const findData = await Food.findByPk(req.params.id);
       if (!findData) throw { name: "Not found" };
-      await Food.destroy({where: {id: req.params.id}});
-      res.status(200).json({message: `Food with id ${req.params.id} success to delete`});
+      await Food.destroy({ where: { id: req.params.id } });
+      res
+        .status(200)
+        .json({ message: `Food with id ${req.params.id} success to delete` });
     } catch (error) {
       next(error);
     }
   }
-  static async editFood(req, res, next){
+  static async editFood(req, res, next) {
     try {
       const findData = await Food.findByPk(req.params.id);
       if (!findData) throw { name: "Not found" };
-      const { name, price, rate, imageUrl, description, quantity, sales, discount, CategoryId } = req.body;
-      await Food.update({
+      const {
         name,
         price,
         rate,
@@ -69,36 +71,51 @@ class Controller{
         quantity,
         sales,
         discount,
-        CategoryId
-      }, {where: {id: req.params.id}});
-      res.status(200).json({message: `Food with id ${req.params.id} edited success`});
+        CategoryId,
+      } = req.body;
+      await Food.update(
+        {
+          name,
+          price,
+          rate,
+          imageUrl,
+          description,
+          quantity,
+          sales,
+          discount,
+          CategoryId,
+        },
+        { where: { id: req.params.id } }
+      );
+      res
+        .status(200)
+        .json({ message: `Food with id ${req.params.id} edited success` });
     } catch (error) {
       next(error);
     }
   }
-  static async statusFood(req, res, next){
+  static async statusFood(req, res, next) {
     try {
       const findData = await Food.findByPk(req.params.id);
       if (!findData) throw { name: "Not found" };
-      const {status} = req.body
-      await Food.update({status}, {where: {id: req.params.id}})
-      res.status(200).json({message: "Update status success"});
+      const { status } = req.body;
+      await Food.update({ status }, { where: { id: req.params.id } });
+      res.status(200).json({ message: "Update status success" });
     } catch (error) {
       next(error);
     }
   }
-  static async activeFood(req, res, next){
+  static async activeFood(req, res, next) {
     try {
       const findData = await Food.findByPk(req.params.id);
       if (!findData) throw { name: "Not found" };
-      const {isActive} = req.body
-      await Food.update({isActive}, {where: {id: req.params.id}})
-      res.status(200).json({message: "Update status success"});
+      const { isActive } = req.body;
+      await Food.update({ isActive }, { where: { id: req.params.id } });
+      res.status(200).json({ message: "Update status success" });
     } catch (error) {
       next(error);
     }
   }
-
 
   static async myRestaurant(req, res, next) {
     try {
@@ -119,6 +136,8 @@ class Controller{
         open_time,
         close_time,
         address,
+        latitude,
+        longitude,
       } = req.body;
       const restaurant = await Restaurant.create({
         name,
@@ -134,8 +153,10 @@ class Controller{
         is_delivery: false,
         review_count: 0,
         address,
-        longitude: 0,
-        latitude: 0,
+        location: Sequelize.fn(
+          "ST_GeomFromText",
+          `POINT(${latitude} ${longitude})`
+        ),
         UserId: id,
       });
 
@@ -149,10 +170,9 @@ class Controller{
       next(error);
     }
   }
-  static async editRestaurant(req, res, next){
+  static async editRestaurant(req, res, next) {
     try {
-      const { name, type, logoUrl, description, is_open, open_time, close_time, is_pickup, is_delivery, address, longitude, latitude } = req.body;
-      await Restaurant.update({
+      const {
         name,
         type,
         logoUrl,
@@ -160,24 +180,45 @@ class Controller{
         is_open,
         open_time,
         close_time,
-        is_pickup, 
-        is_delivery, 
-        address, 
-        longitude, 
-        latitude
-      }, {where: {UserId: req.user.id}});
-      res.status(200).json({message: `Restaurant with id ${req.user.id} edited success`});
+        is_pickup,
+        is_delivery,
+        address,
+        longitude,
+        latitude,
+      } = req.body;
+      await Restaurant.update(
+        {
+          name,
+          type,
+          logoUrl,
+          description,
+          is_open,
+          open_time,
+          close_time,
+          is_pickup,
+          is_delivery,
+          address,
+          longitude,
+          latitude,
+        },
+        { where: { UserId: req.user.id } }
+      );
+      res
+        .status(200)
+        .json({ message: `Restaurant with id ${req.user.id} edited success` });
     } catch (error) {
       next(error);
     }
   }
-  static async deleteRestaurant(req, res, next){
+  static async deleteRestaurant(req, res, next) {
     try {
-      await Restaurant.destroy({where: {UserId: req.user.id}});
-      res.status(200).json({message: `Restaurant with id ${req.user.id} success to delete`});
+      await Restaurant.destroy({ where: { UserId: req.user.id } });
+      res.status(200).json({
+        message: `Restaurant with id ${req.user.id} success to delete`,
+      });
     } catch (error) {
       next(error);
     }
   }
 }
-module.exports = Controller
+module.exports = Controller;

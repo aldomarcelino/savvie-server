@@ -84,23 +84,18 @@ module.exports = (sequelize, DataTypes) => {
       },
       imageUrl: {
         type: DataTypes.STRING,
-        // allowNull: false,
-        // validate: {
-        //   notNull: {
-        //     msg: "ImageUrl is required",
-        //   },
-        //   notEmpty: {
-        //     msg: "ImageUrl is required",
-        //   },
-        // },
       },
-      latitude: {
-        type: DataTypes.FLOAT,
-        // allowNull: false,
-      },
-      longitude: {
-        type: DataTypes.FLOAT,
-        // allowNull: false,
+      location: {
+        type: DataTypes.GEOMETRY("POINT"),
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Location is required",
+          },
+          notNull: {
+            msg: "Location is required",
+          },
+        },
       },
       address: {
         type: DataTypes.TEXT,
@@ -123,8 +118,6 @@ module.exports = (sequelize, DataTypes) => {
   User.beforeCreate((el) => {
     el.password = hashPass(el.password);
     el.imageUrl = "https://api.lorem.space/image/movie?w=150&h=220";
-    el.latitude = 0;
-    el.longitude = 0;
   });
   return User;
 };

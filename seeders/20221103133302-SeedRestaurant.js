@@ -4,7 +4,13 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     const dataRestaurant = require("../data/restaurants.json");
     dataRestaurant.restaurants.forEach((el) => {
-      el.createdAt = el.updatedAt = new Date();
+      (el.location = Sequelize.fn(
+        "ST_GeomFromText",
+        `POINT(${el.latitude} ${el.longitude})`
+      )),
+        (el.createdAt = el.updatedAt = new Date());
+      delete el.latitude;
+      delete el.longitude;
     });
 
     await queryInterface.bulkInsert(
@@ -12,24 +18,9 @@ module.exports = {
       dataRestaurant.restaurants,
       {}
     );
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-     */
   },
 
   async down(queryInterface, Sequelize) {
     await queryInterface.bulkDelete("Restaurants", null);
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
   },
 };

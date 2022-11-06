@@ -1,6 +1,6 @@
 const { comparePass } = require("../helpers/bcrypt");
 const { createSign } = require("../helpers/jwt");
-const { User, Restaurant, Balance } = require("../models");
+const { User, Restaurant, Balance, Sequelize } = require("../models");
 const { OAuth2Client } = require("google-auth-library");
 
 class Controller {
@@ -17,18 +17,30 @@ class Controller {
 
   static async createUser(req, res, next) {
     try {
-      const {  email, password, fullName, phoneNumber, address } = req.body;
-      const user = await User.create({
+      const {
         email,
-        password, 
+        password,
         fullName,
         phoneNumber,
         address,
+        latitude,
+        longitude,
+      } = req.body;
+      const user = await User.create({
+        email,
+        password,
+        fullName,
+        phoneNumber,
+        address,
+        location: Sequelize.fn(
+          "ST_GeomFromText",
+          `POINT(${latitude} ${longitude})`
+        ),
       });
       await Balance.create({
         UserId: user.id,
-        balance: 0
-      })
+        balance: 0,
+      });
 
       res.status(201).json({
         message: "Create user successfully",
@@ -43,14 +55,14 @@ class Controller {
     try {
       const { email, password } = req.body;
       if (!email) {
-        throw { name: "Email is required"}
+        throw { name: "Email is required" };
       }
       if (!password) {
-        throw { name: "Password is required"}
+        throw { name: "Password is required" };
       }
       const user = await User.findOne({
         where: { email },
-        include: [Restaurant]
+        include: [Restaurant],
       });
       if (!user)
         throw { name: "Login failed", msg: "Invalid email or password" };
@@ -63,13 +75,13 @@ class Controller {
         { id: user.id, email: user.email, role: user.role },
         process.env.SECRET_KEY
       );
-      if(!user.Restaurant) {
+      if (!user.Restaurant) {
         res.status(200).json({
           message: "User logged in successfully",
           access_token: token,
           user: user.username,
           role: user.role,
-          id: user.id
+          id: user.id,
         });
       } else {
         res.status(200).json({
@@ -78,7 +90,7 @@ class Controller {
           user: user.username,
           role: user.role,
           id: user.id,
-          restoId: user.Restaurant.id
+          restoId: user.Restaurant.id,
         });
       }
     } catch (error) {

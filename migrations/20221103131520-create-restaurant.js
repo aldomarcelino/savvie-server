@@ -60,13 +60,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT,
       },
-      longitude: {
+      location: {
+        type: Sequelize.GEOMETRY("POINT"),
         allowNull: false,
-        type: Sequelize.FLOAT,
-      },
-      latitude: {
-        allowNull: false,
-        type: Sequelize.FLOAT,
       },
       UserId: {
         type: Sequelize.INTEGER,
