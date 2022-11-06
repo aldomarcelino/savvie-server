@@ -18,10 +18,12 @@ class Controller {
   }
 
   static async createFavourite(req, res, next) {
+    const { id: FoodId } = req.params
+    const { id: UserId } = req.user
     try {
       await Favourite.create({
-        FoodId: req.body.FoodId,
-        UserId: req.user.id,
+        UserId,
+        FoodId
       });
       res.status(201).json({
         message: "Favourite success to create",

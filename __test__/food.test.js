@@ -44,21 +44,6 @@ describe("Food Routes Test", () => {
                 done(err);
             });
         });
-
-        test("401 Failed get foods with invalid token - should return error unauthorized", (done) => {
-            request(app)
-                .get("/food")
-                .set("access_token", "ini invalid token")
-                .then((response) => {
-                    const { body, status } = response;
-                    expect(status).toBe(401);
-                    expect(body).toHaveProperty("message", "Invalid token");
-                    return done();
-                })
-                .catch((err) => {
-                    done(err)
-                })
-        });
     });
 
     describe("GET /food/:id - return data food by Id", () => {
@@ -93,21 +78,6 @@ describe("Food Routes Test", () => {
                 .catch((err) => {
                     done(err);
                 });
-        });
-
-        test("401 Failed get one food with invalid token - should return error unauthorized", (done) => {
-            request(app)
-                .get("/food/1")
-                .set("access_token", "ini invalid token")
-                .then((response) => {
-                    const { body, status } = response;
-                    expect(status).toBe(401);
-                    expect(body).toHaveProperty("message", "Invalid token");
-                    return done();
-                })
-                .catch((err) => {
-                    done(err)
-                })
         });
     });
 
