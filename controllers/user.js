@@ -50,6 +50,7 @@ class Controller {
       }
       const user = await User.findOne({
         where: { email },
+        include: [Restaurant]
       });
       if (!user)
         throw { name: "Login failed", msg: "Invalid email or password" };
@@ -62,14 +63,24 @@ class Controller {
         { id: user.id, email: user.email, role: user.role },
         process.env.SECRET_KEY
       );
-
-      res.status(200).json({
-        message: "User logged in successfully",
-        access_token: token,
-        user: user.username,
-        role: user.role,
-        id: user.id,
-      });
+      if(!user.Restaurant) {
+        res.status(200).json({
+          message: "User logged in successfully",
+          access_token: token,
+          user: user.username,
+          role: user.role,
+          id: user.id
+        });
+      } else {
+        res.status(200).json({
+          message: "User logged in successfully",
+          access_token: token,
+          user: user.username,
+          role: user.role,
+          id: user.id,
+          restoId: user.Restaurant.id
+        });
+      }
     } catch (error) {
       next(error);
     }

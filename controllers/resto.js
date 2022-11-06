@@ -108,6 +108,47 @@ class Controller{
       next(error);
     }
   }
+  static async createRestaurant(req, res, next) {
+    try {
+      const { id } = req.user;
+      const {
+        name,
+        logoUrl,
+        description,
+        type,
+        open_time,
+        close_time,
+        address,
+      } = req.body;
+      const restaurant = await Restaurant.create({
+        name,
+        rate: 0,
+        logoUrl,
+        description,
+        income: 0,
+        type,
+        is_open: false,
+        open_time,
+        close_time,
+        is_pickup: false,
+        is_delivery: false,
+        review_count: 0,
+        address,
+        longitude: 0,
+        latitude: 0,
+        UserId: id,
+      });
+
+      if (!restaurant) throw { name: "Not found", msg: "Id not found" };
+
+      res.status(201).json({
+        message: "Restaurant success to create",
+        restaurant,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
   static async editRestaurant(req, res, next){
     try {
       const { name, type, logoUrl, description, is_open, open_time, close_time, is_pickup, is_delivery, address, longitude, latitude } = req.body;
@@ -130,7 +171,6 @@ class Controller{
       next(error);
     }
   }
-
   static async deleteRestaurant(req, res, next){
     try {
       await Restaurant.destroy({where: {UserId: req.user.id}});

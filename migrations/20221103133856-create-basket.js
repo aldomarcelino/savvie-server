@@ -28,9 +28,15 @@ module.exports = {
         onDelete: "cascade",
         onUpdate: "cascade",
       },
+      quantity: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        defaultValue: 1
+      },
       comition: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        defaultValue: 10
       },
       createdAt: {
         allowNull: false,

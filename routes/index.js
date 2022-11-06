@@ -6,6 +6,7 @@ const foods = require("./food");
 const categorys = require("./category");
 const favourites = require("./favourite");
 const resto = require("./resto");
+const basket = require("./basket");
 const search = require("./search");
 const xendit = require("./xendit");
 const midtrans = require("./midtrans");
@@ -17,6 +18,7 @@ router.use("/food", foods);
 router.use("/categories", categorys);
 router.use("/favorites", favourites);
 router.use("/search", search)
+router.use("/basket", basket)
 router.use("/xendit", xendit)
 router.use("/midtrans", midtrans)
 

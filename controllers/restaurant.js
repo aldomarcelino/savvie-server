@@ -37,54 +37,7 @@ class Controller {
     }
   }
 
-  static async createRestaurant(req, res, next) {
-    try {
-      const { id } = req.user;
-      const {
-        name,
-        rate,
-        logoUrl,
-        income,
-        type,
-        is_open,
-        open_time,
-        close_time,
-        is_pickup,
-        is_delivery,
-        review_count,
-        address,
-        longitude,
-        latitude,
-        UserId = id,
-      } = req.body;
-      const restaurant = await Restaurant.create({
-        name,
-        rate,
-        logoUrl,
-        income,
-        type,
-        is_open,
-        open_time,
-        close_time,
-        is_pickup,
-        is_delivery,
-        review_count,
-        address,
-        longitude,
-        latitude,
-        UserId,
-      });
-
-      if (!restaurant) throw { name: "Not found", msg: "Id not found" };
-
-      res.status(201).json({
-        message: "Restaurant success to create",
-        restaurant,
-      });
-    } catch (error) {
-      next(error);
-    }
-  }
+  
 }
 
 module.exports = Controller;
