@@ -22,7 +22,6 @@ router.use("/basket", basket)
 router.use("/xendit", xendit)
 router.use("/midtrans", midtrans)
 
-router.use(authenticationResto);
 router.use("/resto", resto);
 
 module.exports = router;

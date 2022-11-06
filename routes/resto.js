@@ -1,8 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const Resto = require("../controllers/resto");
+const { authentication, authenticationResto } = require("../middleware/authentication");
 const {authorizationResto} = require("../middleware/authorization");
 
+router.post("/restaurants", authentication, Resto.createRestaurant);
+
+router.use(authenticationResto);
 router.get("/food/", Resto.showFood);
 router.get("/food/:id", authorizationResto, Resto.detailFood);
 router.post("/food/", Resto.addFood);
