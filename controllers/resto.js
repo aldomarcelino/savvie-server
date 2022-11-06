@@ -24,19 +24,20 @@ class Controller{
   }
   static async addFood(req, res, next){
     try {
-      const { name, price, rate, imageUrl, description, quantity, sales, discount = 0, CategoryId } = req.body;
+      const { name, price, imageUrl, description, quantity, CategoryId } = req.body;
       const data = await Food.create({
         name,
         price,
-        rate,
+        rate: 0,
         imageUrl,
         description,
         status: "new",
         quantity,
-        sales,
-        discount,
+        sales: 0,
+        discount: 0,
         is_active: true,
         CategoryId,
+        isActive: true,
         RestaurantId: req.user.restoId
       });
       res.status(201).json(data);
