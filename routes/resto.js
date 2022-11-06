@@ -4,7 +4,7 @@ const Resto = require("../controllers/resto");
 const { authentication, authenticationResto } = require("../middleware/authentication");
 const {authorizationResto} = require("../middleware/authorization");
 
-router.post("/", authentication, Resto.createRestaurant);
+router.post("/restaurants", authentication, Resto.createRestaurant);
 
 router.use(authenticationResto);
 router.get("/food/", Resto.showFood);
