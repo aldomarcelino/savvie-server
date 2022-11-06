@@ -6,7 +6,7 @@ const { authorization } = require("../middleware/authorization");
 
 router.use(authentication)
 router.get("/", Favourite.allFavourite);
-router.post("/", Favourite.createFavourite);
+router.post("/:id", Favourite.createFavourite);
 router.delete("/:id", authorization, Favourite.deleteFavourite);
 
 module.exports = router;

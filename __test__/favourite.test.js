@@ -6,7 +6,7 @@ const { queryInterface } = sequelize;
 const { createSign, verifyToken } = require("../helpers/jwt");
 const { hashPass } = require("../helpers/bcrypt")
 
-jest.setTimeout(1000);
+jest.setTimeout(30000);
 
 let dataFood = require("../data/foods.json");
 let foods = dataFood.food.map((el) => {
@@ -46,8 +46,8 @@ describe("Favourite Routes Test", () => {
     describe("POST /favorites - create new favourite", () => {
         test("201 Success added favourite - should create new favourite", (done) => {
             request(app)
-                .post("/favorites")
-                .send({FoodId: 5})
+                .post("/favorites/1")
+                // .send({FoodId: 5,})
                 .set({access_token: user_access_token})
                 .then((response) => {
                     const { body, status } = response;
@@ -64,7 +64,10 @@ describe("Favourite Routes Test", () => {
             request(app)
                 .post("/favorites")
                 .set("access_token", "ini invalid token")
-                .send({FoodId: 1})
+                .send({
+                    UserId: 1,
+                    FoodId: 1
+                })
                 .then((response) => {
                     const { body, status } = response;
                     expect(status).toBe(401);
