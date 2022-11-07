@@ -1,37 +1,47 @@
+require("dotenv").config();
 const express = require("express");
-const { createServer } = require("http");
-const { Server } = require("socket.io");
 const cors = require("cors");
-const { sequelize } = require("./model");
-
 const app = express();
-app.use(cors());
-const httpServer = createServer(app);
-const io = new Server(httpServer, {
+const PORT = process.env.PORT || 3000;
+const routes = require("./routes/index");
+
+const http = require("http");
+const { Server } = require("socket.io");
+const server = http.createServer(app);
+const io = new Server(server, {
   cors: {
-    origin:
-      "https://fc5e-2404-c0-5c10-00-18f7-9d71.ap.ngrok.ioexp://192.168.82.114:19000",
+    origin: "*",
+    methods: ["GET", "POST"],
   },
 });
 
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.get("/", (req, res) => {
-  res.json("server running!");
+  res.json("Hello World!");
 });
 io.on("connection", (socket) => {
-  socket.on("dapet", (dape) => {
-    console.log(dape);
-  });
+  // console.log(socket)
 
-  socket.on("updateLocation", (data) => {
-    console.log(data);
-  });
-  // ..
-  // console.log("masuk sini", socket.id);
+  console.log(`user ${socket.id} is connected`);
 
-  // socket.on("updateLocation", (...args) => {
-  //   // ...
-  //   console.log("dapet location", args);
-  // });
+  socket.on("location", (data) => {
+    console.log(data, "<< di dalem socket on");
+    socket.broadcast.emit("location:received:raven", data);
+  });
+  socket.on("ping", (count) => {
+    console.log(count, "count=+++++");
+    socket.broadcast.emit("count:received", count);
+  });
+  socket.on("disconnect", () => {
+    console.log(`user ${socket.id} left`);
+  });
 });
 
-httpServer.listen(3000);
+app.use(routes);
+
+server.listen(PORT, () => {
+  console.log("MASIH DI LOCAL", PORT, "BRO!");
+});
