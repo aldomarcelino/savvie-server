@@ -7,7 +7,6 @@ router.use(authentication)
 router.get("/", Basket.allBasket);
 router.post("/:id", Basket.createBasket);
 router.delete("/:id", Basket.deleteBasket);
-router.patch("/minus/:id", Basket.decrement)
-router.patch("/plus/:id", Basket.increment)
+router.patch("/:id", Basket.quantity)
 
 module.exports = router;

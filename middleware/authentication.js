@@ -3,7 +3,6 @@ const { User, Restaurant } = require("../models");
 
 const authentication = async (req, res, next) => {
   try {
-    console.log("test");
     const { access_token } = req.headers;
     if (!access_token) {
       throw { name: "Unauthorized", message: "Missing token" };
@@ -32,7 +31,6 @@ const authenticationResto = async (req, res, next) => {
     const user = await User.findByPk(+payload.id, {
       include: [Restaurant]
     });
-    console.log(user)
     if (!user) throw { name: "Unauthorized", message: "Invalid token" };
 
     req.user = {
