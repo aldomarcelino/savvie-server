@@ -7,7 +7,7 @@ class Controller {
   static async myProfile(req, res, next) {
     try {
       const user = await User.findByPk(req.user.id, {
-        include: [Restaurant],
+        include: [Restaurant, Balance],
       });
       res.status(200).json(user);
     } catch (error) {
