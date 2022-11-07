@@ -38,7 +38,6 @@ class Controller {
         discount: 0,
         is_active: true,
         CategoryId,
-        isActive: true,
         RestaurantId: req.user.restoId,
       });
       res.status(201).json(data);
@@ -109,8 +108,8 @@ class Controller {
     try {
       const findData = await Food.findByPk(req.params.id);
       if (!findData) throw { name: "Not found" };
-      const { isActive } = req.body;
-      await Food.update({ isActive }, { where: { id: req.params.id } });
+      const { is_active } = req.body;
+      await Food.update({ is_active }, { where: { id: req.params.id } });
       res.status(200).json({ message: "Update status success" });
     } catch (error) {
       next(error);

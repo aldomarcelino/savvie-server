@@ -6,7 +6,7 @@ const { queryInterface } = sequelize;
 jest.setTimeout(1000);
 
 const user_access_token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZXNjdWVmb29kQGdtYWlsLmNvbSIsImlhdCI6MTY2NzcyODU3NX0.Th9RmLDQe67BFFnfiyX5nKhgFmgjSpsqkx5_UNNGPAE";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZXNjdWVmb29kQGdtYWlsLmNvbSIsImlhdCI6MTY2NzgwMzczOH0.4MmXjVEcOLYdNmEwqY4hrLqBBoOGE3OpVx3OVepg2OQ";
 
     describe("Basket Routes Test", () => {
         describe("POST /basket/:id - create new basket", () => {

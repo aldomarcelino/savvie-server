@@ -34,7 +34,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       location: {
-        type: Sequelize.GEOMETRY,
+        type: Sequelize.GEOMETRY('POINT'),
         allowNull: false,
       },
       address: {

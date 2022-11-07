@@ -284,7 +284,7 @@ describe("Resto Routes Test", () => {
     describe("PATCH /resto/food/food-status/:id - edit food status", () => {
         test("200 success edit food status", (done) => {
         request(app)
-            .patch("/resto/food/food-status/17")
+            .patch("/resto/food/food-status/6")
             .send({ status: "popular" })
             .set("access_token", user_access_token)
             .then((response) => {
@@ -316,7 +316,7 @@ describe("Resto Routes Test", () => {
 
         test("401 Failed edit food - invalid token - should return error unauthorized", (done) => {
         request(app)
-            .patch("/resto/food/food-status/17")
+            .patch("/resto/food/food-status/6")
             .send({ status: "popular" })
             .set("access_token", "ini invalid token")
             .then((response) => {
@@ -334,7 +334,7 @@ describe("Resto Routes Test", () => {
     describe("PATCH /resto/food/food-active/:id - edit food to inactive", () => {
         test("200 success edit food to inactive", (done) => {
         request(app)
-            .patch("/resto/food/food-active/17")
+            .patch("/resto/food/food-active/6")
             .send({ is_active: false })
             .set("access_token", user_access_token)
             .then((response) => {
@@ -366,7 +366,7 @@ describe("Resto Routes Test", () => {
 
         test("401 Failed edit food - invalid token - should return error unauthorized", (done) => {
         request(app)
-            .patch("/resto/food/food-active/17")
+            .patch("/resto/food/food-active/6")
             .send({ is_active: false })
             .set("access_token", "ini invalid token")
             .then((response) => {
