@@ -23,8 +23,8 @@ class Controller {
         fullName,
         phoneNumber,
         address,
-        latitude,
-        longitude,
+        latitude = 0,
+        longitude = 0,
       } = req.body;
       const user = await User.create({
         email,
