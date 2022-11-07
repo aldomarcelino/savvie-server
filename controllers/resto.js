@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const { Food, Restaurant, Sequelize, OrderItem, User, Payment } = require("../models");
 
 class Controller {
@@ -8,6 +9,29 @@ class Controller {
           RestaurantId: req.user.restoId,
         },
       });
+      res.status(200).json(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+  static async filterFood(req, res, next) {
+    try {
+      const {id} = req.params
+      const data = await Food.findAll({
+        where: {
+          RestaurantId: req.user.restoId,
+        },
+        include: [{
+          model: OrderItem,
+          include: [{
+            model: Payment,
+            where: {
+              updatedAt: {[Op.gte]: Sequelize.literal(`NOW() - INTERVAL \'${id}d\'`)}
+            }
+          }]
+        }]
+      });
+      
       res.status(200).json(data);
     } catch (error) {
       next(error);

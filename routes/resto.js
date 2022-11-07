@@ -8,6 +8,7 @@ router.post("/restaurants", authentication, Resto.createRestaurant);
 
 router.use(authenticationResto);
 router.get("/food/", Resto.showFood);
+router.get("/food/filter/:id", Resto.filterFood);
 router.get("/food/:id", authorizationResto, Resto.detailFood);
 router.post("/food/", Resto.addFood);
 router.delete("/food/:id", authorizationResto, Resto.deleteFood);
