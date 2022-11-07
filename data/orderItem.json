@@ -5,91 +5,91 @@
       "PaymentId": 1,
       "itemPrice": 25000,
       "quantity": 3,
-      "commission": 10
+      "comition": 10
     },
     {
       "FoodId": 2,
       "PaymentId": 1,
       "itemPrice": 35000,
       "quantity": 2,
-      "commission": 10
+      "comition": 10
     },
     {
       "FoodId": 3,
       "PaymentId": 2,
       "itemPrice": 20000,
       "quantity": 1,
-      "commission": 10
+      "comition": 10
     },
     {
       "FoodId": 4,
       "PaymentId": 2,
       "itemPrice": 27000,
       "quantity": 3,
-      "commission": 10
+      "comition": 10
     },
     {
       "FoodId": 5,
       "PaymentId": 2,
       "itemPrice": 15000,
       "quantity": 4,
-      "commission": 10
+      "comition": 10
     },
     {
       "FoodId": 6,
       "PaymentId": 3,
       "itemPrice": 22000,
       "quantity": 3,
-      "commission": 10
+      "comition": 10
     },
     {
       "FoodId": 7,
       "PaymentId": 3,
       "itemPrice": 25000,
       "quantity": 2,
-      "commission": 10
+      "comition": 10
     },
     {
       "FoodId": 7,
       "PaymentId": 4,
       "itemPrice": 25000,
       "quantity": 2,
-      "commission": 10
+      "comition": 10
     },
     {
       "FoodId": 8,
       "PaymentId": 5,
       "itemPrice": 25000,
       "quantity": 2,
-      "commission": 10
+      "comition": 10
     },
     {
       "FoodId": 9,
       "PaymentId": 5,
       "itemPrice": 35000,
       "quantity": 2,
-      "commission": 10
+      "comition": 10
     },
     {
       "FoodId": 1,
       "PaymentId": 6,
       "itemPrice": 25000,
       "quantity": 2,
-      "commission": 10
+      "comition": 10
     },
     {
       "FoodId": 2,
       "PaymentId": 7,
       "itemPrice": 35000,
       "quantity": 2,
-      "commission": 10
+      "comition": 10
     },
     {
       "FoodId": 3,
       "PaymentId": 8,
       "itemPrice": 20000,
       "quantity": 2,
-      "commission": 10
+      "comition": 10
     }
   ]
 }
