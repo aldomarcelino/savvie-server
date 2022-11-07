@@ -11,31 +11,14 @@ const user1 = {
   email: "jamet@mail.com",
   password: "123456",
   address: "Jombang",
-  imageUrl:
-    "https://images.unsplash.com/photo-1506795660198-e95c77602129?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80",
+  imageUrl: "https://images.unsplash.com/photo-1506795660198-e95c77602129?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80",
   phoneNumber: "082267580929",
-};
-
-const user2 = {
-  fullName: "User Test 2",
-  email: "user.test2@mail.com",
-  password: "123456",
-  address: "Semarang",
-  imageUrl:
-    "https://images.unsplash.com/photo-1506795660198-e95c77602129?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80",
-  phoneNumber: "082267580929",
+  latitude: -7.161367,
+  longitude: 113.482498
 };
 
 const user_access_token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZXNjdWVmb29kQGdtYWlsLmNvbSIsImlhdCI6MTY2NzY0OTE1Mn0.Sqkgx312hBggjPziUR-QqYZD4mf8Le70OfR_HEyjhG0";
-
-// afterEach(async () => {
-//   await queryInterface.bulkDelete(`User`, null, {
-//   truncate: true,
-//   cascade: true,
-//   restartIdentity: true,
-//   });
-// });
 
 describe("User Routes Test", () => {
   describe("POST /signup - create new user", () => {
