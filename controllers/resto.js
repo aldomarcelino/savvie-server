@@ -1,4 +1,4 @@
-const { Food, Restaurant, Sequelize } = require("../models");
+const { Food, Restaurant, Sequelize, OrderItem, User, Payment } = require("../models");
 
 class Controller {
   static async showFood(req, res, next) {
@@ -217,6 +217,27 @@ class Controller {
       });
     } catch (error) {
       next(error);
+    }
+  }
+
+
+  static async allOrder(req, res, next){
+    try {
+      const data = OrderItem.findAll({
+        include: [{
+          model: Payment,
+          include: [{
+            model: User,
+            include: [{
+              model: Restaurant,
+              where: {id: req.user.restoId}
+            }]
+          }]
+        }]
+      })
+      res.status(200).json(data)
+    } catch (error) {
+      next(error)
     }
   }
 }

@@ -10,7 +10,7 @@
       "description": "Bakso Urat Komplit",
       "imageUrl": "https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,q_auto:best,w_640/v1600576122/dsy8vda4dx5kzq2vriwl.jpg",
       "quantity": 10,
-      "sales": 19,
+      "sales": 4,
       "status": "popular",
       "is_active": true
     },
@@ -24,7 +24,7 @@
       "description": "Pempek Komplit",
       "imageUrl": "https://curcol.co/wp-content/uploads/2020/12/pempek2-2-500x333.jpg",
       "quantity": 50,
-      "sales": 19,
+      "sales": 4,
       "status": "popular",
       "is_active": true
     },
@@ -38,7 +38,7 @@
       "description": "Ayam serundeng Paha/Dada",
       "imageUrl": "https://img.kurio.network/W9CCTFDgYV7eJ_hStWV44WIg3Bk=/320x320/filters:quality(80)/https://kurio-img.kurioapps.com/21/02/16/d1e52e7c-a758-4a1a-a3fb-f6b5d8791230.jpe",
       "quantity": 50,
-      "sales": 19,
+      "sales": 3,
       "status": "popular",
       "is_active": true
     },
@@ -52,7 +52,7 @@
       "description": "Gado-gado",
       "imageUrl": "https://awsimages.detik.net.id/community/media/visual/2022/06/29/gado-gado-legendaris-2.jpeg?w=700&q=90",
       "quantity": 40,
-      "sales": 19,
+      "sales": 2,
       "status": "popular",
       "is_active": true
     },
@@ -66,7 +66,7 @@
       "description": "Tahu gejrot",
       "imageUrl": "https://t-2.tstatic.net/tribunnewswiki/foto/bank/images/tahu-gejrot.jpg",
       "quantity": 10,
-      "sales": 19,
+      "sales": 4,
       "status": "popular",
       "is_active": true
     },
@@ -80,7 +80,7 @@
       "description": "Nasi Pecel komplit",
       "imageUrl": "https://www.topwisata.info/wp-content/uploads/2022/05/Nasi-Pecel-1.jpeg",
       "quantity": 40,
-      "sales": 19,
+      "sales": 3,
       "status": "popular",
       "is_active": true
     },
@@ -94,7 +94,7 @@
       "description": "Ayam bakar",
       "imageUrl": "https://img.qraved.co/v2/image/data/2015/11/05/ayam_bakar-740x493-x.jpg",
       "quantity": 30,
-      "sales": 19,
+      "sales": 4,
       "status": "popular",
       "is_active": true
     },
@@ -108,7 +108,7 @@
       "description": "Tahu pong komplit",
       "imageUrl": "https://media.beritagar.id/2016-03/e90ab8ec51408991559ba4da12444e2e.jpg",
       "quantity": 20,
-      "sales": 0,
+      "sales": 2,
       "status": "popular",
       "is_active": true
     },
@@ -122,7 +122,7 @@
       "description": "Nasi putih + 3 Lauk",
       "imageUrl": "https://cdn-cas.orami.co.id/parenting/images/nasi_padang.width-1000.jpg",
       "quantity": 20,
-      "sales": 0,
+      "sales": 2,
       "status": "popular",
       "is_active": true
     },
