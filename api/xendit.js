@@ -8,7 +8,7 @@ const invoice = new Invoice({});
 
 class XenditInvoice {
     static createInvoice(externalID, amount, customer) {
-        console.log(amount, "<<<<<<<<<<<<")
+        // console.log(amount, "<<<<<<<<<<<<")
         return invoice.createInvoice({
         externalID: externalID,
         amount,

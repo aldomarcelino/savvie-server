@@ -35,6 +35,23 @@ describe("Restaurants Routes Test", () => {
         });
     });
 
+    describe("GET /restaurants/search - return restaurants by radius 1500m", () => {
+        test("200 Success get restaurants by radius 1500m, return array", (done) => {
+        request(app)
+            .get("/restaurants/search")
+            .set({access_token: user_access_token})
+            .then((response) => {
+                const { body, status } = response;
+                expect(status).toBe(200);
+                expect(body).toBeInstanceOf(Array);
+                done();
+            })
+            .catch((err) => {
+                done(err);
+            });
+        });
+    });
+
     describe("GET /restaurants/:id - return data restaurants by Id", () => {
         test("200 Success get one restaurants data, return object", (done) => {
         request(app)

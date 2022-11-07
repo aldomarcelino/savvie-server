@@ -6,7 +6,7 @@ const { queryInterface } = sequelize;
 const { createSign, verifyToken } = require("../helpers/jwt");
 const { hashPass } = require("../helpers/bcrypt")
 
-jest.setTimeout(30000);
+// jest.setTimeout(30000);
 
 let dataFood = require("../data/foods.json");
 let foods = dataFood.food.map((el) => {
@@ -28,7 +28,7 @@ describe("Favourite Routes Test", () => {
     describe("POST /favorites - create new favourite", () => {
         test("201 Success added favourite - should create new favourite", (done) => {
             request(app)
-                .post("/favorites/2")
+                .post("/favorites/1")
                 .set({access_token: user_access_token})
                 .then((response) => {
                     const { body, status } = response;
@@ -126,7 +126,7 @@ describe("Favourite Routes Test", () => {
 
         test("401 Failed delete favourite data - access token invalid, return error", (done) => {
             request(app)
-            .delete("/favorites/6")
+            .delete("/favorites/1")
             .set({access_token: "akses token salah"})
             .then((response) => {
                 const { body, status } = response;

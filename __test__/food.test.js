@@ -5,12 +5,6 @@ const { queryInterface } = sequelize;
 
 jest.setTimeout(1000);
 
-let dataFood = require("../data/foods.json");
-let foods = dataFood.food.map((el) => {
-    el.createdAt = el.updatedAt = new Date();
-    return el;
-});
-
 const user_access_token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZXNjdWVmb29kQGdtYWlsLmNvbSIsImlhdCI6MTY2NzY0OTE1Mn0.Sqkgx312hBggjPziUR-QqYZD4mf8Le70OfR_HEyjhG0";
 
