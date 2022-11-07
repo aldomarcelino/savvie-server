@@ -14,19 +14,6 @@ let restaurants = dataRestaurant.restaurants.map((el) => {
 const user_access_token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZXNjdWVmb29kQGdtYWlsLmNvbSIsImlhdCI6MTY2NzY0OTE1Mn0.Sqkgx312hBggjPziUR-QqYZD4mf8Le70OfR_HEyjhG0";
 
-// beforeEach(async () => {
-//     // console.log(restaurants, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
-//     await queryInterface.bulkInsert("Restaurants", restaurants);
-// });
-
-// afterEach(async () => {
-//     await queryInterface.bulkDelete(`Restaurants`, null, {
-//     truncate: true,
-//     cascade: true,
-//     restartIdentity: true,
-//     });
-// });
-
 describe("Restaurants Routes Test", () => {
     describe("GET /restaurants - return data all restaurants", () => {
         test("200 Success get all restaurants data, return array", (done) => {

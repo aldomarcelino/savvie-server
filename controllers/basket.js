@@ -40,7 +40,7 @@ class Controller {
       const findData = await Basket.findByPk(req.params.id);
       if (!findData) throw { name: "Not found" };
       await Basket.update({quantity}, {where: {id: req.params.id}});
-      res.status(200).json({message: `Basket with id ${req.params.id} successfully decrement`});
+      res.status(200).json({message: `Basket with id ${req.params.id} successfully update quantity`});
     } catch (error) {
       next(error);
     }

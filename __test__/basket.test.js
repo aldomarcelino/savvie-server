@@ -12,7 +12,7 @@ const user_access_token =
         describe("POST /basket/:id - create new basket", () => {
             test("201 Success added basket - should create new basket", (done) => {
                 request(app)
-                    .post("/basket/3")
+                    .post("/basket/14")
                     .set({ access_token: user_access_token })
                     .then((response) => {
                     const { body, status } = response;
@@ -28,10 +28,25 @@ const user_access_token =
                     done(err);
                     });
             });
+
+            test("401 Failed added basket - invalid token - should return error unauthorized", (done) => {
+                request(app)
+                    .post("/basket/14")
+                    .set("access_token", "ini invalid token")
+                    .then((response) => {
+                    const { body, status } = response;
+                    expect(status).toBe(401);
+                    expect(body).toHaveProperty("message", "Invalid token");
+                    return done();
+                    })
+                    .catch((err) => {
+                    done(err);
+                    });
+                });
         })
 
         describe("GET /basket - return data all basket", () => {
-            test("200 Success get one food data, return object", (done) => {
+            test("200 Success get basket, return object", (done) => {
                 request(app)
                     .get("/basket")
                     .set({ access_token: user_access_token })
@@ -48,12 +63,30 @@ const user_access_token =
                     done(err);
                     });
                 });
+
+            test("401 Failed get basket - invalid token - should return error unauthorized", (done) => {
+                request(app)
+                .get("/basket")
+                    .set("access_token", "ini invalid token")
+                    .then((response) => {
+                    const { body, status } = response;
+                    expect(status).toBe(401);
+                    expect(body).toHaveProperty("message", "Invalid token");
+                    return done();
+                    })
+                    .catch((err) => {
+                    done(err);
+                    });
+                });
         })
 
-        describe("PATCH /basket/plus/:id - edit basket to increment value", () => {
-            test("200 success increment resto", (done) => {
+        describe("PATCH /basket/:id - edit basket to change quantity value", () => {
+            test("200 success change quantity food", (done) => {
             request(app)
-                .patch("/basket/plus/1")
+                .patch("/basket/1")
+                .send({
+                    quantity: 5
+                })
                 .set("access_token", user_access_token)
                 .then((response) => {
                 const { body, status } = response;
@@ -66,24 +99,9 @@ const user_access_token =
                 });
             });
     
-            test("404 Failed increment basket - basket not found, return error", (done) => {
+            test("401 Failed change quantity food - invalid token - should return error unauthorized", (done) => {
             request(app)
-                .patch("/basket/plus/100")
-                .set({ access_token: user_access_token })
-                .then((response) => {
-                const { body, status } = response;
-                expect(status).toBe(404);
-                expect(body).toHaveProperty("message", "Id or data not found");
-                done();
-                })
-                .catch((err) => {
-                done(err);
-                });
-            });
-    
-            test("401 Failed increment food - invalid token - should return error unauthorized", (done) => {
-            request(app)
-                .patch("/basket/plus/1")
+                .patch("/basket/1")
                 .set("access_token", "ini invalid token")
                 .then((response) => {
                 const { body, status } = response;
@@ -97,40 +115,25 @@ const user_access_token =
             });
         });
 
-        describe("PATCH /basket/minus/:id - edit basket to decrement value", () => {
-            test("200 success decrement resto", (done) => {
+        describe("DELETE /basket/:id - delete basket by id", () => {
+            test("200 Success deleted basket", (done) => {
             request(app)
-                .patch("/basket/minus/1")
-                .set("access_token", user_access_token)
+                .delete("/basket/1")
+                .set({ access_token: user_access_token })
                 .then((response) => {
                 const { body, status } = response;
                 expect(status).toBe(200);
                 expect(body).toHaveProperty("message", expect.any(String));
-                done();
+                return done();
                 })
                 .catch((err) => {
                 done(err);
                 });
             });
     
-            test("404 Failed decrement basket - basket not found, return error", (done) => {
+            test("401 Failed deleted basket - invalid token - should return error unauthorized", (done) => {
             request(app)
-                .patch("/basket/minus/100")
-                .set({ access_token: user_access_token })
-                .then((response) => {
-                const { body, status } = response;
-                expect(status).toBe(404);
-                expect(body).toHaveProperty("message", "Id or data not found");
-                done();
-                })
-                .catch((err) => {
-                done(err);
-                });
-            });
-    
-            test("401 Failed decrement food - invalid token - should return error unauthorized", (done) => {
-            request(app)
-                .patch("/basket/minus/1")
+                .delete("/basket/1")
                 .set("access_token", "ini invalid token")
                 .then((response) => {
                 const { body, status } = response;
@@ -143,36 +146,4 @@ const user_access_token =
                 });
             });
         });
-
-        // describe("DELETE /basket/:id - delete basket by id", () => {
-        //     test("200 Success deleted basket", (done) => {
-        //     request(app)
-        //         .delete("/basket/1")
-        //         .set({ access_token: user_access_token })
-        //         .then((response) => {
-        //         const { body, status } = response;
-        //         expect(status).toBe(200);
-        //         expect(body).toHaveProperty("message", expect.any(String));
-        //         return done();
-        //         })
-        //         .catch((err) => {
-        //         done(err);
-        //         });
-        //     });
-    
-        //     test("401 Failed deleted basket - invalid token - should return error unauthorized", (done) => {
-        //     request(app)
-        //         .delete("/basket/1")
-        //         .set("access_token", "ini invalid token")
-        //         .then((response) => {
-        //         const { body, status } = response;
-        //         expect(status).toBe(401);
-        //         expect(body).toHaveProperty("message", "Invalid token");
-        //         return done();
-        //         })
-        //         .catch((err) => {
-        //         done(err);
-        //         });
-        //     });
-        // });
     })

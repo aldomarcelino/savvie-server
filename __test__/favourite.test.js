@@ -6,7 +6,7 @@ const { queryInterface } = sequelize;
 const { createSign, verifyToken } = require("../helpers/jwt");
 const { hashPass } = require("../helpers/bcrypt")
 
-jest.setTimeout(1000);
+jest.setTimeout(30000);
 
 let dataFood = require("../data/foods.json");
 let foods = dataFood.food.map((el) => {
@@ -23,24 +23,6 @@ let users = dataUser.users.map((el) => {
 
 const user_access_token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZXNjdWVmb29kQGdtYWlsLmNvbSIsImlhdCI6MTY2NzY0OTE1Mn0.Sqkgx312hBggjPziUR-QqYZD4mf8Le70OfR_HEyjhG0";
-
-// beforeAll(async () => {
-//     await queryInterface.bulkInsert("Food", foods);
-//     await queryInterface.bulkInsert("User", users);
-// })
-
-// afterAll(async () => {
-//     await queryInterface.bulkDelete(`Food`, null, {
-//     truncate: true,
-//     cascade: true,
-//     restartIdentity: true,
-//     });
-//     await queryInterface.bulkDelete(`User`, null, {
-//     truncate: true,
-//     cascade: true,
-//     restartIdentity: true,
-//     });
-// });
 
 describe("Favourite Routes Test", () => {
     describe("POST /favorites - create new favourite", () => {
