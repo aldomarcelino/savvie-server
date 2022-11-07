@@ -46,8 +46,8 @@ class Controller {
   static async getRestaurantByRadius(req, res) {
     try {
       const distance = req.query.distance || 1500;
-      const long = req.query.long || "-6.9439994342171225";
-      const lat = req.query.lat || "107.5904275402039";
+      const lat = req.query.lat || "-6.260412";
+      const long = req.query.long || "106.781352";
       const result = await sequelize.query(
         `select
         id,
