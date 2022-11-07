@@ -33,6 +33,9 @@ const errorHandler = async (err, req, res, next) => {
   } else if (err.name === "Not found") {
     code = 404;
     message = "Id or data not found";
+  } else if (err.name === "Top up first"){
+    code = 400;
+    message = err.name
   }
   res.status(code).json({
     message: message,

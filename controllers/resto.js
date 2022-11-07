@@ -64,7 +64,6 @@ class Controller {
       const {
         name,
         price,
-        rate,
         imageUrl,
         description,
         quantity,
@@ -76,7 +75,6 @@ class Controller {
         {
           name,
           price,
-          rate,
           imageUrl,
           description,
           quantity,
