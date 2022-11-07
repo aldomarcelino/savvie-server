@@ -1,4 +1,11 @@
-const { Food, Restaurant, Sequelize, OrderItem, User, Payment } = require("../models");
+const {
+  Food,
+  Restaurant,
+  Sequelize,
+  OrderItem,
+  User,
+  Payment,
+} = require("../models");
 
 class Controller {
   static async showFood(req, res, next) {
@@ -116,7 +123,7 @@ class Controller {
 
   static async myRestaurant(req, res, next) {
     try {
-      const data = await Restaurant.findOne({where: {UserId: req.user.id}});
+      const data = await Restaurant.findOne({ where: { UserId: req.user.id } });
       res.status(200).json(data);
     } catch (error) {
       next(error);
@@ -133,8 +140,8 @@ class Controller {
         open_time,
         close_time,
         address,
-        latitude = 0,
-        longitude = 0,
+        latitude,
+        longitude,
       } = req.body;
       const restaurant = await Restaurant.create({
         name,
@@ -218,24 +225,29 @@ class Controller {
     }
   }
 
-
-  static async allOrder(req, res, next){
+  static async allOrder(req, res, next) {
     try {
       const data = await OrderItem.findAll({
-        include: [{
-          model: Payment,
-          include: [{
-            model: User,
-            include: [{
-              model: Restaurant,
-              where: {id: req.user.restoId}
-            }]
-          }]
-        }]
-      })
-      res.status(200).json(data)
+        include: [
+          {
+            model: Payment,
+            include: [
+              {
+                model: User,
+                include: [
+                  {
+                    model: Restaurant,
+                    where: { id: req.user.restoId },
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      });
+      res.status(200).json(data);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 }
