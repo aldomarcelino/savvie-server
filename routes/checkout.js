@@ -4,7 +4,7 @@ const Checkout = require("../controllers/checkout");
 const { authentication } = require("../middleware/authentication");
 
 router.use(authentication)
-router.post("/:id", Checkout.createCheckout);
+router.post("/", Checkout.createCheckout);
 router.get("/", Checkout.allOrder);
 
 module.exports = router;

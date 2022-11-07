@@ -5,14 +5,12 @@ const x = new Xendit({
 
 const { Invoice } = x;
 const invoice = new Invoice({});
-
 class XenditInvoice {
     static createInvoice(externalID, amount, customer) {
-        // console.log(amount, "<<<<<<<<<<<<")
         return invoice.createInvoice({
         externalID: externalID,
         amount,
-        successRedirectURL: "http://localhost:3000/xendit/success",
+        successRedirectURL: `http://localhost:4000/xendit/success/${amount}/${externalID}`,
         payerEmail: customer.email,
         });
     }
