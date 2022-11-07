@@ -14,18 +14,6 @@ let foods = dataFood.food.map((el) => {
 const user_access_token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZXNjdWVmb29kQGdtYWlsLmNvbSIsImlhdCI6MTY2NzY0OTE1Mn0.Sqkgx312hBggjPziUR-QqYZD4mf8Le70OfR_HEyjhG0";
 
-// beforeEach(async () => {
-//     await queryInterface.bulkInsert("Food", foods);
-// });
-
-// afterEach(async () => {
-//     await queryInterface.bulkDelete(`Food`, null, {
-//     truncate: true,
-//     cascade: true,
-//     restartIdentity: true,
-//     });
-// });
-
 describe("Food Routes Test", () => {
     describe("GET /food - return data all foods", () => {
         test("200 Success get all foods data, return array", (done) => {

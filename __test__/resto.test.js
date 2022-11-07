@@ -381,6 +381,53 @@ describe("Resto Routes Test", () => {
         });
     });
 
+    describe("POST /resto/restaurants - create new restaurant", () => {
+        test("201 Success added restaurant - should create new food resto", (done) => {
+        request(app)
+            .post("/resto/restaurants")
+            .send({
+                name: "Omnikopi",
+                logoUrl: "https://tinyurl.com/2z6wfxv6",
+                description: "Airy coffee spot with a white interior & Wi-Fi turning out gourmet blends & elevated light bites.",
+                type: "Coffee shop",
+                open_time: "08:00",
+                close_time: "22:00",
+                address: "Jl. Bintaro Tengah No.25, Rengas, Ciputat Timur, South Tangerang City, Banten 15412"
+            })
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(201);
+            expect(body).toBeInstanceOf(Object);
+            expect(body.restaurant).toBeInstanceOf(Object);
+            expect(body).toHaveProperty("message", expect.any(String));
+            expect(body.restaurant).toHaveProperty("name", expect.any(String));
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("401 Failed create restaurant with invalid token - should return error unauthorized", (done) => {
+        request(app)
+            .post("/resto/restaurants")
+            .send({
+
+            })
+            .set("access_token", "ini invalid token")
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(401);
+            expect(body).toHaveProperty("message", "Invalid token");
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+    });
+
     describe("GET /resto/restaurants - return restaurants based on userId", () => {
         test("200 Success get restaurant data, return object", (done) => {
         request(app)

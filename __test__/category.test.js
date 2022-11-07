@@ -15,18 +15,6 @@ let categories = dataCategory.categories.map((el) => {
 const user_access_token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZXNjdWVmb29kQGdtYWlsLmNvbSIsImlhdCI6MTY2NzY0OTE1Mn0.Sqkgx312hBggjPziUR-QqYZD4mf8Le70OfR_HEyjhG0";
 
-// beforeEach(async () => {
-//     await queryInterface.bulkInsert("Category", categories);
-// });
-
-// afterEach(async () => {
-//     await queryInterface.bulkDelete("Category", null, {
-//     truncate: true,
-//     cascade: true,
-//     restartIdentity: true,
-//     });
-// });
-
 describe("Category Routes Test", () => {
     describe("GET /categories - return data all categories", () => {
         test("200 Success get all categories data, return array", (done) => {

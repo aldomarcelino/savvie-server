@@ -25,15 +25,12 @@ class Controller {
             email: `${req.user.email}`,
         },
     };
-    
-    // console.log(parameter)
 
     snap
         .createTransaction(parameter)
         .then((transaction) => {
         // transaction token
         let transactionToken = transaction.token;
-        // console.log("transactionToken:", transactionToken);
         res.status(201).json({ transactionToken: transactionToken });
         })
         .catch((error) => {
