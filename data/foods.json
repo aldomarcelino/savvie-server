@@ -108,7 +108,7 @@
       "description": "Tahu pong komplit",
       "imageUrl": "https://media.beritagar.id/2016-03/e90ab8ec51408991559ba4da12444e2e.jpg",
       "quantity": 20,
-      "sales": 19,
+      "sales": 0,
       "status": "popular",
       "is_active": true
     },
@@ -122,7 +122,7 @@
       "description": "Nasi putih + 3 Lauk",
       "imageUrl": "https://cdn-cas.orami.co.id/parenting/images/nasi_padang.width-1000.jpg",
       "quantity": 20,
-      "sales": 19,
+      "sales": 0,
       "status": "popular",
       "is_active": true
     },
@@ -136,7 +136,7 @@
       "description": "Iga Bakar 3pcs + Sambal Kecap",
       "imageUrl": "https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/528480da-2ab7-448f-a1ea-90cffdc3571d_Go-Biz_20220922_101445.jpeg?auto=format",
       "quantity": 10,
-      "sales": 19,
+      "sales": 0,
       "status": "popular",
       "is_active": true
     },
@@ -150,7 +150,7 @@
       "description": "Iga Goreng 3pcs + Sambal Terasi",
       "imageUrl": "https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/68f6db0e-821b-44eb-92bb-4528ee8375aa_Go-Biz_20220922_100710.jpeg?auto=format",
       "quantity": 40,
-      "sales": 19,
+      "sales": 0,
       "status": "popular",
       "is_active": true
     },
@@ -164,7 +164,7 @@
       "description": "Ayam goreng tepung 1ptg (dada/paha) + sambal terasi",
       "imageUrl": "https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/40db9993-e2e8-4816-872e-f8f77615d431_Go-Biz_20220922_112851.jpeg?auto=format",
       "quantity": 10,
-      "sales": 19,
+      "sales": 0,
       "status": "popular",
       "is_active": true
     },
@@ -178,7 +178,7 @@
       "description": "Iga Goreng 3pcs + Sambal Terasi",
       "imageUrl": "https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/68f6db0e-821b-44eb-92bb-4528ee8375aa_Go-Biz_20220922_100710.jpeg?auto=format",
       "quantity": 30,
-      "sales": 19,
+      "sales": 0,
       "status": "popular",
       "is_active": true
     },
