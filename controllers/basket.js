@@ -34,21 +34,12 @@ class Controller {
       next(error);
     }
   }
-  static async increment(req, res, next){
+  static async quantity(req, res, next){
     try {
+      const { quantity } = req.body
       const findData = await Basket.findByPk(req.params.id);
       if (!findData) throw { name: "Not found" };
-      await Basket.increment('quantity', {by: 1},{where: {id: req.params.id}});
-      res.status(200).json({message: `Basket with id ${req.params.id} successfully increment `});
-    } catch (error) {
-      next(error);
-    }
-  }
-  static async decrement(req, res, next){
-    try {
-      const findData = await Basket.findByPk(req.params.id);
-      if (!findData) throw { name: "Not found" };
-      await Basket.increment('quantity', {by: -1},{where: {id: req.params.id}});
+      await Basket.update({quantity}, {where: {id: req.params.id}});
       res.status(200).json({message: `Basket with id ${req.params.id} successfully decrement`});
     } catch (error) {
       next(error);

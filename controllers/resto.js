@@ -118,7 +118,7 @@ class Controller {
 
   static async myRestaurant(req, res, next) {
     try {
-      const data = await Restaurant.findByPk(req.user.id);
+      const data = await Restaurant.findOne({where: {UserId: req.user.id}});
       res.status(200).json(data);
     } catch (error) {
       next(error);
