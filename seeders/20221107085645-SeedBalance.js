@@ -3,12 +3,12 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    const dataOrderItem = require("../data/orderItem.json");
-    dataOrderItem.orderItem.forEach((el) => {
+    const dataBalance = require("../data/balance.json");
+    dataBalance.balance.forEach((el) => {
       el.createdAt = el.updatedAt = new Date();
     });
 
-    await queryInterface.bulkInsert("OrderItems", dataOrderItem.orderItem, {});
+    await queryInterface.bulkInsert("Balances", dataBalance.balance, {});
     /**
      * Add seed commands here.
      *
@@ -21,7 +21,7 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("OrderItems", null);
+    await queryInterface.bulkDelete("Balances", null);
     /**
      * Add commands to revert seed here.
      *
