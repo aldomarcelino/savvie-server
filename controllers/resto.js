@@ -223,7 +223,7 @@ class Controller {
 
   static async allOrder(req, res, next){
     try {
-      const data = OrderItem.findAll({
+      const data = await OrderItem.findAll({
         include: [{
           model: Payment,
           include: [{
