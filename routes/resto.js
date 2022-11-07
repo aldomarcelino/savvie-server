@@ -16,7 +16,9 @@ router.patch("/food/food-status/:id", authorizationResto, Resto.statusFood);
 router.patch("/food/food-active/:id", authorizationResto, Resto.activeFood);
 
 router.get("/restaurants", Resto.myRestaurant)
-router.put("/restaurants", Resto.editRestaurant)
-router.delete("/restaurants", Resto.deleteRestaurant)
+router.put("/restaurants", authorizationResto, Resto.editRestaurant)
+router.delete("/restaurants", authorizationResto, Resto.deleteRestaurant)
+
+router.get("/order", Resto.allOrder)
 
 module.exports = router;
