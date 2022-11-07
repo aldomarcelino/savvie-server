@@ -135,8 +135,8 @@ class Controller {
         open_time,
         close_time,
         address,
-        latitude,
-        longitude,
+        latitude = 0,
+        longitude = 0,
       } = req.body;
       const restaurant = await Restaurant.create({
         name,
