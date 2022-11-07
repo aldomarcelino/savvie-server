@@ -4,10 +4,9 @@ class Controller{
   static async createCheckout(req, res, next){
     const t = await sequelize.transaction()
     try {
-      console.log(req.body)
       let data;
       const {order, is_delivery, total} = req.body
-      if(is_delivery == 'delivery'){
+      if(is_delivery == 'Delivery'){
         data = await Payment.create({
           deliveryFee: 10000,
           UserId: req.user.id,
