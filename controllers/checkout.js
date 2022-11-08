@@ -1,11 +1,18 @@
-const { OrderItem, Payment, Balance, sequelize } = require("../models");
+const {
+  OrderItem,
+  Payment,
+  Balance,
+  sequelize,
+  Food,
+  Restaurant,
+} = require("../models");
 
 class Controller {
   static async createCheckout(req, res, next) {
     const t = await sequelize.transaction();
     try {
       let data;
-      // console.log(req.body, "<<<<<<<<<<<")
+      console.log(req.body, "<<<<<<<<<<<");
       const { order, is_delivery, total } = req.body;
       if (is_delivery == "delivery") {
         data = await Payment.create(
@@ -50,7 +57,21 @@ class Controller {
         { where: { UserId: req.user.id } },
         { transaction: t }
       );
-      // console.log("test");
+      order.forEach(async (el) => {
+        const data = await Food.findByPk(el.FoodId)
+        console.log(data.quantity, el.qty)
+        // if(+data.quantity < +el.qty) return res.status(404).json({message: "Out of stock"})
+        await Food.increment(
+          "quantity",
+          { by: -el.qty, where: { id: el.FoodId } },
+          { transaction: t }
+        );
+        await Food.increment(
+          "sales",
+          { by: el.qty, where: { id: el.FoodId } },
+          { transaction: t }
+        );
+      });
       await t.commit();
       res.status(201).json({ message: "payment success" });
     } catch (error) {
