@@ -7,7 +7,7 @@ const app = express();
 const http = require("http");
 const { Server } = require("socket.io");
 const server = http.createServer(app);
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 const io = new Server(server, {
   cors: {
     origin: "*",
@@ -18,9 +18,9 @@ const io = new Server(server, {
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.get("/", (req, res) => {
-  res.json("Hello World!");
-});
+// app.get("/", (req, res) => {
+//   res.json("Hello World!");
+// });
 io.on("connection", (socket) => {
   // console.log(`user ${socket.id} is connected`);
   socket.on("location", (data) => {
