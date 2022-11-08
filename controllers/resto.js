@@ -15,7 +15,7 @@ class Controller {
         where: {
           RestaurantId: req.user.restoId,
         },
-        order: [["stock", "DESC"]],
+        order: [["quantity", "DESC"]],
       });
       res.status(200).json(data);
     } catch (error) {
