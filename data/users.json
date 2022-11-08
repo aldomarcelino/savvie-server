@@ -89,6 +89,16 @@
       "phoneNumber": "082267580929",
       "latitude": 2.970042,
       "longitude": 99.068169
+    },
+    {
+      "fullName": "test7",
+      "email": "test7@gmail.com",
+      "password": "1234",
+      "address": "Medan",
+      "imageUrl": "https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+      "phoneNumber": "082267580929",
+      "latitude": 2.970042,
+      "longitude": 99.068169
     }
   ]
 }
