@@ -1,24 +1,24 @@
 const Xendit = require("xendit-node");
 const x = new Xendit({
-    secretKey: "xnd_development_P4qDfOss0OCpl8RtKrROHjaQYNCk9dN5lSfk+R1l9Wbe+rSiCwZ3jw=="
+  secretKey:
+    "xnd_development_kjw7zafVUEkPFwp0BNURu7vEGq4zkOGfHhoy1WKilU4lBe8RUTvz4Et2naKvf",
 });
 
 const { Invoice } = x;
 const invoice = new Invoice({});
 class XenditInvoice {
-    static createInvoice(externalID, amount, customer) {
-        return invoice.createInvoice({
-        externalID: externalID,
-        amount,
-        successRedirectURL: `http://localhost:4000/xendit/success/${amount}/${externalID}`,
-        payerEmail: customer.email,
-        });
-    }
-    static expireInvoice(invoiceID) {
-        return invoice.expireInvoice({ invoiceID })
-    }
-    static getInvoice(invoiceID) {
-        return invoice.getInvoice({ invoiceID })
-    }
+  static createInvoice(externalID, amount, customer) {
+    return invoice.createInvoice({
+      externalID: externalID,
+      amount,
+      payerEmail: customer.email,
+    });
+  }
+  static expireInvoice(invoiceID) {
+    return invoice.expireInvoice({ invoiceID });
+  }
+  static getInvoice(invoiceID) {
+    return invoice.getInvoice({ invoiceID });
+  }
 }
-module.exports = XenditInvoice
+module.exports = XenditInvoice;
