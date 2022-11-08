@@ -9,6 +9,42 @@ const user_access_token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJyZXNjdWVmb29kQGdtYWlsLmNvbSIsImlhdCI6MTY2NzY0OTE1Mn0.Sqkgx312hBggjPziUR-QqYZD4mf8Le70OfR_HEyjhG0";
 
 describe("Resto Routes Test", () => {
+    describe("GET /resto/order - return data orders", () => {
+        test("200 Success get all orders data, return array", (done) => {
+        request(app)
+            .get("/resto/order")
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(200);
+            expect(body[0]).toBeInstanceOf(Object);
+            expect(body[0]).toHaveProperty("FoodId", expect.any(Number));
+            expect(body[0]).toHaveProperty("PaymentId", expect.any(Number));
+            expect(body[0]).toHaveProperty("itemPrice", expect.any(Number));
+            expect(body.length).toBeGreaterThan(0);
+            done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("401 Failed get foods with invalid token - should return error unauthorized", (done) => {
+        request(app)
+            .get("/resto/order")
+            .set("access_token", "ini invalid token")
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(401);
+            expect(body).toHaveProperty("message", "Invalid token");
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+    });
+
     describe("GET /resto/food - return data all foods", () => {
         test("200 Success get all foods data, return array", (done) => {
         request(app)
@@ -96,20 +132,44 @@ describe("Resto Routes Test", () => {
         });
     });
 
+    describe("GET /food/filter/:id - return data filtered foods", () => {
+        test("200 Success get filetered food data, return object", (done) => {
+        request(app)
+            .get("/resto/food/9")
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(200);
+            expect(body).toBeInstanceOf(Object);
+            expect(body).toHaveProperty("name", expect.any(String));
+            expect(body).toHaveProperty("price", expect.any(Number));
+            expect(body).toHaveProperty("rate", expect.any(Number));
+            expect(body).toHaveProperty("imageUrl", expect.any(String));
+            done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+    });
+
     describe("POST /resto/food - create new resto food", () => {
         test("201 Success added food resto - should create new food resto", (done) => {
         request(app)
             .post("/resto/food")
             .send({
             name: "udang goreng tepung",
-            price: "25000",
+            price: 25000,
             rate: 0,
             imageUrl: "https://unsplash.com/photos/HNmcgpzPHag",
             description: "udang goreng terenak setasikmalaya",
+            status: "new",
             quantity: 20,
             sales: 1,
-            discount: 0,
+            discount: 10,
             CategoryId: 3,
+            is_active: true,
+            newPrice: 18000,
             })
             .set({ access_token: user_access_token })
             .then((response) => {
@@ -120,6 +180,205 @@ describe("Resto Routes Test", () => {
             expect(body).toHaveProperty("price", expect.any(Number));
             expect(body).toHaveProperty("rate", expect.any(Number));
             expect(body).toHaveProperty("imageUrl", expect.any(String));
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("400 Failed create food - should return error - Name is required", (done) => {
+        request(app)
+            .post("/resto/food")
+            .send({
+            price: 25000,
+            rate: 0,
+            imageUrl: "https://unsplash.com/photos/HNmcgpzPHag",
+            description: "udang goreng terenak setasikmalaya",
+            status: "new",
+            quantity: 20,
+            sales: 1,
+            discount: 10,
+            CategoryId: 3,
+            is_active: true,
+            newPrice: 18000,
+            })
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(400);
+            expect(body).toBeInstanceOf(Object);
+            expect(body).toHaveProperty("message", expect.any(String));
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("400 Failed create food - should return error - Price is required", (done) => {
+        request(app)
+            .post("/resto/food")
+            .send({
+            name: "udang goreng tepung",
+            rate: 0,
+            imageUrl: "https://unsplash.com/photos/HNmcgpzPHag",
+            description: "udang goreng terenak setasikmalaya",
+            status: "new",
+            quantity: 20,
+            sales: 1,
+            discount: 10,
+            CategoryId: 3,
+            is_active: true,
+            newPrice: 18000,
+            })
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(400);
+            expect(body).toBeInstanceOf(Object);
+            expect(body).toHaveProperty("message", expect.any(String));
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("400 Failed create food - should return error - ImageUrl is required", (done) => {
+        request(app)
+            .post("/resto/food")
+            .send({
+            name: "udang goreng tepung",
+            price: 25000,
+            rate: 0,
+            description: "udang goreng terenak setasikmalaya",
+            status: "new",
+            quantity: 20,
+            sales: 1,
+            discount: 10,
+            CategoryId: 3,
+            is_active: true,
+            newPrice: 18000,
+            })
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(400);
+            expect(body).toBeInstanceOf(Object);
+            expect(body).toHaveProperty("message", expect.any(String));
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("400 Failed create food - should return error - Description is required", (done) => {
+        request(app)
+            .post("/resto/food")
+            .send({
+            name: "udang goreng tepung",
+            price: 25000,
+            rate: 0,
+            imageUrl: "https://unsplash.com/photos/HNmcgpzPHag",
+            status: "new",
+            quantity: 20,
+            sales: 1,
+            discount: 10,
+            CategoryId: 3,
+            is_active: true,
+            newPrice: 18000,
+            })
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(400);
+            expect(body).toBeInstanceOf(Object);
+            expect(body).toHaveProperty("message", expect.any(String));
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("400 Failed create food - should return error - Description is required", (done) => {
+        request(app)
+            .post("/resto/food")
+            .send({
+            name: "udang goreng tepung",
+            rate: 0,
+            imageUrl: "https://unsplash.com/photos/HNmcgpzPHag",
+            status: "new",
+            quantity: 20,
+            sales: 1,
+            discount: 10,
+            CategoryId: 3,
+            is_active: true,
+            newPrice: 18000,
+            })
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(400);
+            expect(body).toBeInstanceOf(Object);
+            expect(body).toHaveProperty("message", expect.any(String));
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("400 Failed create food - should return error - Quantity is required", (done) => {
+        request(app)
+            .post("/resto/food")
+            .send({
+            name: "udang goreng tepung",
+            rate: 0,
+            imageUrl: "https://unsplash.com/photos/HNmcgpzPHag",
+            description: "udang goreng terenak setasikmalaya",
+            status: "new",
+            sales: 1,
+            discount: 10,
+            CategoryId: 3,
+            is_active: true,
+            newPrice: 18000,
+            })
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(400);
+            expect(body).toBeInstanceOf(Object);
+            expect(body).toHaveProperty("message", expect.any(String));
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("400 Failed create food - should return error - CategoryId is required", (done) => {
+        request(app)
+            .post("/resto/food")
+            .send({
+            name: "udang goreng tepung",
+            rate: 0,
+            imageUrl: "https://unsplash.com/photos/HNmcgpzPHag",
+            description: "udang goreng terenak setasikmalaya",
+            status: "new",
+            sales: 1,
+            discount: 10,
+            is_active: true,
+            newPrice: 18000,
+            })
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(400);
+            expect(body).toBeInstanceOf(Object);
+            expect(body).toHaveProperty("message", expect.any(String));
             return done();
             })
             .catch((err) => {
@@ -386,13 +645,17 @@ describe("Resto Routes Test", () => {
         request(app)
             .post("/resto/restaurants")
             .send({
-                name: "Omnikopi",
-                logoUrl: "https://tinyurl.com/2z6wfxv6",
-                description: "Airy coffee spot with a white interior & Wi-Fi turning out gourmet blends & elevated light bites.",
-                type: "Coffee shop",
-                open_time: "08:00",
-                close_time: "22:00",
-                address: "Jl. Bintaro Tengah No.25, Rengas, Ciputat Timur, South Tangerang City, Banten 15412"
+            name: "Omnikopi",
+            logoUrl: "https://tinyurl.com/2z6wfxv6",
+            description:
+                "Airy coffee spot with a white interior & Wi-Fi turning out gourmet blends & elevated light bites.",
+            type: "Coffee shop",
+            open_time: "08:00",
+            close_time: "22:00",
+            address:
+                "Jl. Bintaro Tengah No.25, Rengas, Ciputat Timur, South Tangerang City, Banten 15412",
+            latitude: 0,
+            longitude: 0,
             })
             .set({ access_token: user_access_token })
             .then((response) => {
@@ -409,12 +672,232 @@ describe("Resto Routes Test", () => {
             });
         });
 
-        test("401 Failed create restaurant with invalid token - should return error unauthorized", (done) => {
+        test("400 Failed added restaurant - should return error - Name is required", (done) => {
         request(app)
             .post("/resto/restaurants")
             .send({
-
+            logoUrl: "https://tinyurl.com/2z6wfxv6",
+            description:
+                "Airy coffee spot with a white interior & Wi-Fi turning out gourmet blends & elevated light bites.",
+            type: "Coffee shop",
+            open_time: "08:00",
+            close_time: "22:00",
+            address:
+                "Jl. Bintaro Tengah No.25, Rengas, Ciputat Timur, South Tangerang City, Banten 15412",
+            latitude: 0,
+            longitude: 0,
             })
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(400);
+            expect(body).toBeInstanceOf(Object);
+            expect(body).toHaveProperty("message", expect.any(String));
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("400 Failed added restaurant - should return error - LogoUrl is required", (done) => {
+        request(app)
+            .post("/resto/restaurants")
+            .send({
+            name: "Omnikopi",
+            description:
+                "Airy coffee spot with a white interior & Wi-Fi turning out gourmet blends & elevated light bites.",
+            type: "Coffee shop",
+            open_time: "08:00",
+            close_time: "22:00",
+            address:
+                "Jl. Bintaro Tengah No.25, Rengas, Ciputat Timur, South Tangerang City, Banten 15412",
+            latitude: 0,
+            longitude: 0,
+            })
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(400);
+            expect(body).toBeInstanceOf(Object);
+            expect(body).toHaveProperty("message", expect.any(String));
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("400 Failed added restaurant - should return error - description is required", (done) => {
+        request(app)
+            .post("/resto/restaurants")
+            .send({
+            name: "Omnikopi",
+            logoUrl: "https://tinyurl.com/2z6wfxv6",
+            type: "Coffee shop",
+            open_time: "08:00",
+            close_time: "22:00",
+            address:
+                "Jl. Bintaro Tengah No.25, Rengas, Ciputat Timur, South Tangerang City, Banten 15412",
+            latitude: 0,
+            longitude: 0,
+            })
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(400);
+            expect(body).toBeInstanceOf(Object);
+            expect(body).toHaveProperty("message", expect.any(String));
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("400 Failed added restaurant - should return error - type is required", (done) => {
+        request(app)
+            .post("/resto/restaurants")
+            .send({
+            name: "Omnikopi",
+            logoUrl: "https://tinyurl.com/2z6wfxv6",
+            description:
+                "Airy coffee spot with a white interior & Wi-Fi turning out gourmet blends & elevated light bites.",
+            open_time: "08:00",
+            close_time: "22:00",
+            address:
+                "Jl. Bintaro Tengah No.25, Rengas, Ciputat Timur, South Tangerang City, Banten 15412",
+            latitude: 0,
+            longitude: 0,
+            })
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(400);
+            expect(body).toBeInstanceOf(Object);
+            expect(body).toHaveProperty("message", expect.any(String));
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("400 Failed added restaurant - should return error - Open_Time is required", (done) => {
+        request(app)
+            .post("/resto/restaurants")
+            .send({
+            name: "Omnikopi",
+            logoUrl: "https://tinyurl.com/2z6wfxv6",
+            description:
+                "Airy coffee spot with a white interior & Wi-Fi turning out gourmet blends & elevated light bites.",
+            type: "Coffee shop",
+            close_time: "22:00",
+            address:
+                "Jl. Bintaro Tengah No.25, Rengas, Ciputat Timur, South Tangerang City, Banten 15412",
+            latitude: 0,
+            longitude: 0,
+            })
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(400);
+            expect(body).toBeInstanceOf(Object);
+            expect(body).toHaveProperty("message", expect.any(String));
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("400 Failed added restaurant - should return error - Close_Time is required", (done) => {
+        request(app)
+            .post("/resto/restaurants")
+            .send({
+            name: "Omnikopi",
+            logoUrl: "https://tinyurl.com/2z6wfxv6",
+            description:
+                "Airy coffee spot with a white interior & Wi-Fi turning out gourmet blends & elevated light bites.",
+            type: "Coffee shop",
+            open_time: "08:00",
+            address:
+                "Jl. Bintaro Tengah No.25, Rengas, Ciputat Timur, South Tangerang City, Banten 15412",
+            latitude: 0,
+            longitude: 0,
+            })
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(400);
+            expect(body).toBeInstanceOf(Object);
+            expect(body).toHaveProperty("message", expect.any(String));
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("400 Failed added restaurant - should return error - address is required", (done) => {
+        request(app)
+            .post("/resto/restaurants")
+            .send({
+            name: "Omnikopi",
+            logoUrl: "https://tinyurl.com/2z6wfxv6",
+            description:
+                "Airy coffee spot with a white interior & Wi-Fi turning out gourmet blends & elevated light bites.",
+            type: "Coffee shop",
+            open_time: "08:00",
+            close_time: "22:00",
+            latitude: 0,
+            longitude: 0,
+            })
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(400);
+            expect(body).toBeInstanceOf(Object);
+            expect(body).toHaveProperty("message", expect.any(String));
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("400 Failed added restaurant - should return error - Internal server error", (done) => {
+        request(app)
+            .post("/resto/restaurants")
+            .send({
+            name: "Omnikopi",
+            logoUrl: "https://tinyurl.com/2z6wfxv6",
+            description:
+                "Airy coffee spot with a white interior & Wi-Fi turning out gourmet blends & elevated light bites.",
+            type: "Coffee shop",
+            open_time: "08:00",
+            close_time: "22:00",
+            address:
+                "Jl. Bintaro Tengah No.25, Rengas, Ciputat Timur, South Tangerang City, Banten 15412",
+            longitude: 0,
+            })
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(500);
+            expect(body).toBeInstanceOf(Object);
+            expect(body).toHaveProperty("message", expect.any(String));
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("401 Failed create restaurant with invalid token - should return error unauthorized", (done) => {
+        request(app)
+            .post("/resto/restaurants")
+            .send({})
             .set("access_token", "ini invalid token")
             .then((response) => {
             const { body, status } = response;

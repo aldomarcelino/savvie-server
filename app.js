@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 io.on("connection", (socket) => {
   // console.log(`user ${socket.id} is connected`);
   socket.on("location", (data) => {
-    console.log(data, "<< di dalem socket on");
+    // console.log(data, "<< di dalem socket on");
     socket.broadcast.emit("location:received:raven", data);
   });
 });
@@ -32,8 +32,8 @@ io.on("connection", (socket) => {
 app.use("/", router);
 app.use(errorHandler);
 
-server.listen(PORT, () => {
-  console.log("MASIH DI LOCAL", PORT, "BRO!");
-});
+// server.listen(PORT, () => {
+//   console.log("MASIH DI LOCAL", PORT, "BRO!");
+// });
 
-// module.exports = app;
+module.exports = app;

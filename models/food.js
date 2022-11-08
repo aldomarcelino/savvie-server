@@ -122,7 +122,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       newPrice: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        // allowNull: false,
       },
       CategoryId: {
         type: DataTypes.INTEGER,
