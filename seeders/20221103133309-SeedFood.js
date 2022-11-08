@@ -5,6 +5,7 @@ module.exports = {
     const dataFood = require("../data/foods.json");
     dataFood.food.forEach((el) => {
       el.createdAt = el.updatedAt = new Date();
+      el.newPrice = el.price - (el.discount/100 * el.price)
     });
 
     await queryInterface.bulkInsert("Food", dataFood.food, {});

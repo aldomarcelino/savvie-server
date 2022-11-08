@@ -120,6 +120,10 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      newPrice: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       CategoryId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -138,5 +142,8 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "Food",
     }
   );
+  Food.beforeCreate(el => {
+    el.newPrice = el.price - (el.discount/100 * el.price)
+  })
   return Food;
 };

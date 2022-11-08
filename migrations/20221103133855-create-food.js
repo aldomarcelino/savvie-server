@@ -44,6 +44,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
+      newPrice: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
       is_active: {
         allowNull: false,
         type: Sequelize.BOOLEAN,
