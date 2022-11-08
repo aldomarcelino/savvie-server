@@ -4,9 +4,14 @@ class Controller {
   static async allFood(req, res, next) {
     try {
       const food = await Food.findAll({
-        include: [{ model: Category }, { model: Restaurant }],
+        include: [{ model: Category }, 
+          { 
+            model: Restaurant,
+            where: {is_open: true}
+          }],
+        where: {is_active: true}
       });
-
+      
       res.status(200).json(food);
     } catch (error) {
       next(error);
