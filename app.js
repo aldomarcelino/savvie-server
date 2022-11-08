@@ -36,4 +36,4 @@ server.listen(PORT, () => {
   console.log("MASIH DI LOCAL", PORT, "BRO!");
 });
 
-// module.exports = app;
+module.exports = app;
