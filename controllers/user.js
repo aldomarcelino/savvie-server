@@ -141,6 +141,45 @@ class Controller {
       next(error);
     }
   }
+
+  // static postSignup(req, res) {
+  //   const { email, password, name } = req.body
+  //   // console.log(req.body);
+  //   const input = { email, password, name, role: 'user' }
+  //   // console.log(input);
+  //   User.create(input)
+  //   await(() => {
+  //           const transporter = nodemailer.createTransport(smtpTransport({
+  //               service: 'gmail',
+  //               host: 'smtp.gmail.com',
+  //               auth: {
+  //                   user: 'webmail.auto.sender@gmail.com',
+  //                   pass: 'mhrztczzwoimzmxs'
+  //               }
+  //           }))
+  //           const mailOptions = {
+  //               from: 'webmail.auto.sender@gmail.com@gmail.com',
+  //               to: `${email}`,
+  //               subject: `Thank you for register ${name}`,
+  //               text: 'That was easy!'
+  //           };
+
+  //           transporter.sendMail(mailOptions, (error, info) => {
+  //               if (error) console.log(error);
+  //               else console.log('Email sent: ' + info.res);
+  //           });
+
+  //           res.redirect('/signin')
+  //       })
+  //       .catch(err => {
+  //           console.log(err);
+  //           if (!err.errors) res.send(err);
+  //           else {
+  //               let invalid = {};
+  //               err.errors.forEach(el => invalid[el.path] = el.message);
+  //               res.render('register', { input, invalid });
+  //           }
+  //       });
 }
 
 module.exports = Controller;
