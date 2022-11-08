@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./bin/www",
+    "dev": "nodemon app.js",
     "store": "node ./bin/www",
     "test": "jest --runInBand --forceExit --verbose --detectOpenHandles --coverage",
     "seed": "sequelize db:drop && sequelize-cli db:create && sequelize-cli db:migrate && sequelize-cli db:seed:all",
