@@ -1,5 +1,12 @@
 const { Op } = require("sequelize");
-const { Food, Restaurant, Sequelize, OrderItem, User, Payment } = require("../models");
+const {
+  Food,
+  Restaurant,
+  Sequelize,
+  OrderItem,
+  User,
+  Payment,
+} = require("../models");
 
 class Controller {
   static async showFood(req, res, next) {
@@ -8,6 +15,7 @@ class Controller {
         where: {
           RestaurantId: req.user.restoId,
         },
+        order: [["quantity", "DESC"]],
       });
       res.status(200).json(data);
     } catch (error) {
@@ -16,22 +24,28 @@ class Controller {
   }
   static async filterFood(req, res, next) {
     try {
-      const {id} = req.params
+      const { id } = req.params;
       const data = await Food.findAll({
         where: {
           RestaurantId: req.user.restoId,
         },
-        include: [{
-          model: OrderItem,
-          include: [{
-            model: Payment,
-            where: {
-              updatedAt: {[Op.gte]: Sequelize.literal(`NOW() - INTERVAL \'${id}d\'`)}
-            }
-          }]
-        }]
+        include: [
+          {
+            model: OrderItem,
+            include: [
+              {
+                model: Payment,
+                where: {
+                  updatedAt: {
+                    [Op.gte]: Sequelize.literal(`NOW() - INTERVAL \'${id}d\'`),
+                  },
+                },
+              },
+            ],
+          },
+        ],
       });
-      
+
       res.status(200).json(data);
     } catch (error) {
       next(error);
@@ -105,6 +119,7 @@ class Controller {
           sales,
           discount,
           CategoryId,
+          newPrice: price - (discount / 100) * price,
         },
         { where: { id: req.params.id } }
       );
@@ -255,7 +270,7 @@ class Controller {
                   {
                     model: Restaurant,
                     where: { id: req.user.restoId },
-                    include: [Food]
+                    include: [Food],
                   },
                 ],
               },

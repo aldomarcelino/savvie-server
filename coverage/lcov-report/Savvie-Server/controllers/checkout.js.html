@@ -23,16 +23,28 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
+<<<<<<< HEAD
                 <span class="strong">78.26% </span>
                 <span class="quiet">Statements</span>
                 <span class='fraction'>18/23</span>
+=======
+                <span class="strong">91.3% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>21/23</span>
+>>>>>>> 2b4b8f4c734a6aed6fb17ce83c2610906a1910b5
             </div>
         
             
             <div class='fl pad1y space-right2'>
+<<<<<<< HEAD
                 <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
                 <span class='fraction'>2/4</span>
+=======
+                <span class="strong">75% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>3/4</span>
+>>>>>>> 2b4b8f4c734a6aed6fb17ce83c2610906a1910b5
             </div>
         
             
@@ -44,9 +56,15 @@
         
             
             <div class='fl pad1y space-right2'>
+<<<<<<< HEAD
                 <span class="strong">77.27% </span>
                 <span class="quiet">Lines</span>
                 <span class='fraction'>17/22</span>
+=======
+                <span class="strong">90.9% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>20/22</span>
+>>>>>>> 2b4b8f4c734a6aed6fb17ce83c2610906a1910b5
             </div>
         
             
@@ -61,7 +79,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -186,15 +204,42 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<<<<<<< HEAD
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+=======
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">4x</span>
+>>>>>>> 2b4b8f4c734a6aed6fb17ce83c2610906a1910b5
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<<<<<<< HEAD
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+=======
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+>>>>>>> 2b4b8f4c734a6aed6fb17ce83c2610906a1910b5
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -263,15 +308,20 @@ class Controller {
         { where: { UserId: req.user.id } },
         { transaction: t }
       );
+<<<<<<< HEAD
       <span class="missing-if-branch" title="else path not taken" >E</span>if (findUser.balance &lt; total) throw { name: "Top up first" };
 <span class="cstat-no" title="statement not covered" >      await Balance.update(</span>
+=======
+      if (findUser.balance &lt; total) throw { name: "Top up first" };
+      await Balance.update(
+>>>>>>> 2b4b8f4c734a6aed6fb17ce83c2610906a1910b5
         { balance: +findUser.balance - +total },
         { where: { UserId: req.user.id } },
         { transaction: t }
       );
       // console.log("test");
-<span class="cstat-no" title="statement not covered" >      await t.commit();</span>
-<span class="cstat-no" title="statement not covered" >      res.status(201).json({ message: "payment success" });</span>
+      await t.commit();
+      res.status(201).json({ message: "payment success" });
     } catch (error) {
       await t.rollback();
       next(error);
@@ -301,7 +351,11 @@ module.exports = Controller;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+<<<<<<< HEAD
                 at 2022-11-08T16:33:05.221Z
+=======
+                at 2022-11-08T10:58:38.514Z
+>>>>>>> 2b4b8f4c734a6aed6fb17ce83c2610906a1910b5
             </div>
         <script src="../../prettify.js"></script>
         <script>
