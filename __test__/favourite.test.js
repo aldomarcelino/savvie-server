@@ -6,7 +6,7 @@ const { queryInterface } = sequelize;
 const { createSign, verifyToken } = require("../helpers/jwt");
 const { hashPass } = require("../helpers/bcrypt")
 
-jest.setTimeout(30000);
+// jest.setTimeout(30000);
 
 let dataFood = require("../data/foods.json");
 let foods = dataFood.food.map((el) => {

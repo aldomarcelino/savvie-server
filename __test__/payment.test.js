@@ -51,14 +51,19 @@ describe("Payment Routes Test", () => {
     });
   });
 
-  describe("GET /xendit/success - success message after topup", () => {
+  describe("POST /xendit/success - success message after topup", () => {
     test("200 Success message after topup balance", (done) => {
       request(app)
-        .get("/xendit/success")
+        .post("/xendit/success")
+        .send({
+          external_id: 2,
+          amount: 50000,
+          status: "PAID"
+        })
         .set({ access_token: user_access_token })
         .then((response) => {
           const { body, status } = response;
-          expect(status).toBe(200);
+          expect(status).toBe(201);
           expect(body).toBeInstanceOf(Object);
           expect(body).toHaveProperty("message", expect.any(String));
           return done();
