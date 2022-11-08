@@ -13,9 +13,24 @@ describe("Checkout Routes Test", () => {
     test("201 Success added checkout resto", (done) => {
     request(app)
         .post("/checkout")
-        .send({
-
-        })
+        .send(
+          {
+            "order": [
+              {
+                "qty": 3,
+                "FoodId": 2,
+                "itemPrice": 35000
+              },
+              {
+                "qty": 2,
+                "FoodId": 1,
+                "itemPrice": 25000
+              }
+            ],
+            "is_delivery": "Delivery",
+            "total": 155000
+          }
+        )
         .set({ access_token: user_access_token })
         .then((response) => {
         const { body, status } = response;

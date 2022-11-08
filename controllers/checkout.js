@@ -5,6 +5,7 @@ class Controller {
     const t = await sequelize.transaction();
     try {
       let data;
+      console.log(req.body, "<<<<<<<<<<<")
       const { order, is_delivery, total } = req.body;
       if (is_delivery == "delivery") {
         data = await Payment.create(
