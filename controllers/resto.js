@@ -255,6 +255,7 @@ class Controller {
                   {
                     model: Restaurant,
                     where: { id: req.user.restoId },
+                    include: [Food]
                   },
                 ],
               },

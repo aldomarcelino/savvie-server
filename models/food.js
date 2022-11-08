@@ -142,5 +142,8 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "Food",
     }
   );
+  Food.beforeCreate(el => {
+    el.newPrice = el.price - (el.discount/100 * el.price)
+  })
   return Food;
 };
