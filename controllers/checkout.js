@@ -30,7 +30,7 @@ class Controller {
           {
             deliveryFee: 0,
             UserId: req.user.id,
-            status: "paid",
+            status: "Paid",
             paymentCode: new Date().toString(),
             is_delivery,
           },
@@ -57,10 +57,13 @@ class Controller {
         { where: { UserId: req.user.id } },
         { transaction: t }
       );
+      let error = []
       order.forEach(async (el) => {
         const data = await Food.findByPk(el.FoodId)
         console.log(data.quantity, el.qty)
-        // if(+data.quantity < +el.qty) return res.status(404).json({message: "Out of stock"})
+        if(+data.quantity < +el.qty) {
+          error.push("Error")
+        }
         await Food.increment(
           "quantity",
           { by: -el.qty, where: { id: el.FoodId } },
@@ -72,6 +75,7 @@ class Controller {
           { transaction: t }
         );
       });
+      console.log(error)
       await t.commit();
       res.status(201).json({ message: "payment success" });
     } catch (error) {
