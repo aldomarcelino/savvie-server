@@ -3,7 +3,7 @@
     {
       "UserId": "1",
       "name": "Aldo Food",
-      "is_open": false,
+      "is_open": true,
       "open_time": "10:00",
       "close_time": "22:00",
       "rate": 5,
@@ -21,7 +21,7 @@
     {
       "UserId": "2",
       "name": "Boost",
-      "is_open": false,
+      "is_open": true,
       "open_time": "10:00",
       "close_time": "22:00",
       "rate": 5,
@@ -39,7 +39,7 @@
     {
       "UserId": "3",
       "name": "Tous Less Jours",
-      "is_open": false,
+      "is_open": true,
       "open_time": "10:00",
       "close_time": "22:00",
       "rate": 5,
@@ -57,7 +57,7 @@
     {
       "UserId": "4",
       "name": "Loving Hut",
-      "is_open": false,
+      "is_open": true,
       "open_time": "10:00",
       "close_time": "22:00",
       "rate": 5,
@@ -75,7 +75,7 @@
     {
       "UserId": "5",
       "name": "Gioia frozen",
-      "is_open": false,
+      "is_open": true,
       "open_time": "10:00",
       "close_time": "22:00",
       "rate": 5,
@@ -93,7 +93,7 @@
     {
       "UserId": "6",
       "name": "Hokky",
-      "is_open": false,
+      "is_open": true,
       "open_time": "10:00",
       "close_time": "22:00",
       "rate": 5,
@@ -111,7 +111,7 @@
     {
       "UserId": "7",
       "name": "Woy Makaroni",
-      "is_open": false,
+      "is_open": true,
       "open_time": "10:00",
       "close_time": "22:00",
       "rate": 5,
@@ -129,7 +129,7 @@
     {
       "UserId": "8",
       "name": "Mc Donalds",
-      "is_open": false,
+      "is_open": true,
       "open_time": "10:00",
       "close_time": "22:00",
       "rate": 5,
@@ -147,7 +147,7 @@
     {
       "UserId": "9",
       "name": "Sentosa Seafood",
-      "is_open": false,
+      "is_open": true,
       "open_time": "10:00",
       "close_time": "22:00",
       "rate": 5,
