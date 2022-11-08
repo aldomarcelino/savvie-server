@@ -29,17 +29,17 @@ class Controller {
   }
   static async success(req, res, next) {
     try {
-    //   console.log(req.body)
+      //   console.log(req.body)
       const findUser = await User.findByPk(externalId, {
         include: [Balance],
       });
-    //   console.log(findUser);
+      //   console.log(findUser);
       const findWallet = await Balance.findOne({
         where: {
           UserId: findUser.id,
         },
       });
-    //   console.log(findWallet);
+      //   console.log(findWallet);
       await Balance.update(
         {
           balance: +findWallet.balance + +amount,

@@ -71,7 +71,6 @@ describe("User Routes Test", () => {
         .end((err, res) => {
           if (err) return done(err);
           const { body, status } = res;
-
           expect(status).toBe(400);
           expect(body).toHaveProperty("message", "Email is required");
           return done();
@@ -85,7 +84,6 @@ describe("User Routes Test", () => {
         .end((err, res) => {
           if (err) return done(err);
           const { body, status } = res;
-
           expect(status).toBe(400);
           expect(body).toHaveProperty("message", "email must be unique");
           return done();
@@ -237,6 +235,21 @@ describe("User Routes Test", () => {
           expect(body).toHaveProperty("email", expect.any(String));
           expect(body).toHaveProperty("fullName", expect.any(String));
           done();
+        })
+        .catch((err) => {
+          done(err);
+        });
+    });
+
+    test("401 Failed get user data with invalid token - should return error unauthorized", (done) => {
+      request(app)
+        .get(("/"))
+        .set("access_token", "ini invalid token")
+        .then((response) => {
+          const { body, status } = response;
+          expect(status).toBe(401);
+          expect(body).toHaveProperty("message", expect.any(String));
+          return done();
         })
         .catch((err) => {
           done(err);
