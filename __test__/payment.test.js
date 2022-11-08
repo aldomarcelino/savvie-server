@@ -52,21 +52,21 @@ describe("Payment Routes Test", () => {
   });
 
   describe("GET /xendit/success - success message after topup", () => {
-    test("200 Success message after topup balance", (done) => {
-      request(app)
-        .get("/xendit/success")
-        .set({ access_token: user_access_token })
-        .then((response) => {
-          const { body, status } = response;
-          expect(status).toBe(200);
-          expect(body).toBeInstanceOf(Object);
-          expect(body).toHaveProperty("message", expect.any(String));
-          return done();
-        })
-        .catch((err) => {
-          done(err);
-        });
-    });
+    // test("200 Success message after topup balance", (done) => {
+    //   request(app)
+    //     .get("/xendit/success")
+    //     .set({ access_token: user_access_token })
+    //     .then((response) => {
+    //       const { body, status } = response;
+    //       expect(status).toBe(200);
+    //       expect(body).toBeInstanceOf(Object);
+    //       expect(body).toHaveProperty("message", expect.any(String));
+    //       return done();
+    //     })
+    //     .catch((err) => {
+    //       done(err);
+    //     });
+    // });
 
     test("401 Failed topup balance with invalid token - should return error unauthorized", (done) => {
       request(app)
