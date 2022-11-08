@@ -29,28 +29,25 @@ class Controller {
   }
   static async success(req, res, next) {
     try {
-      //   console.log(req.body)
-      const findUser = await User.findByPk(externalId, {
-        include: [Balance],
-      });
-      //   console.log(findUser);
-      const findWallet = await Balance.findOne({
-        where: {
-          UserId: findUser.id,
-        },
-      });
-      //   console.log(findWallet);
-      await Balance.update(
-        {
-          balance: +findWallet.balance + +amount,
-        },
-        {
+      const {external_id, amount, status} = req.body
+      if(status == "PAID"){
+        const findWallet = await Balance.findOne({
           where: {
-            UserId: findUser.id,
+            UserId: external_id,
           },
-        }
-      );
-      res.status(201).json({ message: "topup success" });
+        });
+        await Balance.update(
+          {
+            balance: +findWallet.balance + +amount,
+          },
+          {
+            where: {
+              UserId: external_id,
+            },
+          }
+        );
+        res.status(201).json({ message: "topup success" });
+      }
     } catch (error) {
       next(error);
     }
