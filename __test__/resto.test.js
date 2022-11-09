@@ -99,6 +99,21 @@ describe("Resto Routes Test", () => {
             });
         });
 
+        test("403 Failed get one food - return error forbidden", (done) => {
+            request(app)
+                .get("/resto/food/25")
+                .set({ access_token: user_access_token })
+                .then((response) => {
+                const { body, status } = response;
+                expect(status).toBe(403);
+                expect(body).toHaveProperty("message", expect.any(String));
+                done();
+                })
+                .catch((err) => {
+                done(err);
+                });
+            });
+
         test("404 Failed get one food data, return error", (done) => {
         request(app)
             .get("/resto/food/1000")
@@ -130,25 +145,41 @@ describe("Resto Routes Test", () => {
         });
     });
 
-    describe("GET /food/filter/:id - return data filtered foods", () => {
+    describe("GET /resto/food/filter/:id - return data filtered foods", () => {
         test("200 Success get filetered food data, return object", (done) => {
         request(app)
-            .get("/resto/food/9")
+            .get("/resto/food/filter/9")
             .set({ access_token: user_access_token })
             .then((response) => {
             const { body, status } = response;
             expect(status).toBe(200);
-            expect(body).toBeInstanceOf(Object);
-            expect(body).toHaveProperty("name", expect.any(String));
-            expect(body).toHaveProperty("price", expect.any(Number));
-            expect(body).toHaveProperty("rate", expect.any(Number));
-            expect(body).toHaveProperty("imageUrl", expect.any(String));
+            expect(body).toBeInstanceOf(Array);
+            expect(body[0]).toHaveProperty("name", expect.any(String));
+            expect(body[0]).toHaveProperty("price", expect.any(Number));
+            expect(body[0]).toHaveProperty("rate", expect.any(Number));
+            expect(body[0]).toHaveProperty("imageUrl", expect.any(String));
             done();
             })
             .catch((err) => {
             done(err);
             });
         });
+
+        test("401 Failed get filtered food data with invalid token - should return error unauthorized", (done) => {
+            request(app)
+                .get("/resto/food/filter/9")
+                .set("access_token", "ini invalid token")
+                .then((response) => {
+                const { body, status } = response;
+                expect(status).toBe(401);
+                expect(body).toHaveProperty("message", "Invalid token");
+                return done();
+                })
+                .catch((err) => {
+                done(err);
+                });
+            });
+        
     });
 
     describe("POST /resto/food - create new resto food", () => {
@@ -427,6 +458,21 @@ describe("Resto Routes Test", () => {
             });
         });
 
+        test("403 Failed delete food - return error forbidden", (done) => {
+        request(app)
+            .delete("/resto/food/25")
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(403);
+            expect(body).toHaveProperty("message", expect.any(String));
+            done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
         test("404 Failed delete food - food not found, return error", (done) => {
         request(app)
             .delete("/resto/food/1000")
@@ -536,6 +582,32 @@ describe("Resto Routes Test", () => {
             done(err);
             });
         });
+
+        test("403 Failed edit one food - return error forbidden", (done) => {
+            request(app)
+                .put("/resto/food/25")
+                .send({
+                    name: "Edit food test",
+                    price: "500000",
+                    rate: 5,
+                    imageUrl: "https://unsplash.com/photos/HNmcgpzPHag",
+                    description: "udang goreng terenak setasikmalaya",
+                    quantity: 20,
+                    sales: 1,
+                    discount: 30,
+                    CategoryId: 3,
+                    })
+                .set({ access_token: user_access_token })
+                .then((response) => {
+                const { body, status } = response;
+                expect(status).toBe(403);
+                expect(body).toHaveProperty("message", expect.any(String));
+                done();
+                })
+                .catch((err) => {
+                done(err);
+                });
+            });
     });
 
     describe("PATCH /resto/food/food-status/:id - edit food status", () => {
@@ -586,6 +658,22 @@ describe("Resto Routes Test", () => {
             done(err);
             });
         });
+
+        test("403 Failed edit food - return error forbidden", (done) => {
+            request(app)
+                .patch("/resto/food/food-status/25")
+                .send({ status: "popular" })
+                .set({ access_token: user_access_token })
+                .then((response) => {
+                const { body, status } = response;
+                expect(status).toBe(403);
+                expect(body).toHaveProperty("message", expect.any(String));
+                done();
+                })
+                .catch((err) => {
+                done(err);
+                });
+            });
     });
 
     describe("PATCH /resto/food/food-active/:id - edit food to inactive", () => {
@@ -636,6 +724,22 @@ describe("Resto Routes Test", () => {
             done(err);
             });
         });
+
+        test("403 Failed edit food - return error forbidden", (done) => {
+            request(app)
+                .patch("/resto/food/food-active/25")
+                .send({ is_active: false })
+                .set({ access_token: user_access_token })
+                .then((response) => {
+                const { body, status } = response;
+                expect(status).toBe(403);
+                expect(body).toHaveProperty("message", expect.any(String));
+                done();
+                })
+                .catch((err) => {
+                done(err);
+                });
+            });
     });
 
     describe("POST /resto/restaurants - create new restaurant", () => {
