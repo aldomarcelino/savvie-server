@@ -51,6 +51,90 @@ class Controller {
       next(error);
     }
   }
+  static async filterFoodDate(req, res, next) {
+    try {
+      const { id } = req.params;
+      const data = await Food.findAll({
+        where: {
+          RestaurantId: req.user.restoId,
+        },
+        include: [
+          {
+            model: OrderItem,
+            include: [
+              {
+                model: Payment,
+                where: {
+                  updatedAt: {
+                    [Op.gte]: Sequelize.literal(`NOW() - INTERVAL \'${id}d\'`),
+                  },
+                },
+              },
+            ],
+          },
+        ],
+      });
+      function formatDate(date) {
+        var dd = date.getDate();
+        var mm = date.getMonth() + 1;
+        if (dd < 10) {
+          dd = "0" + dd;
+        }
+        if (mm < 10) {
+          mm = "0" + mm;
+        }
+        date = mm + "/" + dd;
+        return date;
+      }
+      let labels = [];
+      for (var i = 0; i < id; i++) {
+        var d = new Date();
+        d.setDate(d.getDate() - i);
+        labels.push(d.toString().substring(0, 10).split("-").join("/"));
+      }
+      const arrayQuantity = [];
+      const arrayDate = [];
+      const obj = {};
+      const array = []
+      data.map((x) => {
+        x.OrderItems.map((y) => {
+          arrayQuantity.push(y.quantity);
+          arrayDate.push(
+            y.Payment.updatedAt.toString().substring(0, 10).split("-").join("/")
+          );
+        });
+      });
+      // console.log(arrayQuantity, arrayDate)
+      // console.log(labels)
+      arrayDate.forEach((element, index) => {
+        if(!obj[element]){
+          obj[element] = +arrayQuantity[index];
+        }else{
+          obj[element] += +arrayQuantity[index]
+        }
+      });
+      console.log(obj)
+      for (let key in obj) {
+        labels.forEach((x, i) => {
+          console.log(key, x, i)
+          if (key == x) {
+            // console.log(array[i], key, x)
+            if (!array[i]) {
+              // console.log(array[i], "<<<<<<<<<<<<<");
+              array[i] = obj[key];
+            } else {
+              console.log("TESTTTTTTTTTTTTTTTTTTT")
+              array[i] += obj[key];
+            }
+          }
+        });
+      }
+      console.log(array)
+      res.status(200).json(array);
+    } catch (error) {
+      next(error);
+    }
+  }
   static async detailFood(req, res, next) {
     try {
       const data = await Food.findByPk(req.params.id);
@@ -266,25 +350,6 @@ class Controller {
 
   static async allOrder(req, res, next) {
     try {
-      // const data = await OrderItem.findAll({
-      //   include: [
-      //     {
-      //       model: Payment,
-      //       include: [
-      //         {
-      //           model: User,
-      //           include: [
-      //             {
-      //               model: Restaurant,
-      //               where: { id: req.user.restoId },
-      //               include: [Food],
-      //             },
-      //           ],
-      //         },
-      //       ],
-      //     },
-      //   ],
-      // });
       let data = await Restaurant.findByPk(req.user.restoId, {
         include: [
           {
@@ -304,11 +369,42 @@ class Controller {
           },
         ],
       });
-      // function order(data) {
-      //   return data.Food.OrderItem.length > 0;
-      // }
-      // data = data.Food.filter
       res.status(200).json(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+  static async allOrderPayment(req, res, next) {
+    try {
+      let data = await Restaurant.findByPk(req.user.restoId, {
+        include: [
+          {
+            model: Food,
+            include: [
+              {
+                model: OrderItem,
+                include: [
+                  {
+                    model: Payment,
+                    order: [["id", "ASC"]],
+                    include: [User],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      });
+      let order = [] 
+      data.Food.forEach(x => {
+        if(x.OrderItems.length > 0){
+          x.OrderItems.map(y => {
+            order.push(y.Payment)
+          })
+        }
+      })
+      let resto = await Restaurant.findByPk(req.user.restoId)
+      res.status(200).json({order, resto});
     } catch (error) {
       next(error);
     }
