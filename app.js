@@ -22,10 +22,16 @@ app.use(express.urlencoded({ extended: true }));
 //   res.json("Hello World!");
 // });
 io.on("connection", (socket) => {
-  // console.log(`user ${socket.id} is connected`);
-  socket.on("location", (data) => {
-    // console.log(data, "<< di dalem socket on");
-    socket.broadcast.emit("location:received:raven", data);
+  console.log(`user ${socket.id} is connected`);
+
+  socket.on("create-room", (id) => {
+    console.log(id, "++_+_+_+_++_");
+    socket.join(id);
+  });
+
+  socket.on("location", ({ id, data }) => {
+    console.log(id);
+    socket.to(id).emit("locationDriver", data);
   });
 });
 
