@@ -12,7 +12,6 @@ class Controller {
     const t = await sequelize.transaction();
     try {
       let data;
-      console.log(req.body, "REQ BODY");
       const { order, is_delivery, total } = req.body;
       if (is_delivery == "delivery") {
         data = await Payment.create(
@@ -56,7 +55,6 @@ class Controller {
         { balance: +findUser.balance - +total },
         { where: { UserId: req.user.id }, transaction: t }
       );
-      let error = [];
       for (let i = 0; i < order.length; i++) {
         const data = await Food.findByPk(order[i].FoodId);
         if (+data.quantity < +order[i].qty) throw { name: "Out of stock" };
@@ -71,11 +69,9 @@ class Controller {
           where: { id: el.FoodId },
         });
       });
-      console.log(error, "hfjagskdfhasdui");
       await t.commit();
       res.status(201).json({ message: "payment success" });
     } catch (error) {
-      console.log(error, "Catch Checkout");
       await t.rollback();
       next(error);
     }
@@ -86,6 +82,7 @@ class Controller {
         include: [
           {
             model: OrderItem,
+            include: [{ model: Food, include: [{ model: Restaurant }] }],
           },
         ],
         where: { UserId: req.user.id },
