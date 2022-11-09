@@ -29,7 +29,7 @@ class Controller {
         message: "Favourite success to create",
       });
     } catch (error) {
-      console.log(error);
+      next(error);
     }
   }
 
