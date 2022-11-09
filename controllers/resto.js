@@ -62,8 +62,15 @@ class Controller {
   }
   static async addFood(req, res, next) {
     try {
-      const { name, price, imageUrl, description, quantity, CategoryId } =
-        req.body;
+      const {
+        name,
+        price,
+        imageUrl,
+        description,
+        discount = 0,
+        quantity,
+        CategoryId,
+      } = req.body;
       const data = await Food.create({
         name,
         price,
@@ -73,7 +80,7 @@ class Controller {
         status: "new",
         quantity,
         sales: 0,
-        discount: 0,
+        discount,
         is_active: true,
         CategoryId,
         RestaurantId: req.user.restoId,
