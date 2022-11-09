@@ -14,11 +14,11 @@ class XenditInvoice {
       payerEmail: customer.email,
     });
   }
-  static expireInvoice(invoiceID) {
-    return invoice.expireInvoice({ invoiceID });
-  }
-  static getInvoice(invoiceID) {
-    return invoice.getInvoice({ invoiceID });
-  }
+  // static expireInvoice(invoiceID) {
+  //   return invoice.expireInvoice({ invoiceID });
+  // }
+  // static getInvoice(invoiceID) {
+  //   return invoice.getInvoice({ invoiceID });
+  // }
 }
 module.exports = XenditInvoice;

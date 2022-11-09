@@ -12,9 +12,9 @@ const errorHandler = async (err, req, res, next) => {
   } else if (err.name === "Empty email or password") {
     code = 400;
     message = "Email or password is required";
-  } else if (err.name === "Unauthorized") {
-    code = 401;
-    message = "Missing token";
+  // } else if (err.name === "Unauthorized") {
+  //   code = 401;
+  //   message = "Missing token";
   } else if (err.name === "JsonWebTokenError") {
     code = 401;
     message = "Invalid token";

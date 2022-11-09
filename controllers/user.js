@@ -98,49 +98,49 @@ class Controller {
     }
   }
 
-  static async userGoogleLogin(req, res, next) {
-    try {
-      const { jwt } = req.body;
-      const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-      const ticket = await client.verifyIdToken({
-        idToken: jwt,
-        audience: process.env.GOOGLE_CLIENT_ID,
-      });
-      const payload = ticket.getPayload();
+  // static async userGoogleLogin(req, res, next) {
+  //   try {
+  //     const { jwt } = req.body;
+  //     const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+  //     const ticket = await client.verifyIdToken({
+  //       idToken: jwt,
+  //       audience: process.env.GOOGLE_CLIENT_ID,
+  //     });
+  //     const payload = ticket.getPayload();
 
-      const [user, isCreated] = await User.findOrCreate({
-        where: {
-          email: payload.email,
-        },
-        defaults: {
-          email: payload.email,
-          username: payload.name,
-          password: "123456",
-          phoneNumber: "0834242234",
-          address: "Jakarta",
-          role: "Staff",
-        },
-        hooks: false,
-      });
+  //     const [user, isCreated] = await User.findOrCreate({
+  //       where: {
+  //         email: payload.email,
+  //       },
+  //       defaults: {
+  //         email: payload.email,
+  //         username: payload.name,
+  //         password: "123456",
+  //         phoneNumber: "0834242234",
+  //         address: "Jakarta",
+  //         role: "Staff",
+  //       },
+  //       hooks: false,
+  //     });
 
-      const token = createSign(
-        { id: user.id, email: user.email, role: user.role },
-        process.env.SECRET_KEY
-      );
+  //     const token = createSign(
+  //       { id: user.id, email: user.email, role: user.role },
+  //       process.env.SECRET_KEY
+  //     );
 
-      const statusCode = isCreated ? 201 : 200;
-      res.status(statusCode).json({
-        statusCode,
-        msg: "User logged in successfully",
-        role: "Staff",
-        id: user.id,
-        access_token: token,
-        user: user.username,
-      });
-    } catch (error) {
-      next(error);
-    }
-  }
+  //     const statusCode = isCreated ? 201 : 200;
+  //     res.status(statusCode).json({
+  //       statusCode,
+  //       msg: "User logged in successfully",
+  //       role: "Staff",
+  //       id: user.id,
+  //       access_token: token,
+  //       user: user.username,
+  //     });
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // }
 
   // static postSignup(req, res) {
   //   const { email, password, name } = req.body

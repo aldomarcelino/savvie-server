@@ -12,7 +12,7 @@ class Controller {
     const t = await sequelize.transaction();
     try {
       let data;
-      console.log(req.body, "<<<<<<<<<<<");
+      console.log(req.body, "REQ BODY");
       const { order, is_delivery, total } = req.body;
       if (is_delivery == "delivery") {
         data = await Payment.create(
@@ -60,7 +60,7 @@ class Controller {
       let error = [];
       order.forEach(async (el) => {
         const data = await Food.findByPk(el.FoodId);
-        console.log(data.quantity, el.qty);
+        // console.log(data.quantity, el.qty);
         if (+data.quantity < +el.qty) {
           error.push("Error");
         }
@@ -75,10 +75,10 @@ class Controller {
           { transaction: t }
         );
       });
-      console.log(error);
       await t.commit();
       res.status(201).json({ message: "payment success" });
     } catch (error) {
+      console.log(error, "Catch Checkout");
       await t.rollback();
       next(error);
     }

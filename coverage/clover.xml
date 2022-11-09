@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<coverage generated="1667925185313" clover="3.2.0">
-  <project timestamp="1667925185313" name="All files">
-    <metrics statements="573" coveredstatements="510" conditionals="101" coveredconditionals="72" methods="76" coveredmethods="69" elements="750" coveredelements="651" complexity="0" loc="573" ncloc="573" packages="7" files="39" classes="39"/>
-=======
-<coverage generated="1667905118595" clover="3.2.0">
-  <project timestamp="1667905118595" name="All files">
-    <metrics statements="572" coveredstatements="507" conditionals="99" coveredconditionals="72" methods="76" coveredmethods="68" elements="747" coveredelements="647" complexity="0" loc="572" ncloc="572" packages="7" files="39" classes="39"/>
->>>>>>> 2b4b8f4c734a6aed6fb17ce83c2610906a1910b5
+<coverage generated="1667972100803" clover="3.2.0">
+  <project timestamp="1667972100803" name="All files">
+    <metrics statements="568" coveredstatements="520" conditionals="99" coveredconditionals="74" methods="74" coveredmethods="70" elements="741" coveredelements="664" complexity="0" loc="568" ncloc="568" packages="7" files="39" classes="39"/>
     <package name="Savvie-Server">
       <metrics statements="20" coveredstatements="18" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="0"/>
       <file name="app.js" path="/Users/adibwafi/Documents/Hacktiv8/Phase3/Final Project/Savvie-Server/app.js">
@@ -35,25 +29,19 @@
       </file>
     </package>
     <package name="Savvie-Server.api">
-      <metrics statements="8" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="1"/>
+      <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="xendit.js" path="/Users/adibwafi/Documents/Hacktiv8/Phase3/Final Project/Savvie-Server/api/xendit.js">
-        <metrics statements="8" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="1"/>
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="9" type="stmt"/>
         <line num="2" count="9" type="stmt"/>
         <line num="7" count="9" type="stmt"/>
         <line num="8" count="9" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
         <line num="24" count="9" type="stmt"/>
       </file>
     </package>
     <package name="Savvie-Server.controllers">
-<<<<<<< HEAD
-      <metrics statements="249" coveredstatements="201" conditionals="50" coveredconditionals="34" methods="37" coveredmethods="34"/>
-=======
-      <metrics statements="248" coveredstatements="198" conditionals="48" coveredconditionals="34" methods="37" coveredmethods="33"/>
->>>>>>> 2b4b8f4c734a6aed6fb17ce83c2610906a1910b5
+      <metrics statements="247" coveredstatements="212" conditionals="48" coveredconditionals="36" methods="37" coveredmethods="35"/>
       <file name="category.js" path="/Users/adibwafi/Documents/Hacktiv8/Phase3/Final Project/Savvie-Server/controllers/category.js">
         <metrics statements="12" coveredstatements="11" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="9" type="stmt"/>
@@ -70,51 +58,41 @@
         <line num="33" count="9" type="stmt"/>
       </file>
       <file name="checkout.js" path="/Users/adibwafi/Documents/Hacktiv8/Phase3/Final Project/Savvie-Server/controllers/checkout.js">
-<<<<<<< HEAD
-        <metrics statements="22" coveredstatements="17" conditionals="4" coveredconditionals="2" methods="3" coveredmethods="3"/>
-        <line num="1" count="9" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="10" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="33" count="1" type="stmt"/>
-        <line num="34" count="2" type="stmt"/>
-        <line num="42" count="1" type="stmt"/>
-        <line num="43" count="1" type="stmt"/>
-        <line num="47" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-=======
-        <metrics statements="22" coveredstatements="20" conditionals="4" coveredconditionals="3" methods="3" coveredmethods="3"/>
-        <line num="1" count="9" type="stmt"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
-        <line num="10" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="22" count="2" type="stmt"/>
-        <line num="33" count="2" type="stmt"/>
-        <line num="34" count="4" type="stmt"/>
-        <line num="42" count="2" type="stmt"/>
-        <line num="43" count="2" type="stmt"/>
-        <line num="47" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="48" count="1" type="stmt"/>
-        <line num="54" count="1" type="stmt"/>
+        <metrics statements="31" coveredstatements="28" conditionals="6" coveredconditionals="4" methods="4" coveredmethods="4"/>
+        <line num="8" count="9" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="17" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="40" count="2" type="stmt"/>
+        <line num="41" count="4" type="stmt"/>
+        <line num="49" count="2" type="stmt"/>
+        <line num="50" count="2" type="stmt"/>
+        <line num="54" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="55" count="1" type="stmt"/>
->>>>>>> 2b4b8f4c734a6aed6fb17ce83c2610906a1910b5
-        <line num="57" count="1" type="stmt"/>
-        <line num="58" count="1" type="stmt"/>
-        <line num="62" count="1" type="stmt"/>
-        <line num="63" count="1" type="stmt"/>
-        <line num="71" count="1" type="stmt"/>
-        <line num="73" count="0" type="stmt"/>
-        <line num="77" count="9" type="stmt"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="62" count="2" type="stmt"/>
+        <line num="64" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="67" count="2" type="stmt"/>
+        <line num="72" count="2" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="87" count="1" type="stmt"/>
+        <line num="88" count="1" type="stmt"/>
+        <line num="96" count="1" type="stmt"/>
+        <line num="98" count="0" type="stmt"/>
+        <line num="102" count="9" type="stmt"/>
       </file>
       <file name="favourite.js" path="/Users/adibwafi/Documents/Hacktiv8/Phase3/Final Project/Savvie-Server/controllers/favourite.js">
-        <metrics statements="18" coveredstatements="15" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="3"/>
+        <metrics statements="17" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
         <line num="1" count="9" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
@@ -129,7 +107,6 @@
         <line num="37" count="1" type="stmt"/>
         <line num="38" count="1" type="stmt"/>
         <line num="39" count="1" type="stmt"/>
-        <line num="43" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="45" count="1" type="stmt"/>
         <line num="49" count="0" type="stmt"/>
         <line num="54" count="9" type="stmt"/>
@@ -139,15 +116,15 @@
         <line num="1" count="9" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="17" count="2" type="stmt"/>
-        <line num="18" count="2" type="stmt"/>
-        <line num="19" count="2" type="stmt"/>
-        <line num="24" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="28" count="1" type="stmt"/>
-        <line num="33" count="9" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="29" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="38" count="9" type="stmt"/>
       </file>
       <file name="midtrans.js" path="/Users/adibwafi/Documents/Hacktiv8/Phase3/Final Project/Savvie-Server/controllers/midtrans.js">
         <metrics statements="10" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
@@ -188,78 +165,78 @@
       <file name="resto.js" path="/Users/adibwafi/Documents/Hacktiv8/Phase3/Final Project/Savvie-Server/controllers/resto.js">
         <metrics statements="73" coveredstatements="58" conditionals="12" coveredconditionals="6" methods="13" coveredmethods="12"/>
         <line num="1" count="9" type="stmt"/>
-        <line num="2" count="9" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="41" count="2" type="stmt"/>
-        <line num="42" count="2" type="stmt"/>
-        <line num="43" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="44" count="2" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="50" count="8" type="stmt"/>
-        <line num="52" count="8" type="stmt"/>
-        <line num="53" count="8" type="stmt"/>
-        <line num="67" count="1" type="stmt"/>
-        <line num="69" count="7" type="stmt"/>
-        <line num="73" count="1" type="stmt"/>
-        <line num="74" count="1" type="stmt"/>
-        <line num="75" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="76" count="1" type="stmt"/>
-        <line num="77" count="1" type="stmt"/>
-        <line num="81" count="0" type="stmt"/>
-        <line num="85" count="1" type="stmt"/>
-        <line num="86" count="1" type="stmt"/>
-        <line num="87" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="97" count="1" type="stmt"/>
-        <line num="98" count="1" type="stmt"/>
+        <line num="9" count="9" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="55" count="2" type="stmt"/>
+        <line num="56" count="2" type="stmt"/>
+        <line num="57" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="58" count="2" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="64" count="8" type="stmt"/>
+        <line num="66" count="8" type="stmt"/>
+        <line num="67" count="8" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="83" count="7" type="stmt"/>
+        <line num="87" count="1" type="stmt"/>
+        <line num="88" count="1" type="stmt"/>
+        <line num="89" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="90" count="1" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
+        <line num="95" count="0" type="stmt"/>
+        <line num="99" count="1" type="stmt"/>
+        <line num="100" count="1" type="stmt"/>
+        <line num="101" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="111" count="1" type="stmt"/>
-        <line num="115" count="0" type="stmt"/>
-        <line num="119" count="1" type="stmt"/>
-        <line num="120" count="1" type="stmt"/>
-        <line num="121" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="122" count="1" type="stmt"/>
-        <line num="123" count="1" type="stmt"/>
-        <line num="124" count="1" type="stmt"/>
-        <line num="126" count="0" type="stmt"/>
-        <line num="130" count="1" type="stmt"/>
-        <line num="131" count="1" type="stmt"/>
-        <line num="132" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="133" count="1" type="stmt"/>
+        <line num="112" count="1" type="stmt"/>
+        <line num="126" count="1" type="stmt"/>
+        <line num="130" count="0" type="stmt"/>
         <line num="134" count="1" type="stmt"/>
         <line num="135" count="1" type="stmt"/>
-        <line num="137" count="0" type="stmt"/>
-        <line num="142" count="1" type="stmt"/>
-        <line num="143" count="1" type="stmt"/>
-        <line num="144" count="1" type="stmt"/>
-        <line num="146" count="0" type="stmt"/>
-        <line num="150" count="9" type="stmt"/>
-        <line num="151" count="9" type="stmt"/>
-        <line num="162" count="9" type="stmt"/>
-        <line num="163" count="9" type="stmt"/>
-        <line num="184" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="186" count="1" type="stmt"/>
-        <line num="191" count="8" type="stmt"/>
-        <line num="195" count="1" type="stmt"/>
-        <line num="209" count="1" type="stmt"/>
+        <line num="136" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="137" count="1" type="stmt"/>
+        <line num="138" count="1" type="stmt"/>
+        <line num="139" count="1" type="stmt"/>
+        <line num="141" count="0" type="stmt"/>
+        <line num="145" count="1" type="stmt"/>
+        <line num="146" count="1" type="stmt"/>
+        <line num="147" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="148" count="1" type="stmt"/>
+        <line num="149" count="1" type="stmt"/>
+        <line num="150" count="1" type="stmt"/>
+        <line num="152" count="0" type="stmt"/>
+        <line num="157" count="1" type="stmt"/>
+        <line num="158" count="1" type="stmt"/>
+        <line num="159" count="1" type="stmt"/>
+        <line num="161" count="0" type="stmt"/>
+        <line num="165" count="9" type="stmt"/>
+        <line num="166" count="9" type="stmt"/>
+        <line num="177" count="9" type="stmt"/>
+        <line num="178" count="9" type="stmt"/>
+        <line num="199" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="201" count="1" type="stmt"/>
+        <line num="206" count="8" type="stmt"/>
         <line num="210" count="1" type="stmt"/>
-        <line num="227" count="1" type="stmt"/>
-        <line num="231" count="0" type="stmt"/>
-        <line num="235" count="1" type="stmt"/>
-        <line num="236" count="1" type="stmt"/>
-        <line num="237" count="1" type="stmt"/>
-        <line num="241" count="0" type="stmt"/>
-        <line num="246" count="1" type="stmt"/>
-        <line num="247" count="1" type="stmt"/>
-        <line num="266" count="1" type="stmt"/>
-        <line num="268" count="0" type="stmt"/>
-        <line num="272" count="9" type="stmt"/>
+        <line num="224" count="1" type="stmt"/>
+        <line num="225" count="1" type="stmt"/>
+        <line num="242" count="1" type="stmt"/>
+        <line num="246" count="0" type="stmt"/>
+        <line num="250" count="1" type="stmt"/>
+        <line num="251" count="1" type="stmt"/>
+        <line num="252" count="1" type="stmt"/>
+        <line num="256" count="0" type="stmt"/>
+        <line num="261" count="1" type="stmt"/>
+        <line num="281" count="1" type="stmt"/>
+        <line num="303" count="1" type="stmt"/>
+        <line num="305" count="0" type="stmt"/>
+        <line num="309" count="9" type="stmt"/>
       </file>
       <file name="search.js" path="/Users/adibwafi/Documents/Hacktiv8/Phase3/Final Project/Savvie-Server/controllers/search.js">
         <metrics statements="20" coveredstatements="17" conditionals="4" coveredconditionals="2" methods="2" coveredmethods="2"/>
@@ -277,15 +254,15 @@
         <line num="30" count="1" type="stmt"/>
         <line num="31" count="1" type="stmt"/>
         <line num="32" count="1" type="stmt"/>
-        <line num="33" count="16" type="stmt"/>
-        <line num="34" count="16" type="stmt"/>
-        <line num="35" count="16" type="stmt"/>
+        <line num="33" count="18" type="stmt"/>
+        <line num="34" count="18" type="stmt"/>
+        <line num="35" count="18" type="stmt"/>
         <line num="37" count="1" type="stmt"/>
         <line num="39" count="0" type="stmt"/>
         <line num="44" count="9" type="stmt"/>
       </file>
       <file name="user.js" path="/Users/adibwafi/Documents/Hacktiv8/Phase3/Final Project/Savvie-Server/controllers/user.js">
-        <metrics statements="42" coveredstatements="29" conditionals="14" coveredconditionals="10" methods="4" coveredmethods="3"/>
+        <metrics statements="32" coveredstatements="30" conditionals="12" coveredconditionals="11" methods="3" coveredmethods="3"/>
         <line num="1" count="9" type="stmt"/>
         <line num="2" count="9" type="stmt"/>
         <line num="3" count="9" type="stmt"/>
@@ -300,41 +277,27 @@
         <line num="40" count="1" type="stmt"/>
         <line num="45" count="1" type="stmt"/>
         <line num="50" count="6" type="stmt"/>
-        <line num="55" count="4" type="stmt"/>
-        <line num="56" count="4" type="stmt"/>
-        <line num="57" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="55" count="8" type="stmt"/>
+        <line num="56" count="8" type="stmt"/>
+        <line num="57" count="8" type="cond" truecount="2" falsecount="0"/>
         <line num="58" count="1" type="stmt"/>
-        <line num="60" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="60" count="7" type="cond" truecount="2" falsecount="0"/>
         <line num="61" count="1" type="stmt"/>
-        <line num="63" count="2" type="stmt"/>
-        <line num="67" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="63" count="6" type="stmt"/>
+        <line num="67" count="6" type="cond" truecount="2" falsecount="0"/>
         <line num="68" count="1" type="stmt"/>
-        <line num="70" count="1" type="stmt"/>
-        <line num="71" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="70" count="5" type="stmt"/>
+        <line num="71" count="5" type="cond" truecount="1" falsecount="1"/>
         <line num="72" count="0" type="stmt"/>
-        <line num="74" count="1" type="stmt"/>
-        <line num="78" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="74" count="5" type="stmt"/>
+        <line num="78" count="5" type="cond" truecount="2" falsecount="0"/>
         <line num="79" count="1" type="stmt"/>
-        <line num="87" count="0" type="stmt"/>
+        <line num="87" count="4" type="stmt"/>
         <line num="97" count="3" type="stmt"/>
-        <line num="102" count="0" type="stmt"/>
-        <line num="103" count="0" type="stmt"/>
-        <line num="104" count="0" type="stmt"/>
-        <line num="105" count="0" type="stmt"/>
-        <line num="109" count="0" type="stmt"/>
-        <line num="111" count="0" type="stmt"/>
-        <line num="126" count="0" type="stmt"/>
-        <line num="131" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="132" count="0" type="stmt"/>
-        <line num="141" count="0" type="stmt"/>
-        <line num="146" count="9" type="stmt"/>
+        <line num="185" count="9" type="stmt"/>
       </file>
       <file name="xendit.js" path="/Users/adibwafi/Documents/Hacktiv8/Phase3/Final Project/Savvie-Server/controllers/xendit.js">
-<<<<<<< HEAD
         <metrics statements="20" coveredstatements="17" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
-=======
-        <metrics statements="19" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
->>>>>>> 2b4b8f4c734a6aed6fb17ce83c2610906a1910b5
         <line num="1" count="9" type="stmt"/>
         <line num="2" count="9" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
@@ -347,7 +310,6 @@
         <line num="19" count="1" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
-<<<<<<< HEAD
         <line num="31" count="1" type="stmt"/>
         <line num="32" count="1" type="stmt"/>
         <line num="33" count="1" type="cond" truecount="1" falsecount="1"/>
@@ -356,15 +318,6 @@
         <line num="49" count="1" type="stmt"/>
         <line num="52" count="0" type="stmt"/>
         <line num="57" count="9" type="stmt"/>
-=======
-        <line num="31" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="53" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="60" count="9" type="stmt"/>
->>>>>>> 2b4b8f4c734a6aed6fb17ce83c2610906a1910b5
       </file>
     </package>
     <package name="Savvie-Server.helpers">
@@ -372,7 +325,7 @@
       <file name="bcrypt.js" path="/Users/adibwafi/Documents/Hacktiv8/Phase3/Final Project/Savvie-Server/helpers/bcrypt.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="9" type="stmt"/>
-        <line num="3" count="11" type="stmt"/>
+        <line num="3" count="9" type="stmt"/>
         <line num="4" count="9" type="stmt"/>
         <line num="6" count="9" type="stmt"/>
       </file>
@@ -397,19 +350,11 @@
         <line num="7" count="28" type="cond" truecount="1" falsecount="1"/>
         <line num="8" count="0" type="stmt"/>
         <line num="10" count="28" type="stmt"/>
-<<<<<<< HEAD
-        <line num="11" count="18" type="stmt"/>
-        <line num="12" count="18" type="cond" truecount="1" falsecount="1"/>
-        <line num="14" count="18" type="stmt"/>
-        <line num="18" count="18" type="stmt"/>
-        <line num="20" count="10" type="stmt"/>
-=======
         <line num="11" count="19" type="stmt"/>
         <line num="12" count="19" type="cond" truecount="1" falsecount="1"/>
         <line num="14" count="19" type="stmt"/>
         <line num="18" count="19" type="stmt"/>
         <line num="20" count="9" type="stmt"/>
->>>>>>> 2b4b8f4c734a6aed6fb17ce83c2610906a1910b5
         <line num="24" count="9" type="stmt"/>
         <line num="25" count="35" type="stmt"/>
         <line num="26" count="35" type="stmt"/>
@@ -451,23 +396,6 @@
       <file name="errorHandler.js" path="/Users/adibwafi/Documents/Hacktiv8/Phase3/Final Project/Savvie-Server/middleware/errorHandler.js">
         <metrics statements="36" coveredstatements="30" conditionals="22" coveredconditionals="19" methods="1" coveredmethods="1"/>
         <line num="1" count="9" type="stmt"/>
-<<<<<<< HEAD
-        <line num="2" count="55" type="stmt"/>
-        <line num="3" count="55" type="stmt"/>
-        <line num="4" count="55" type="stmt"/>
-        <line num="6" count="55" type="cond" truecount="2" falsecount="0"/>
-        <line num="10" count="20" type="stmt"/>
-        <line num="11" count="20" type="stmt"/>
-        <line num="12" count="35" type="cond" truecount="1" falsecount="1"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="15" count="35" type="cond" truecount="1" falsecount="1"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="18" count="35" type="cond" truecount="2" falsecount="0"/>
-        <line num="19" count="21" type="stmt"/>
-        <line num="20" count="21" type="stmt"/>
-=======
         <line num="2" count="54" type="stmt"/>
         <line num="3" count="54" type="stmt"/>
         <line num="4" count="54" type="stmt"/>
@@ -477,13 +405,9 @@
         <line num="12" count="34" type="cond" truecount="1" falsecount="1"/>
         <line num="13" count="0" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
-        <line num="15" count="34" type="cond" truecount="1" falsecount="1"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
         <line num="18" count="34" type="cond" truecount="2" falsecount="0"/>
         <line num="19" count="20" type="stmt"/>
         <line num="20" count="20" type="stmt"/>
->>>>>>> 2b4b8f4c734a6aed6fb17ce83c2610906a1910b5
         <line num="21" count="14" type="cond" truecount="2" falsecount="0"/>
         <line num="22" count="1" type="stmt"/>
         <line num="23" count="1" type="stmt"/>
@@ -502,12 +426,11 @@
         <line num="36" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="37" count="1" type="stmt"/>
         <line num="38" count="1" type="stmt"/>
-<<<<<<< HEAD
-        <line num="40" count="55" type="stmt"/>
-=======
-        <line num="40" count="54" type="stmt"/>
->>>>>>> 2b4b8f4c734a6aed6fb17ce83c2610906a1910b5
-        <line num="45" count="9" type="stmt"/>
+        <line num="39" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="43" count="54" type="stmt"/>
+        <line num="48" count="9" type="stmt"/>
       </file>
     </package>
     <package name="Savvie-Server.models">
@@ -639,7 +562,7 @@
       </file>
     </package>
     <package name="Savvie-Server.routes">
-      <metrics statements="112" coveredstatements="112" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="111" coveredstatements="111" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="category.js" path="/Users/adibwafi/Documents/Hacktiv8/Phase3/Final Project/Savvie-Server/routes/category.js">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="9" type="stmt"/>
@@ -763,13 +686,12 @@
         <line num="7" count="9" type="stmt"/>
       </file>
       <file name="user.js" path="/Users/adibwafi/Documents/Hacktiv8/Phase3/Final Project/Savvie-Server/routes/user.js">
-        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="9" type="stmt"/>
         <line num="2" count="9" type="stmt"/>
         <line num="3" count="9" type="stmt"/>
         <line num="4" count="9" type="stmt"/>
         <line num="6" count="9" type="stmt"/>
-        <line num="7" count="9" type="stmt"/>
         <line num="8" count="9" type="stmt"/>
         <line num="10" count="9" type="stmt"/>
         <line num="12" count="9" type="stmt"/>

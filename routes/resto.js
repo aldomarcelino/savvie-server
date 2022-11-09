@@ -7,10 +7,10 @@ const {authorizationResto} = require("../middleware/authorization");
 router.post("/restaurants", authentication, Resto.createRestaurant);
 
 router.use(authenticationResto);
-router.get("/food/", Resto.showFood);
+router.get("/food", Resto.showFood);
 router.get("/food/filter/:id", Resto.filterFood);
 router.get("/food/:id", authorizationResto, Resto.detailFood);
-router.post("/food/", Resto.addFood);
+router.post("/food", Resto.addFood);
 router.delete("/food/:id", authorizationResto, Resto.deleteFood);
 router.put("/food/:id", authorizationResto, Resto.editFood);
 router.patch("/food/food-status/:id", authorizationResto, Resto.statusFood);

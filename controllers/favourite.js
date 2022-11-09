@@ -40,7 +40,7 @@ class Controller {
         where: { id, UserId: req.user.id },
       });
 
-      if (!favourite) throw { name: "Not found", msg: "Id not found" };
+      // if (!favourite) throw { name: "Not found", msg: "Id not found" };
 
       res.status(200).json({
         message: `Favourite with id ${id} success to delete`,
