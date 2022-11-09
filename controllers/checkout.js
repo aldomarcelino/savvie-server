@@ -57,12 +57,12 @@ class Controller {
         { where: { UserId: req.user.id } },
         { transaction: t }
       );
-      let error = []
+      let error = [];
       order.forEach(async (el) => {
-        const data = await Food.findByPk(el.FoodId)
-        console.log(data.quantity, el.qty)
-        if(+data.quantity < +el.qty) {
-          error.push("Error")
+        const data = await Food.findByPk(el.FoodId);
+        console.log(data.quantity, el.qty);
+        if (+data.quantity < +el.qty) {
+          error.push("Error");
         }
         await Food.increment(
           "quantity",
@@ -75,7 +75,7 @@ class Controller {
           { transaction: t }
         );
       });
-      console.log(error)
+      console.log(error);
       await t.commit();
       res.status(201).json({ message: "payment success" });
     } catch (error) {

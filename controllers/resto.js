@@ -259,18 +259,36 @@ class Controller {
 
   static async allOrder(req, res, next) {
     try {
-      const data = await OrderItem.findAll({
+      // const data = await OrderItem.findAll({
+      //   include: [
+      //     {
+      //       model: Payment,
+      //       include: [
+      //         {
+      //           model: User,
+      //           include: [
+      //             {
+      //               model: Restaurant,
+      //               where: { id: req.user.restoId },
+      //               include: [Food],
+      //             },
+      //           ],
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // });
+      let data = await Restaurant.findByPk(req.user.restoId, {
         include: [
           {
-            model: Payment,
+            model: Food,
             include: [
               {
-                model: User,
+                model: OrderItem,
                 include: [
                   {
-                    model: Restaurant,
-                    where: { id: req.user.restoId },
-                    include: [Food],
+                    model: Payment,
+                    include: [User],
                   },
                 ],
               },
@@ -278,6 +296,10 @@ class Controller {
           },
         ],
       });
+      // function order(data) {
+      //   return data.Food.OrderItem.length > 0;
+      // }
+      // data = data.Food.filter
       res.status(200).json(data);
     } catch (error) {
       next(error);
