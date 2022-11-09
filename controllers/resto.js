@@ -54,7 +54,7 @@ class Controller {
   static async detailFood(req, res, next) {
     try {
       const data = await Food.findByPk(req.params.id);
-      if (!data) throw { name: "Not found" };
+      // if (!data) throw { name: "Not found" };
       res.status(200).json(data);
     } catch (error) {
       next(error);
@@ -62,8 +62,15 @@ class Controller {
   }
   static async addFood(req, res, next) {
     try {
-      const { name, price, imageUrl, description, quantity, CategoryId } =
-        req.body;
+      const {
+        name,
+        price,
+        imageUrl,
+        description,
+        discount = 0,
+        quantity,
+        CategoryId,
+      } = req.body;
       const data = await Food.create({
         name,
         price,
@@ -73,7 +80,7 @@ class Controller {
         status: "new",
         quantity,
         sales: 0,
-        discount: 0,
+        discount,
         is_active: true,
         CategoryId,
         RestaurantId: req.user.restoId,
@@ -86,7 +93,7 @@ class Controller {
   static async deleteFood(req, res, next) {
     try {
       const findData = await Food.findByPk(req.params.id);
-      if (!findData) throw { name: "Not found" };
+      // if (!findData) throw { name: "Not found" };
       await Food.destroy({ where: { id: req.params.id } });
       res
         .status(200)
@@ -98,7 +105,7 @@ class Controller {
   static async editFood(req, res, next) {
     try {
       const findData = await Food.findByPk(req.params.id);
-      if (!findData) throw { name: "Not found" };
+      // if (!findData) throw { name: "Not found" };
       const {
         name,
         price,
@@ -133,7 +140,7 @@ class Controller {
   static async statusFood(req, res, next) {
     try {
       const findData = await Food.findByPk(req.params.id);
-      if (!findData) throw { name: "Not found" };
+      // if (!findData) throw { name: "Not found" };
       const { status } = req.body;
       await Food.update({ status }, { where: { id: req.params.id } });
       res.status(200).json({ message: "Update status success" });
@@ -144,7 +151,7 @@ class Controller {
   static async activeFood(req, res, next) {
     try {
       const findData = await Food.findByPk(req.params.id);
-      if (!findData) throw { name: "Not found" };
+      // if (!findData) throw { name: "Not found" };
       const { is_active } = req.body;
       await Food.update({ is_active }, { where: { id: req.params.id } });
       res.status(200).json({ message: "Update status success" });
@@ -196,7 +203,7 @@ class Controller {
         UserId: id,
       });
 
-      if (!restaurant) throw { name: "Not found", msg: "Id not found" };
+      // if (!restaurant) throw { name: "Not found", msg: "Id not found" };
 
       res.status(201).json({
         message: "Restaurant success to create",
