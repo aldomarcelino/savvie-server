@@ -47,35 +47,31 @@ class Controller {
         };
       });
       await OrderItem.bulkCreate(orderInput, { transaction: t });
-      const findUser = await Balance.findOne(
-        { where: { UserId: req.user.id } },
-        { transaction: t }
-      );
+      const findUser = await Balance.findOne({
+        where: { UserId: req.user.id },
+        transaction: t,
+      });
       if (findUser.balance < total) throw { name: "Top up first" };
       await Balance.update(
         { balance: +findUser.balance - +total },
-        { where: { UserId: req.user.id } },
-        { transaction: t }
+        { where: { UserId: req.user.id }, transaction: t }
       );
       let error = [];
+      for (let i = 0; i < order.length; i++) {
+        const data = await Food.findByPk(order[i].FoodId);
+        if (+data.quantity < +order[i].qty) throw { name: "Out of stock" };
+      }
       order.forEach(async (el) => {
-        const data = await Food.findByPk(el.FoodId);
-        console.log(data.quantity, el.qty);
-        if (+data.quantity < +el.qty) {
-          error.push("Error");
-        }
-        await Food.increment(
-          "quantity",
-          { by: -el.qty, where: { id: el.FoodId } },
-          { transaction: t }
-        );
-        await Food.increment(
-          "sales",
-          { by: el.qty, where: { id: el.FoodId } },
-          { transaction: t }
-        );
+        await Food.increment("quantity", {
+          by: -el.qty,
+          where: { id: el.FoodId },
+        });
+        await Food.increment("sales", {
+          by: el.qty,
+          where: { id: el.FoodId },
+        });
       });
-      console.log(error);
+      console.log(error, "hfjagskdfhasdui");
       await t.commit();
       res.status(201).json({ message: "payment success" });
     } catch (error) {
