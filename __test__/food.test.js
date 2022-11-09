@@ -49,7 +49,7 @@ describe("Food Routes Test", () => {
 
         test("404 Failed get one food data, return error", (done) => {
             request(app)
-                .get("/food/100")
+                .get("/food/1000")
                 .set({access_token: user_access_token})
                 .then((response) => {
                     const { body, status } = response;

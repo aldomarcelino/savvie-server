@@ -10,28 +10,61 @@ const user_access_token =
 
 describe("Checkout Routes Test", () => {
   describe("POST /checkout - create new resto food", () => {
-    test("201 Success added checkout resto", (done) => {
+    test("201 Success added checkout resto", async () => {
+      const resAuth = await request(app).post("/signin").send({
+        email: "Aldo@gmail.com",
+        password: "1234",
+      });
+
+      const response = await request(app)
+        .post("/checkout")
+        .send({
+          order: [
+            {
+              qty: 2,
+              FoodId: 2,
+              itemPrice: 35000,
+            },
+            {
+              qty: 2,
+              FoodId: 1,
+              itemPrice: 25000,
+            },
+          ],
+          is_delivery: "Delivery",
+          total: 120000,
+        })
+        .set({ access_token: resAuth.body.access_token });
+
+      const { body, status } = response;
+      expect(status).toBe(201);
+      expect(body).toBeInstanceOf(Object);
+      expect(body).toHaveProperty("message", expect.any(String));
+    });
+
+    test("400 Failed create checkout balance less than food price - should return error - Top up first", (done) => {
       request(app)
         .post("/checkout")
-        .send({"order": [
-          {
-            "qty": 3,
-            "FoodId": 2,
-            "itemPrice": 35000
-          },
-          {
-            "qty": 2,
-            "FoodId": 1,
-            "itemPrice": 25000
-          }
-        ],
-        "is_delivery": "Delivery",
-        "total": 155000
+        .send({
+          order: [
+            {
+              qty: 3,
+              FoodId: 2,
+              itemPrice: 35000,
+            },
+            {
+              qty: 2,
+              FoodId: 1,
+              itemPrice: 25000,
+            },
+          ],
+          is_delivery: "Delivery",
+          total: 155000,
         })
         .set({ access_token: user_access_token })
         .then((response) => {
           const { body, status } = response;
-          expect(status).toBe(201);
+          expect(status).toBe(400);
           expect(body).toBeInstanceOf(Object);
           expect(body).toHaveProperty("message", expect.any(String));
           return done();
@@ -40,38 +73,6 @@ describe("Checkout Routes Test", () => {
           done(err);
         });
     });
-
-    // test("400 Failed create checkout balance less than food price - should return error - Top up first", (done) => {
-    //   request(app)
-    //     .post("/checkout")
-    //     .send({
-    //       order: [
-    //         {
-    //           qty: 3,
-    //           FoodId: 2,
-    //           itemPrice: 35000,
-    //         },
-    //         {
-    //           qty: 2,
-    //           FoodId: 1,
-    //           itemPrice: 25000,
-    //         },
-    //       ],
-    //       is_delivery: "Delivery",
-    //       total: 155000,
-    //     })
-    //     .set({ access_token: user_access_token })
-    //     .then((response) => {
-    //       const { body, status } = response;
-    //       expect(status).toBe(400);
-    //       expect(body).toBeInstanceOf(Object);
-    //       expect(body).toHaveProperty("message", expect.any(String));
-    //       return done();
-    //     })
-    //     .catch((err) => {
-    //       done(err);
-    //     });
-    // });
 
     test("401 Failed create checkout with invalid token - should return error unauthorized", (done) => {
       request(app)

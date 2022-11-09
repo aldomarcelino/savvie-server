@@ -12,7 +12,7 @@ class Controller {
     const t = await sequelize.transaction();
     try {
       let data;
-      console.log(req.body, "<<<<<<<<<<<");
+      console.log(req.body, "REQ BODY");
       const { order, is_delivery, total } = req.body;
       if (is_delivery == "delivery") {
         data = await Payment.create(
@@ -75,6 +75,7 @@ class Controller {
       await t.commit();
       res.status(201).json({ message: "payment success" });
     } catch (error) {
+      console.log(error, "Catch Checkout");
       await t.rollback();
       next(error);
     }

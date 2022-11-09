@@ -17,11 +17,9 @@ describe("Resto Routes Test", () => {
             .then((response) => {
             const { body, status } = response;
             expect(status).toBe(200);
-            expect(body[0]).toBeInstanceOf(Object);
-            expect(body[0]).toHaveProperty("FoodId", expect.any(Number));
-            expect(body[0]).toHaveProperty("PaymentId", expect.any(Number));
-            expect(body[0]).toHaveProperty("itemPrice", expect.any(Number));
-            expect(body.length).toBeGreaterThan(0);
+            expect(body).toBeInstanceOf(Object);
+            expect(body).toHaveProperty("UserId", expect.any(Number));
+            expect(body).toHaveProperty("name", expect.any(String));
             done();
             })
             .catch((err) => {
@@ -103,7 +101,7 @@ describe("Resto Routes Test", () => {
 
         test("404 Failed get one food data, return error", (done) => {
         request(app)
-            .get("/resto/food/100")
+            .get("/resto/food/1000")
             .set({ access_token: user_access_token })
             .then((response) => {
             const { body, status } = response;
@@ -431,7 +429,7 @@ describe("Resto Routes Test", () => {
 
         test("404 Failed delete food - food not found, return error", (done) => {
         request(app)
-            .delete("/resto/food/100")
+            .delete("/resto/food/1000")
             .set({ access_token: user_access_token })
             .then((response) => {
             const { body, status } = response;
@@ -489,7 +487,7 @@ describe("Resto Routes Test", () => {
 
         test("404 Failed edit food - food not found, return error", (done) => {
         request(app)
-            .put("/resto/food/100")
+            .put("/resto/food/1000")
             .send({
             name: "Edit food test",
             price: "500000",
@@ -559,7 +557,7 @@ describe("Resto Routes Test", () => {
 
         test("404 Failed edit food - food not found, return error", (done) => {
         request(app)
-            .patch("/resto/food/food-status/100")
+            .patch("/resto/food/food-status/1000")
             .send({ status: "popular" })
             .set({ access_token: user_access_token })
             .then((response) => {
@@ -609,7 +607,7 @@ describe("Resto Routes Test", () => {
 
         test("404 Failed edit food - food not found, return error", (done) => {
         request(app)
-            .patch("/resto/food/food-active/100")
+            .patch("/resto/food/food-active/1000")
             .send({ is_active: false })
             .set({ access_token: user_access_token })
             .then((response) => {
