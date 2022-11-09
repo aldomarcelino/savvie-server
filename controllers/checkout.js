@@ -12,7 +12,7 @@ class Controller {
     const t = await sequelize.transaction();
     try {
       let data;
-      console.log(req.body, "REQ BODY");
+      // console.log(req.body, "REQ BODY");
       const { order, is_delivery, total } = req.body;
       if (is_delivery == "delivery") {
         data = await Payment.create(
@@ -71,7 +71,7 @@ class Controller {
           where: { id: el.FoodId },
         });
       });
-      console.log(error, "hfjagskdfhasdui");
+      // console.log(error, "hfjagskdfhasdui");
       await t.commit();
       res.status(201).json({ message: "payment success" });
     } catch (error) {

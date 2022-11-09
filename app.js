@@ -38,8 +38,8 @@ io.on("connection", (socket) => {
 app.use("/", router);
 app.use(errorHandler);
 
-// server.listen(PORT, () => {
-//   console.log("MASIH DI LOCAL", PORT, "BRO!");
-// });
+server.listen(PORT, () => {
+  console.log("MASIH DI LOCAL", PORT, "BRO!");
+});
 
-module.exports = app;
+// module.exports = app;

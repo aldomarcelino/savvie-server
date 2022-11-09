@@ -9,9 +9,9 @@ const errorHandler = async (err, req, res, next) => {
   ) {
     code = 400;
     message = err.errors[0].message;
-  } else if (err.name === "Empty email or password") {
-    code = 400;
-    message = "Email or password is required";
+  // } else if (err.name === "Empty email or password") {
+  //   code = 400;
+  //   message = "Email or password is required";
   // } else if (err.name === "Unauthorized") {
   //   code = 401;
   //   message = "Missing token";
@@ -36,9 +36,9 @@ const errorHandler = async (err, req, res, next) => {
   } else if (err.name === "Top up first"){
     code = 400;
     message = err.name
-  } else if (err.name === "Out of stock"){
-    code = 404;
-    message = err.name
+  // } else if (err.name === "Out of stock"){
+  //   code = 404;
+  //   message = err.name
   }
   res.status(code).json({
     message: message,

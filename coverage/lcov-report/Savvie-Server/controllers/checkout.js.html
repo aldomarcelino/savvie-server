@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.62% </span>
+                <span class="strong">90.9% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>29/32</span>
+                <span class='fraction'>30/33</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.32% </span>
+                <span class="strong">93.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>28/31</span>
+                <span class='fraction'>28/30</span>
             </div>
         
             
@@ -162,10 +162,7 @@
 <a name='L97'></a><a href='#L97'>97</a>
 <a name='L98'></a><a href='#L98'>98</a>
 <a name='L99'></a><a href='#L99'>99</a>
-<a name='L100'></a><a href='#L100'>100</a>
-<a name='L101'></a><a href='#L101'>101</a>
-<a name='L102'></a><a href='#L102'>102</a>
-<a name='L103'></a><a href='#L103'>103</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L100'></a><a href='#L100'>100</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -179,7 +176,7 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -223,16 +220,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -281,7 +275,7 @@ class Controller {
     const t = await sequelize.transaction();
     try {
       let data;
-      console.log(req.body, "REQ BODY");
+      // console.log(req.body, "REQ BODY");
       const { order, is_delivery, total } = req.body;
       <span class="missing-if-branch" title="if path not taken" >I</span>if (is_delivery == "delivery") {
 <span class="cstat-no" title="statement not covered" >        data = await Payment.create(</span>
@@ -316,34 +310,31 @@ class Controller {
         };
       });
       await OrderItem.bulkCreate(orderInput, { transaction: t });
-      const findUser = await Balance.findOne(
-        { where: { UserId: req.user.id } },
-        { transaction: t }
-      );
+      const findUser = await Balance.findOne({
+        where: { UserId: req.user.id },
+        transaction: t,
+      });
       if (findUser.balance &lt; total) throw { name: "Top up first" };
       await Balance.update(
         { balance: +findUser.balance - +total },
-        { where: { UserId: req.user.id } },
-        { transaction: t }
+        { where: { UserId: req.user.id }, transaction: t }
       );
       let error = [];
+      for (let i = 0; i &lt; order.length; i++) {
+        const data = await Food.findByPk(order[i].FoodId);
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (+data.quantity &lt; +order[i].qty) <span class="cstat-no" title="statement not covered" >throw { name: "Out of stock" };</span>
+      }
       order.forEach(async (el) =&gt; {
-        const data = await Food.findByPk(el.FoodId);
-        // console.log(data.quantity, el.qty);
-        <span class="missing-if-branch" title="if path not taken" >I</span>if (+data.quantity &lt; +el.qty) {
-<span class="cstat-no" title="statement not covered" >          error.push("Error");</span>
-        }
-        await Food.increment(
-          "quantity",
-          { by: -el.qty, where: { id: el.FoodId } },
-          { transaction: t }
-        );
-        await Food.increment(
-          "sales",
-          { by: el.qty, where: { id: el.FoodId } },
-          { transaction: t }
-        );
+        await Food.increment("quantity", {
+          by: -el.qty,
+          where: { id: el.FoodId },
+        });
+        await Food.increment("sales", {
+          by: el.qty,
+          where: { id: el.FoodId },
+        });
       });
+      // console.log(error, "hfjagskdfhasdui");
       await t.commit();
       res.status(201).json({ message: "payment success" });
     } catch (error) {
@@ -376,7 +367,7 @@ module.exports = Controller;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-11-09T05:35:00.737Z
+                at 2022-11-09T06:40:07.933Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
