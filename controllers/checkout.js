@@ -84,7 +84,7 @@ class Controller {
         include: [
           {
             model: OrderItem,
-            include: [{ model: Food, include: [{ model: Restaurant }] }],
+            include: [{ model: Food, include: [{ model: Restaurant }]}],
           },
         ],
         where: { UserId: req.user.id },
