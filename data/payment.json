@@ -2,8 +2,179 @@
   "payment": [
     {
       "deliveryFee": 10000,
+      "UserId": 6,
+      "status": "Delivered",
+      "paymentCode": "123102",
+      "is_delivery": "delivery",
+      "createdAt": "2022-10-12T10:29:23.920Z",
+      "updatedAt": "2022-10-12T10:29:23.920Z"
+    },
+    {
+      "deliveryFee": 10000,
+      "UserId": 6,
+      "status": "Delivered",
+      "paymentCode": "123103",
+      "is_delivery": "delivery",
+      "createdAt": "2022-10-13T10:29:23.920Z",
+      "updatedAt": "2022-10-13T10:29:23.920Z"
+    },
+    {
+      "deliveryFee": 10000,
+      "UserId": 6,
+      "status": "Delivered",
+      "paymentCode": "123104",
+      "is_delivery": "delivery",
+      "createdAt": "2022-10-14T10:29:23.920Z",
+      "updatedAt": "2022-10-14T10:29:23.920Z"
+    },
+    {
+      "deliveryFee": 10000,
+      "UserId": 6,
+      "status": "Delivered",
+      "paymentCode": "123105",
+      "is_delivery": "delivery",
+      "createdAt": "2022-10-15T10:29:23.920Z",
+      "updatedAt": "2022-10-15T10:29:23.920Z"
+    },
+    {
+      "deliveryFee": 10000,
+      "UserId": 6,
+      "status": "Delivered",
+      "paymentCode": "123106",
+      "is_delivery": "delivery",
+      "createdAt": "2022-10-16T10:29:23.920Z",
+      "updatedAt": "2022-10-16T10:29:23.920Z"
+    },
+    {
+      "deliveryFee": 10000,
+      "UserId": 6,
+      "status": "Delivered",
+      "paymentCode": "123107",
+      "is_delivery": "delivery",
+      "createdAt": "2022-10-17T10:29:23.920Z",
+      "updatedAt": "2022-10-17T10:29:23.920Z"
+    },
+    {
+      "deliveryFee": 10000,
+      "UserId": 6,
+      "status": "Delivered",
+      "paymentCode": "123108",
+      "is_delivery": "delivery",
+      "createdAt": "2022-10-18T10:29:23.920Z",
+      "updatedAt": "2022-10-18T10:29:23.920Z"
+    },
+    {
+      "deliveryFee": 10000,
+      "UserId": 6,
+      "status": "Delivered",
+      "paymentCode": "123109",
+      "is_delivery": "delivery",
+      "createdAt": "2022-10-19T10:29:23.920Z",
+      "updatedAt": "2022-10-19T10:29:23.920Z"
+    },
+    {
+      "deliveryFee": 10000,
+      "UserId": 6,
+      "status": "Delivered",
+      "paymentCode": "123110",
+      "is_delivery": "delivery",
+      "createdAt": "2022-10-20T10:29:23.920Z",
+      "updatedAt": "2022-10-20T10:29:23.920Z"
+    },
+    {
+      "deliveryFee": 10000,
+      "UserId": 6,
+      "status": "Delivered",
+      "paymentCode": "123111",
+      "is_delivery": "delivery",
+      "createdAt": "2022-10-21T10:29:23.920Z",
+      "updatedAt": "2022-10-21T10:29:23.920Z"
+    },
+    {
+      "deliveryFee": 10000,
+      "UserId": 6,
+      "status": "Delivered",
+      "paymentCode": "123112",
+      "is_delivery": "delivery",
+      "createdAt": "2022-10-22T10:29:23.920Z",
+      "updatedAt": "2022-10-22T10:29:23.920Z"
+    },
+    {
+      "deliveryFee": 10000,
+      "UserId": 6,
+      "status": "Delivered",
+      "paymentCode": "123113",
+      "is_delivery": "delivery",
+      "createdAt": "2022-10-23T10:29:23.920Z",
+      "updatedAt": "2022-10-23T10:29:23.920Z"
+    },
+    {
+      "deliveryFee": 10000,
+      "UserId": 6,
+      "status": "Delivered",
+      "paymentCode": "123114",
+      "is_delivery": "delivery",
+      "createdAt": "2022-10-24T10:29:23.920Z",
+      "updatedAt": "2022-10-24T10:29:23.920Z"
+    },
+    {
+      "deliveryFee": 10000,
+      "UserId": 6,
+      "status": "Delivered",
+      "paymentCode": "123115",
+      "is_delivery": "delivery",
+      "createdAt": "2022-10-25T10:29:23.920Z",
+      "updatedAt": "2022-10-25T10:29:23.920Z"
+    },
+    {
+      "deliveryFee": 10000,
+      "UserId": 6,
+      "status": "Delivered",
+      "paymentCode": "123116",
+      "is_delivery": "delivery",
+      "createdAt": "2022-10-26T10:29:23.920Z",
+      "updatedAt": "2022-10-26T10:29:23.920Z"
+    },
+    {
+      "deliveryFee": 10000,
+      "UserId": 6,
+      "status": "Delivered",
+      "paymentCode": "123117",
+      "is_delivery": "delivery",
+      "createdAt": "2022-10-27T10:29:23.920Z",
+      "updatedAt": "2022-10-27T10:29:23.920Z"
+    },
+    {
+      "deliveryFee": 10000,
+      "UserId": 6,
+      "status": "Delivered",
+      "paymentCode": "123118",
+      "is_delivery": "delivery",
+      "createdAt": "2022-10-27T10:29:23.920Z",
+      "updatedAt": "2022-10-27T10:29:23.920Z"
+    },
+    {
+      "deliveryFee": 10000,
+      "UserId": 6,
+      "status": "Delivered",
+      "paymentCode": "123119",
+      "is_delivery": "delivery",
+      "createdAt": "2022-10-28T10:29:23.920Z",
+      "updatedAt": "2022-10-28T10:29:23.920Z"
+    },
+    {
+      "deliveryFee": 10000,
+      "UserId": 6,
+      "status": "Delivered",
+      "paymentCode": "123120",
+      "is_delivery": "delivery",
+      "createdAt": "2022-10-29T10:29:23.920Z",
+      "updatedAt": "2022-10-29T10:29:23.920Z"
+    },
+    {
+      "deliveryFee": 10000,
       "UserId": 1,
-      "status": "Paid",
+      "status": "Delivered",
       "paymentCode": "123121",
       "is_delivery": "delivery",
       "createdAt": "2022-10-30T10:29:23.920Z",
@@ -21,7 +192,7 @@
     {
       "deliveryFee": 10000,
       "UserId": 2,
-      "status": "Paid",
+      "status": "Delivered",
       "paymentCode": "123123",
       "is_delivery": "delivery",
       "createdAt": "2022-11-01T10:29:23.920Z",
@@ -39,7 +210,7 @@
     {
       "deliveryFee": 10000,
       "UserId": 3,
-      "status": "Paid",
+      "status": "Delivered",
       "paymentCode": "123125",
       "is_delivery": "delivery",
       "createdAt": "2022-11-03T10:29:23.920Z",
@@ -57,7 +228,7 @@
     {
       "deliveryFee": 10000,
       "UserId": 5,
-      "status": "Paid",
+      "status": "Delivered",
       "paymentCode": "123127",
       "is_delivery": "delivery",
       "createdAt": "2022-11-05T10:29:23.920Z",
@@ -67,7 +238,7 @@
       "deliveryFee": 10000,
       "UserId": 5,
       "status": "Delivered",
-      "paymentCode": "123128",
+      "paymentCode": "123129",
       "is_delivery": "delivery",
       "createdAt": "2022-11-06T10:29:23.920Z",
       "updatedAt": "2022-11-06T10:29:23.920Z"
@@ -75,11 +246,38 @@
     {
       "deliveryFee": 10000,
       "UserId": 6,
-      "status": "Paid",
-      "paymentCode": "123128",
+      "status": "Delivered",
+      "paymentCode": "123130",
       "is_delivery": "delivery",
       "createdAt": "2022-11-07T10:29:23.920Z",
       "updatedAt": "2022-11-07T10:29:23.920Z"
+    },
+    {
+      "deliveryFee": 10000,
+      "UserId": 6,
+      "status": "Delivered",
+      "paymentCode": "123130",
+      "is_delivery": "delivery",
+      "createdAt": "2022-11-08T10:29:23.920Z",
+      "updatedAt": "2022-11-08T10:29:23.920Z"
+    },
+    {
+      "deliveryFee": 10000,
+      "UserId": 6,
+      "status": "Delivered",
+      "paymentCode": "123131",
+      "is_delivery": "delivery",
+      "createdAt": "2022-11-09T10:29:23.920Z",
+      "updatedAt": "2022-11-09T10:29:23.920Z"
+    },
+    {
+      "deliveryFee": 10000,
+      "UserId": 6,
+      "status": "Delivered",
+      "paymentCode": "123132",
+      "is_delivery": "delivery",
+      "createdAt": "2022-11-10T10:29:23.920Z",
+      "updatedAt": "2022-11-10T10:29:23.920Z"
     }
   ]
 }
