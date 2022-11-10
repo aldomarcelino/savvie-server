@@ -1,15 +1,17 @@
 {
   "development": {
     "username": "postgres",
-    "password": "postgres",
+    "password": "sabuncolek",
     "database": "savvie_db",
     "host": "localhost",
+    "port": "5433",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
-    "password": "postgres",
+    "password": "sabuncolek",
     "database": "savvie_test",
+    "port": "5433",
     "host": "localhost",
     "dialect": "postgres"
   },
