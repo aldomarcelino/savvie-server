@@ -172,12 +172,28 @@ describe("User Routes Test", () => {
         });
     });
 
-    test("401 Failed signin - should return error", (done) => {
+    test("401 Failed signin wrong password - should return error", (done) => {
       request(app)
         .post("/signin")
         .send({
-          email: "hello@mail.com",
+          email: "Aldo@gmail.com",
           password: "salahpassword",
+        })
+        .end((err, res) => {
+          if (err) return done(err);
+          const { body, status } = res;
+
+          expect(status).toBe(401);
+          expect(body).toHaveProperty("message", "Invalid email or password");
+          return done();
+        });
+    });
+    test("401 Failed signin wrong user - should return error", (done) => {
+      request(app)
+        .post("/signin")
+        .send({
+          email: "salah@gmail.com",
+          password: "1234",
         })
         .end((err, res) => {
           if (err) return done(err);
@@ -221,6 +237,47 @@ describe("User Routes Test", () => {
         });
     });
   });
+
+  describe("PUT / - edit user ", () => {
+    test("200 Success update user location", (done) => {
+    request(app)
+        .put("/")
+        .send({
+          latitude: 1215151,
+          longitude: 1515151,
+        })
+        .set("access_token", user_access_token)
+        .then((response) => {
+        const { body, status } = response;
+        expect(status).toBe(200);
+        expect(body).toHaveProperty("message", expect.any(String));
+        expect(body).toHaveProperty("user", expect.any(Array));
+        done();
+        })
+        .catch((err) => {
+        done(err);
+        });
+    });
+
+    test("401 Failed update user location - invalid token - should return error unauthorized", (done) => {
+    request(app)
+        .put("/")
+        .send({
+          latitude: 1215151,
+          longitude: 1515151,
+        })
+        .set("access_token", "ini invalid token")
+        .then((response) => {
+        const { body, status } = response;
+        expect(status).toBe(401);
+        expect(body).toHaveProperty("message", "Invalid token");
+        return done();
+        })
+        .catch((err) => {
+        done(err);
+        });
+    });
+});
 
   describe("GET / - return data all user", () => {
     test("200 Success get user, return array", (done) => {

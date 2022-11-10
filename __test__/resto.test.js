@@ -43,6 +43,40 @@ describe("Resto Routes Test", () => {
         });
     });
 
+    describe("GET /resto/order/food - return order by restaurant id", () => {
+        test("200 Success get food orders by restaurant id, return array", (done) => {
+        request(app)
+            .get("/resto/order/food")
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(200);
+            expect(body).toBeInstanceOf(Object);
+            expect(body.order).toBeInstanceOf(Array);
+            expect(body.resto).toBeInstanceOf(Object);
+            done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("401 Failed get food orders by restaurant id with invalid token - should return error unauthorized", (done) => {
+        request(app)
+            .get("/resto/order/food")
+            .set("access_token", "ini invalid token")
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(401);
+            expect(body).toHaveProperty("message", "Invalid token");
+            return done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+    });
+
     describe("GET /resto/food - return data all foods", () => {
         test("200 Success get all foods data, return array", (done) => {
         request(app)
@@ -173,6 +207,39 @@ describe("Resto Routes Test", () => {
                 const { body, status } = response;
                 expect(status).toBe(401);
                 expect(body).toHaveProperty("message", "Invalid token");
+                return done();
+                })
+                .catch((err) => {
+                done(err);
+                });
+            });
+        
+    });
+    
+    describe("GET /resto/food/filterDate/:id - return data filtered foods by date", () => {
+        test("200 Success get filetered date food data, return object", (done) => {
+        request(app)
+            .get("/resto/food/filterDate/9")
+            .set({ access_token: user_access_token })
+            .then((response) => {
+            const { body, status } = response;
+            expect(status).toBe(200);
+            expect(body).toBeInstanceOf(Array);
+            done();
+            })
+            .catch((err) => {
+            done(err);
+            });
+        });
+
+        test("401 Failed get filtered food data with invalid token - should return Internal Server Error", (done) => {
+            request(app)
+                .get("/resto/food/filter/9")
+                .set("access_token", "ini invalid token")
+                .then((response) => {
+                const { body, status } = response;
+                expect(status).toBe(401);
+                expect(body).toHaveProperty("message", expect.any(String));
                 return done();
                 })
                 .catch((err) => {
