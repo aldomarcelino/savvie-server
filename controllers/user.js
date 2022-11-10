@@ -50,6 +50,28 @@ class Controller {
       next(error);
     }
   }
+  static async editUser(req, res, next) {
+    try {
+      const {
+        latitude,
+        longitude
+      } = req.body;
+      const user = await User.update({
+        location: Sequelize.fn(
+          "ST_GeomFromText",
+          `POINT(${latitude} ${longitude})`
+        ),
+      },{where: {id:req.user.id}}
+      );
+
+      res.status(200).json({
+        message: "Update location successfully",
+        user,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 
   static async userLogin(req, res, next) {
     try {
