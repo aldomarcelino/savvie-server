@@ -1,4 +1,4 @@
-const app = require("../app");
+const {server} = require("../app");
 const request = require("supertest");
 const { sequelize, Food } = require("../models");
 const { queryInterface } = sequelize;
@@ -11,12 +11,12 @@ const user_access_token =
 describe("Checkout Routes Test", () => {
   describe("POST /checkout - create new resto food", () => {
     test("201 Success added checkout resto", async () => {
-      const resAuth = await request(app).post("/signin").send({
+      const resAuth = await request(server).post("/signin").send({
         email: "Aldo@gmail.com",
         password: "1234",
       });
 
-      const response = await request(app)
+      const response = await request(server)
         .post("/checkout")
         .send({
           order: [
@@ -43,7 +43,7 @@ describe("Checkout Routes Test", () => {
     });
 
     test("400 Failed create checkout balance less than food price - should return error - Top up first", (done) => {
-      request(app)
+      request(server)
         .post("/checkout")
         .send({
           order: [
@@ -75,7 +75,7 @@ describe("Checkout Routes Test", () => {
     });
 
     test("401 Failed create checkout with invalid token - should return error unauthorized", (done) => {
-      request(app)
+      request(server)
         .post("/checkout")
         .send({})
         .set("access_token", "ini invalid token")
@@ -93,7 +93,7 @@ describe("Checkout Routes Test", () => {
 
   describe("GET /checkout - return data order food", () => {
     test("200 Success get all checkout, return array", (done) => {
-      request(app)
+      request(server)
         .get("/checkout")
         .set({ access_token: user_access_token })
         .then((response) => {
@@ -108,7 +108,7 @@ describe("Checkout Routes Test", () => {
     });
 
     test("401 Failed get order food with invalid token - should return error unauthorized", (done) => {
-      request(app)
+      request(server)
         .post("/checkout")
         .set("access_token", "ini invalid token")
         .then((response) => {

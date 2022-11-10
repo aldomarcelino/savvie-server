@@ -1,4 +1,4 @@
-const app = require("../app");
+const {server} = require("../app");
 const request = require("supertest");
 const { sequelize, Food  } = require("../models");
 const { queryInterface } = sequelize;
@@ -11,7 +11,7 @@ const user_access_token =
 describe("Food Routes Test", () => {
     describe("GET /food - return data all foods", () => {
         test("200 Success get all foods data, return array", (done) => {
-        request(app)
+        request(server)
             .get("/food")
             .set({access_token: user_access_token})
             .then((response) => {
@@ -30,7 +30,7 @@ describe("Food Routes Test", () => {
 
     describe("GET /food/:id - return data food by Id", () => {
         test("200 Success get one food data, return object", (done) => {
-        request(app)
+        request(server)
             .get("/food/26")
             .set({access_token: user_access_token})
             .then((response) => {
@@ -48,7 +48,7 @@ describe("Food Routes Test", () => {
         });
 
         test("404 Failed get one food data, return error", (done) => {
-            request(app)
+            request(server)
                 .get("/food/1000")
                 .set({access_token: user_access_token})
                 .then((response) => {

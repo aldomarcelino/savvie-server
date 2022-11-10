@@ -1,4 +1,4 @@
-const app = require("../app");
+const {server} = require("../app");
 const request = require("supertest");
 const { sequelize, Category  } = require("../models");
 const { queryInterface } = sequelize;
@@ -18,7 +18,7 @@ const user_access_token =
 describe("Category Routes Test", () => {
     describe("GET /categories - return data all categories", () => {
         test("200 Success get all categories data, return array", (done) => {
-        request(app)
+        request(server)
             .get("/categories")
             .set({access_token: user_access_token})
             .then((response) => {
@@ -39,7 +39,7 @@ describe("Category Routes Test", () => {
 
     describe("GET /categories/:id - return data categories by Id", () => {
         test("200 Success get one categories data, return object", (done) => {
-        request(app)
+        request(server)
             .get("/categories/2")
             .set({access_token: user_access_token})
             .then((response) => {
@@ -58,7 +58,7 @@ describe("Category Routes Test", () => {
         });
 
         test("404 Failed get one categories data, return error", (done) => {
-            request(app)
+            request(server)
                 .get("/categories/100")
                 .set({access_token: user_access_token})
                 .then((response) => {

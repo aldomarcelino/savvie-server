@@ -24,9 +24,10 @@ app.use(express.urlencoded({ extended: true }));
 io.on("connection", (socket) => {
   console.log(`user ${socket.id} is connected`);
 
-  socket.on("create-room", (id) => {
+  socket.on("join-room", (id) => {
     console.log(id, "++_+_+_+_++_");
     socket.join(id);
+    socket.emit("success-join", id);
   });
 
   socket.on("location", ({ id, data }) => {
@@ -38,8 +39,4 @@ io.on("connection", (socket) => {
 app.use("/", router);
 app.use(errorHandler);
 
-server.listen(PORT, () => {
-  console.log("MASIH DI LOCAL", PORT, "BRO!");
-});
-
-// module.exports = app;
+module.exports = { server, io };

@@ -1,5 +1,5 @@
 require("dotenv").config();
-const app = require("../app");
+const {server} = require("../app");
 const request = require("supertest");
 const { sequelize, Favourite, User, Food } = require("../models");
 const { queryInterface } = sequelize;
@@ -14,12 +14,12 @@ const user_access_token =
 describe("Favourite Routes Test", () => {
   describe("POST /favorites - create new favourite", () => {
     test("201 Success added favourite - should create new favourite", async () => {
-      const resAuth = await request(app).post("/signin").send({
+      const resAuth = await request(server).post("/signin").send({
         email: "Aldo@gmail.com",
         password: "1234",
       });
 
-      const response = await request(app)
+      const response = await request(server)
         .post("/favorites/1")
         .set({ access_token: resAuth.body.access_token });
 
@@ -29,7 +29,7 @@ describe("Favourite Routes Test", () => {
     });
 
     test("401 Failed added favourite with invalid token - should return error unauthorized", (done) => {
-      request(app)
+      request(server)
         .post("/favorites/2")
         .set("access_token", "ini invalid token")
         .then((response) => {
@@ -46,12 +46,12 @@ describe("Favourite Routes Test", () => {
 
   describe("GET /favorites - return data all favourites", () => {
     test("200 Success get all favourites, return array", async () => {
-      const resAuth = await request(app).post("/signin").send({
+      const resAuth = await request(server).post("/signin").send({
         email: "Aldo@gmail.com",
         password: "1234",
       });
 
-      const response = await request(app)
+      const response = await request(server)
         .get("/favorites")
         .set({ access_token: resAuth.body.access_token })
         
@@ -65,7 +65,7 @@ describe("Favourite Routes Test", () => {
     });
 
     test("401 Failed get favourite with invalid token - should return error unauthorized", (done) => {
-      request(app)
+      request(server)
         .get("/favorites")
         .set("access_token", "ini invalid token")
         .then((response) => {
@@ -82,11 +82,11 @@ describe("Favourite Routes Test", () => {
 
   describe("DELETE /favorites/:id - delete favourite by id", () => {
     test("200 Success deleted favourite", async () => {
-        const resAuth = await request(app).post("/signin").send({
+        const resAuth = await request(server).post("/signin").send({
             email: "Aldo@gmail.com",
             password: "1234",
           });
-          const response = await request(app)
+          const response = await request(server)
         .delete("/favorites/1")
         .set({ access_token: resAuth.body.access_token })
         
@@ -97,7 +97,7 @@ describe("Favourite Routes Test", () => {
     });
 
     test("404 Failed delete favourite data - favourite not found, return error", (done) => {
-      request(app)
+      request(server)
         .delete("/favorites/100")
         .set({ access_token: user_access_token })
         .then((response) => {
@@ -112,7 +112,7 @@ describe("Favourite Routes Test", () => {
     });
 
     test("401 Failed delete favourite data - access token invalid, return error", (done) => {
-      request(app)
+      request(server)
         .delete("/favorites/1")
         .set({ access_token: "akses token salah" })
         .then((response) => {

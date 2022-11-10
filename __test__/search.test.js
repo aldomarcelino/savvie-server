@@ -1,4 +1,4 @@
-const app = require("../app");
+const {server} = require("../app");
 const request = require("supertest");
 const { sequelize, Food } = require("../models");
 const { queryInterface } = sequelize;
@@ -11,7 +11,7 @@ const user_access_token =
 describe("Search Routes Test", () => {
     describe("GET /search - return data food matches by name", () => {
         test("200 Success get all foods data, return array", (done) => {
-        request(app)
+        request(server)
             .get("/search?=ayam")
             .set({ access_token: user_access_token })
             .then((response) => {

@@ -1,4 +1,4 @@
-const app = require("../app");
+const {server} = require("../app");
 const request = require("supertest");
 const { sequelize, User } = require("../models");
 const { createSign, verifyToken } = require("../helpers/jwt");
@@ -23,7 +23,7 @@ const user_access_token =
 describe("User Routes Test", () => {
   describe("POST /signup - create new user", () => {
     test("201 Success signup - should create new User", (done) => {
-      request(app)
+      request(server)
         .post("/signup")
         .send(user1)
         .end((err, res) => {
@@ -37,7 +37,7 @@ describe("User Routes Test", () => {
     });
 
     test("400 Failed signup - should return error if fullName is null", (done) => {
-      request(app)
+      request(server)
         .post("/signup")
         .send({
           email: "user.test@mail.com",
@@ -58,7 +58,7 @@ describe("User Routes Test", () => {
     });
 
     test("400 Failed signup - should return error if email is null", (done) => {
-      request(app)
+      request(server)
         .post("/signup")
         .send({
           fullName: "User Test",
@@ -78,7 +78,7 @@ describe("User Routes Test", () => {
     });
 
     test("400 Failed signup - should return error if email is already exists", (done) => {
-      request(app)
+      request(server)
         .post("/signup")
         .send(user1)
         .end((err, res) => {
@@ -91,7 +91,7 @@ describe("User Routes Test", () => {
     });
 
     test("400 Failed signup - should return error if wrong email format", (done) => {
-      request(app)
+      request(server)
         .post("/signup")
         .send({
           fullName: "User Test",
@@ -113,7 +113,7 @@ describe("User Routes Test", () => {
     });
 
     test("400 Failed signup - should return error if password is null", (done) => {
-      request(app)
+      request(server)
         .post("/signup")
         .send({
           fullName: "User Test",
@@ -134,7 +134,7 @@ describe("User Routes Test", () => {
     });
 
     test("400 Failed signup - should return error if phone number is null", (done) => {
-      request(app)
+      request(server)
         .post("/signup")
         .send({
           fullName: "User Test",
@@ -157,7 +157,7 @@ describe("User Routes Test", () => {
 
   describe("POST /signin - user signin", () => {
     test("200 Success signin - should return access_token", (done) => {
-      request(app)
+      request(server)
         .post("/signin")
         .send(user1)
         .end((err, res) => {
@@ -173,7 +173,7 @@ describe("User Routes Test", () => {
     });
 
     test("401 Failed signin wrong password - should return error", (done) => {
-      request(app)
+      request(server)
         .post("/signin")
         .send({
           email: "Aldo@gmail.com",
@@ -189,7 +189,7 @@ describe("User Routes Test", () => {
         });
     });
     test("401 Failed signin wrong user - should return error", (done) => {
-      request(app)
+      request(server)
         .post("/signin")
         .send({
           email: "salah@gmail.com",
@@ -206,7 +206,7 @@ describe("User Routes Test", () => {
     });
 
     test("400 Failed signin when email is null - should return error", (done) => {
-      request(app)
+      request(server)
         .post("/signin")
         .send({
           password: "salahpassword",
@@ -222,7 +222,7 @@ describe("User Routes Test", () => {
     });
 
     test("400 Failed signin when password is null - should return error", (done) => {
-      request(app)
+      request(server)
         .post("/signin")
         .send({
           email: "hello@mail.com",
@@ -240,7 +240,7 @@ describe("User Routes Test", () => {
 
   describe("PUT / - edit user ", () => {
     test("200 Success update user location", (done) => {
-    request(app)
+    request(server)
         .put("/")
         .send({
           latitude: 1215151,
@@ -260,7 +260,7 @@ describe("User Routes Test", () => {
     });
 
     test("401 Failed update user location - invalid token - should return error unauthorized", (done) => {
-    request(app)
+    request(server)
         .put("/")
         .send({
           latitude: 1215151,
@@ -281,7 +281,7 @@ describe("User Routes Test", () => {
 
   describe("GET / - return data all user", () => {
     test("200 Success get user, return array", (done) => {
-      request(app)
+      request(server)
         .get("/")
         .set({access_token: user_access_token})
         .then((response) => {

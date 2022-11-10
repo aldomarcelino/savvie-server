@@ -1,4 +1,4 @@
-const app = require("../app");
+const {server} = require("../app");
 const request = require("supertest");
 const { sequelize, Food } = require("../models");
 const { queryInterface } = sequelize;
@@ -11,7 +11,7 @@ const user_access_token =
 describe("Resto Routes Test", () => {
     describe("GET /resto/order - return data orders", () => {
         test("200 Success get all orders data, return array", (done) => {
-        request(app)
+        request(server)
             .get("/resto/order")
             .set({ access_token: user_access_token })
             .then((response) => {
@@ -28,7 +28,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("401 Failed get foods with invalid token - should return error unauthorized", (done) => {
-        request(app)
+        request(server)
             .get("/resto/order")
             .set("access_token", "ini invalid token")
             .then((response) => {
@@ -45,7 +45,7 @@ describe("Resto Routes Test", () => {
 
     describe("GET /resto/order/food - return order by restaurant id", () => {
         test("200 Success get food orders by restaurant id, return array", (done) => {
-        request(app)
+        request(server)
             .get("/resto/order/food")
             .set({ access_token: user_access_token })
             .then((response) => {
@@ -62,7 +62,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("401 Failed get food orders by restaurant id with invalid token - should return error unauthorized", (done) => {
-        request(app)
+        request(server)
             .get("/resto/order/food")
             .set("access_token", "ini invalid token")
             .then((response) => {
@@ -79,7 +79,7 @@ describe("Resto Routes Test", () => {
 
     describe("GET /resto/food - return data all foods", () => {
         test("200 Success get all foods data, return array", (done) => {
-        request(app)
+        request(server)
             .get("/resto/food")
             .set({ access_token: user_access_token })
             .then((response) => {
@@ -98,7 +98,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("401 Failed get foods with invalid token - should return error unauthorized", (done) => {
-        request(app)
+        request(server)
             .get("/resto/food")
             .set("access_token", "ini invalid token")
             .then((response) => {
@@ -115,7 +115,7 @@ describe("Resto Routes Test", () => {
 
     describe("GET /resto/food/:id - return data one food", () => {
         test("200 Success get one food data, return object", (done) => {
-        request(app)
+        request(server)
             .get("/resto/food/9")
             .set({ access_token: user_access_token })
             .then((response) => {
@@ -134,7 +134,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("403 Failed get one food - return error forbidden", (done) => {
-            request(app)
+            request(server)
                 .get("/resto/food/25")
                 .set({ access_token: user_access_token })
                 .then((response) => {
@@ -149,7 +149,7 @@ describe("Resto Routes Test", () => {
             });
 
         test("404 Failed get one food data, return error", (done) => {
-        request(app)
+        request(server)
             .get("/resto/food/1000")
             .set({ access_token: user_access_token })
             .then((response) => {
@@ -164,7 +164,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("401 Failed get one food with invalid token - should return error unauthorized", (done) => {
-        request(app)
+        request(server)
             .get("/resto/food/9")
             .set("access_token", "ini invalid token")
             .then((response) => {
@@ -181,7 +181,7 @@ describe("Resto Routes Test", () => {
 
     describe("GET /resto/food/filter/:id - return data filtered foods", () => {
         test("200 Success get filetered food data, return object", (done) => {
-        request(app)
+        request(server)
             .get("/resto/food/filter/9")
             .set({ access_token: user_access_token })
             .then((response) => {
@@ -200,7 +200,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("401 Failed get filtered food data with invalid token - should return error unauthorized", (done) => {
-            request(app)
+            request(server)
                 .get("/resto/food/filter/9")
                 .set("access_token", "ini invalid token")
                 .then((response) => {
@@ -218,7 +218,7 @@ describe("Resto Routes Test", () => {
     
     describe("GET /resto/food/filterDate/:id - return data filtered foods by date", () => {
         test("200 Success get filetered date food data, return object", (done) => {
-        request(app)
+        request(server)
             .get("/resto/food/filterDate/9")
             .set({ access_token: user_access_token })
             .then((response) => {
@@ -233,7 +233,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("401 Failed get filtered food data with invalid token - should return Internal Server Error", (done) => {
-            request(app)
+            request(server)
                 .get("/resto/food/filter/9")
                 .set("access_token", "ini invalid token")
                 .then((response) => {
@@ -251,7 +251,7 @@ describe("Resto Routes Test", () => {
 
     describe("POST /resto/food - create new resto food", () => {
         test("201 Success added food resto - should create new food resto", (done) => {
-        request(app)
+        request(server)
             .post("/resto/food")
             .send({
             name: "udang goreng tepung",
@@ -284,7 +284,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("400 Failed create food - should return error - Name is required", (done) => {
-        request(app)
+        request(server)
             .post("/resto/food")
             .send({
             price: 25000,
@@ -313,7 +313,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("400 Failed create food - should return error - Price is required", (done) => {
-        request(app)
+        request(server)
             .post("/resto/food")
             .send({
             name: "udang goreng tepung",
@@ -342,7 +342,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("400 Failed create food - should return error - ImageUrl is required", (done) => {
-        request(app)
+        request(server)
             .post("/resto/food")
             .send({
             name: "udang goreng tepung",
@@ -371,7 +371,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("400 Failed create food - should return error - Description is required", (done) => {
-        request(app)
+        request(server)
             .post("/resto/food")
             .send({
             name: "udang goreng tepung",
@@ -400,7 +400,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("400 Failed create food - should return error - Description is required", (done) => {
-        request(app)
+        request(server)
             .post("/resto/food")
             .send({
             name: "udang goreng tepung",
@@ -428,7 +428,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("400 Failed create food - should return error - Quantity is required", (done) => {
-        request(app)
+        request(server)
             .post("/resto/food")
             .send({
             name: "udang goreng tepung",
@@ -456,7 +456,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("400 Failed create food - should return error - CategoryId is required", (done) => {
-        request(app)
+        request(server)
             .post("/resto/food")
             .send({
             name: "udang goreng tepung",
@@ -483,7 +483,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("401 Failed create food with invalid token - should return error unauthorized", (done) => {
-        request(app)
+        request(server)
             .post("/resto/food")
             .send({
             name: "udang goreng tepung",
@@ -511,7 +511,7 @@ describe("Resto Routes Test", () => {
 
     describe("DELETE /resto/food/:id - delete food resto by id", () => {
         test("200 Success deleted food", (done) => {
-        request(app)
+        request(server)
             .delete("/resto/food/1")
             .set({ access_token: user_access_token })
             .then((response) => {
@@ -526,7 +526,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("403 Failed delete food - return error forbidden", (done) => {
-        request(app)
+        request(server)
             .delete("/resto/food/25")
             .set({ access_token: user_access_token })
             .then((response) => {
@@ -541,7 +541,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("404 Failed delete food - food not found, return error", (done) => {
-        request(app)
+        request(server)
             .delete("/resto/food/1000")
             .set({ access_token: user_access_token })
             .then((response) => {
@@ -556,7 +556,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("401 Failed create food with invalid token - should return error unauthorized", (done) => {
-        request(app)
+        request(server)
             .delete("/resto/food/100")
             .set("access_token", "ini invalid token")
             .then((response) => {
@@ -573,7 +573,7 @@ describe("Resto Routes Test", () => {
 
     describe("PUT /resto/food/:id - edit food resto by id", () => {
         test("200 Success edit food resto", (done) => {
-        request(app)
+        request(server)
             .put("/resto/food/10")
             .send({
             name: "Edit food test",
@@ -599,7 +599,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("404 Failed edit food - food not found, return error", (done) => {
-        request(app)
+        request(server)
             .put("/resto/food/1000")
             .send({
             name: "Edit food test",
@@ -625,7 +625,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("401 Failed edit food with invalid token - should return error unauthorized", (done) => {
-        request(app)
+        request(server)
             .put("/resto/food/100")
             .send({
             name: "Edit food test",
@@ -651,7 +651,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("403 Failed edit one food - return error forbidden", (done) => {
-            request(app)
+            request(server)
                 .put("/resto/food/25")
                 .send({
                     name: "Edit food test",
@@ -679,7 +679,7 @@ describe("Resto Routes Test", () => {
 
     describe("PATCH /resto/food/food-status/:id - edit food status", () => {
         test("200 success edit food status", (done) => {
-        request(app)
+        request(server)
             .patch("/resto/food/food-status/6")
             .send({ status: "popular" })
             .set("access_token", user_access_token)
@@ -695,7 +695,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("404 Failed edit food - food not found, return error", (done) => {
-        request(app)
+        request(server)
             .patch("/resto/food/food-status/1000")
             .send({ status: "popular" })
             .set({ access_token: user_access_token })
@@ -711,7 +711,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("401 Failed edit food - invalid token - should return error unauthorized", (done) => {
-        request(app)
+        request(server)
             .patch("/resto/food/food-status/6")
             .send({ status: "popular" })
             .set("access_token", "ini invalid token")
@@ -727,7 +727,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("403 Failed edit food - return error forbidden", (done) => {
-            request(app)
+            request(server)
                 .patch("/resto/food/food-status/25")
                 .send({ status: "popular" })
                 .set({ access_token: user_access_token })
@@ -745,7 +745,7 @@ describe("Resto Routes Test", () => {
 
     describe("PATCH /resto/food/food-active/:id - edit food to inactive", () => {
         test("200 success edit food to inactive", (done) => {
-        request(app)
+        request(server)
             .patch("/resto/food/food-active/6")
             .send({ is_active: false })
             .set("access_token", user_access_token)
@@ -761,7 +761,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("404 Failed edit food - food not found, return error", (done) => {
-        request(app)
+        request(server)
             .patch("/resto/food/food-active/1000")
             .send({ is_active: false })
             .set({ access_token: user_access_token })
@@ -777,7 +777,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("401 Failed edit food - invalid token - should return error unauthorized", (done) => {
-        request(app)
+        request(server)
             .patch("/resto/food/food-active/6")
             .send({ is_active: false })
             .set("access_token", "ini invalid token")
@@ -793,7 +793,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("403 Failed edit food - return error forbidden", (done) => {
-            request(app)
+            request(server)
                 .patch("/resto/food/food-active/25")
                 .send({ is_active: false })
                 .set({ access_token: user_access_token })
@@ -811,7 +811,7 @@ describe("Resto Routes Test", () => {
 
     describe("POST /resto/restaurants - create new restaurant", () => {
         test("201 Success added restaurant - should create new food resto", (done) => {
-        request(app)
+        request(server)
             .post("/resto/restaurants")
             .send({
             name: "Omnikopi",
@@ -842,7 +842,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("400 Failed added restaurant - should return error - Name is required", (done) => {
-        request(app)
+        request(server)
             .post("/resto/restaurants")
             .send({
             logoUrl: "https://tinyurl.com/2z6wfxv6",
@@ -870,7 +870,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("400 Failed added restaurant - should return error - LogoUrl is required", (done) => {
-        request(app)
+        request(server)
             .post("/resto/restaurants")
             .send({
             name: "Omnikopi",
@@ -898,7 +898,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("400 Failed added restaurant - should return error - description is required", (done) => {
-        request(app)
+        request(server)
             .post("/resto/restaurants")
             .send({
             name: "Omnikopi",
@@ -925,7 +925,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("400 Failed added restaurant - should return error - type is required", (done) => {
-        request(app)
+        request(server)
             .post("/resto/restaurants")
             .send({
             name: "Omnikopi",
@@ -953,7 +953,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("400 Failed added restaurant - should return error - Open_Time is required", (done) => {
-        request(app)
+        request(server)
             .post("/resto/restaurants")
             .send({
             name: "Omnikopi",
@@ -981,7 +981,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("400 Failed added restaurant - should return error - Close_Time is required", (done) => {
-        request(app)
+        request(server)
             .post("/resto/restaurants")
             .send({
             name: "Omnikopi",
@@ -1009,7 +1009,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("400 Failed added restaurant - should return error - address is required", (done) => {
-        request(app)
+        request(server)
             .post("/resto/restaurants")
             .send({
             name: "Omnikopi",
@@ -1036,7 +1036,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("400 Failed added restaurant - should return error - Internal server error", (done) => {
-        request(app)
+        request(server)
             .post("/resto/restaurants")
             .send({
             name: "Omnikopi",
@@ -1064,7 +1064,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("401 Failed create restaurant with invalid token - should return error unauthorized", (done) => {
-        request(app)
+        request(server)
             .post("/resto/restaurants")
             .send({})
             .set("access_token", "ini invalid token")
@@ -1082,7 +1082,7 @@ describe("Resto Routes Test", () => {
 
     describe("GET /resto/restaurants - return restaurants based on userId", () => {
         test("200 Success get restaurant data, return object", (done) => {
-        request(app)
+        request(server)
             .get("/resto/restaurants")
             .set({ access_token: user_access_token })
             .then((response) => {
@@ -1100,7 +1100,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("401 Failed get restaurant data - invalid token - should return error unauthorized", (done) => {
-        request(app)
+        request(server)
             .get("/resto/restaurants")
             .set("access_token", "ini invalid token")
             .then((response) => {
@@ -1117,7 +1117,7 @@ describe("Resto Routes Test", () => {
 
     describe("PUT /resto/restaurants - edit restaurant data", () => {
         test("200 Success edit restaurant data", (done) => {
-        request(app)
+        request(server)
             .put("/resto/restaurants")
             .send({
             name: "Markobar",
@@ -1136,7 +1136,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("401 Failed edit restaurant - invalid token - should return error unauthorized", (done) => {
-        request(app)
+        request(server)
             .put("/resto/restaurants")
             .send({
             name: "Markobar",
@@ -1157,7 +1157,7 @@ describe("Resto Routes Test", () => {
 
     describe("DELETE /resto/restaurants - delete restaurant by id", () => {
         test("200 Success deleted restaurant", (done) => {
-        request(app)
+        request(server)
             .delete("/resto/restaurants")
             .set({ access_token: user_access_token })
             .then((response) => {
@@ -1172,7 +1172,7 @@ describe("Resto Routes Test", () => {
         });
 
         test("401 Failed deleted restaurant - invalid token - should return error unauthorized", (done) => {
-        request(app)
+        request(server)
             .delete("/resto/restaurants")
             .set("access_token", "ini invalid token")
             .then((response) => {
