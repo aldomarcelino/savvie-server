@@ -1,4 +1,4 @@
-const app = require("../app");
+const {server} = require("../app");
 const request = require("supertest");
 const { sequelize, Food } = require("../models");
 const { queryInterface } = sequelize;
@@ -11,7 +11,7 @@ const user_access_token =
 describe("Payment Routes Test", () => {
   describe("POST /xendit/topup - topup balance through xendit", () => {
     test("200 Success topup balance - should increment balance to wallet", (done) => {
-      request(app)
+      request(server)
         .post("/xendit/topup")
         .send({
           balance: 50000,
@@ -33,7 +33,7 @@ describe("Payment Routes Test", () => {
     });
 
     test("401 Failed topup balance with invalid token - should return error unauthorized", (done) => {
-      request(app)
+      request(server)
         .post("/xendit/topup")
         .send({
           balance: 50000,
@@ -53,7 +53,7 @@ describe("Payment Routes Test", () => {
 
   describe("POST /xendit/success - success message after topup", () => {
     test("200 Success message after topup balance", (done) => {
-      request(app)
+      request(server)
         .post("/xendit/success")
         .send({
           external_id: 2,
@@ -74,7 +74,7 @@ describe("Payment Routes Test", () => {
     });
 
     test("401 Failed topup balance with invalid token - should return error unauthorized", (done) => {
-      request(app)
+      request(server)
         .post("/midtrans/topup")
         .send({
           balance: 50000,
@@ -94,7 +94,7 @@ describe("Payment Routes Test", () => {
 
   describe("POST /midtrans/topup - topup balance through midtrans", () => {
     test("201 Success topup balance - should return transaction token and increment balance to wallet", (done) => {
-      request(app)
+      request(server)
         .post("/midtrans/topup")
         .send({
           balance: 50000,
@@ -113,7 +113,7 @@ describe("Payment Routes Test", () => {
     });
 
     test("401 Failed topup balance with invalid token - should return error unauthorized", (done) => {
-      request(app)
+      request(server)
         .post("/midtrans/topup")
         .send({
           balance: 50000,

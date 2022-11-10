@@ -1,4 +1,4 @@
-const app = require("../app");
+const {server} = require("../app");
 const request = require("supertest");
 const { sequelize, Restaurants } = require("../models");
 const { queryInterface } = sequelize;
@@ -17,7 +17,7 @@ const user_access_token =
 describe("Restaurants Routes Test", () => {
     describe("GET /restaurants - return data all restaurants", () => {
         test("200 Success get all restaurants data, return array", (done) => {
-        request(app)
+        request(server)
             .get("/restaurants")
             .set({access_token: user_access_token})
             .then((response) => {
@@ -37,7 +37,7 @@ describe("Restaurants Routes Test", () => {
 
     describe("GET /restaurants/search - return restaurants by radius 1500m", () => {
         test("200 Success get restaurants by radius 1500m, return array", (done) => {
-        request(app)
+        request(server)
             .get("/restaurants/search")
             .set({access_token: user_access_token})
             .then((response) => {
@@ -54,7 +54,7 @@ describe("Restaurants Routes Test", () => {
 
     describe("GET /restaurants/:id - return data restaurants by Id", () => {
         test("200 Success get one restaurants data, return object", (done) => {
-        request(app)
+        request(server)
             .get("/restaurants/2")
             .set({access_token: user_access_token})
             .then((response) => {
@@ -73,7 +73,7 @@ describe("Restaurants Routes Test", () => {
         });
 
         test("404 Failed get one restaurant data - data not found, return error", (done) => {
-            request(app)
+            request(server)
                 .get("/restaurants/100")
                 .set({access_token: user_access_token})
                 .then((response) => {

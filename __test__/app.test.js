@@ -1,70 +1,71 @@
-// require("dotenv").config();
-// const { server: app } = require("../app");
-// const io = require("socket.io");
-// const { io: Server } = require("../app");
+const { server: app } = require("../app");
+const io = require("socket.io-client");
+const { io: server } = require("../app");
 
-// jest.setTimeout(20000);
+jest.setTimeout(20000);
+describe("run socket", () => {
+  server.attach(3005);
+  let socket;
+  let socketCustomer;
 
-// Server.attach(4000);
-// let socket;
+  beforeAll((done) => {
+    socket = io("http://localhost:3005");
+    socketCustomer = io("http://localhost:3005");
 
-// beforeAll((done) => {
-//   socket = io.connect("http://localhost:4000", {
-//     "reconnection delay": 0,
-//     "reopen delay": 0,
-//     "force new connection": true,
-//   });
-//   socket.on("connect", function () {
-//     console.log("worked...");
-//   });
-//   socket.on("disconnect", function () {
-//     console.log("disconnected...");
-//   });
-// });
+    socket.on("connect", function () {
+      console.log("worked...");
+      done();
+    });
+    socket.on("disconnect", function () {
+      console.log("disconnected...");
+    });
+  });
 
-// afterAll((done) => {
-//   socket.disconnect();
-//   done();
-// });
+  afterAll((done) => {
+    socket.disconnect();
+    socketCustomer.disconnect();
+    server.close();
+    done();
+  });
 
-// describe("Socket Routes Test", () => {
-//   test("Socket create-room", (done) => {
-//     const data = {
-//       message: "Makan ikan",
-//     };
+  describe("Socket Routes Test", () => {
+    test("Socket join-room", (done) => {
+      socket.emit("join-room", 1);
+      socket.on("success-join", (id) => {
+        console.log("CALEED <---------");
+        try {
+          expect(id).toBe(1);
+          done();
+        } catch (error) {
+          done(error);
+        }
+      });
+    });
 
-//     socket.on("create-room", (dataRes) => {
-//       try {
-//         expect(dataRes).toBe(dataRes);
-//         done();
-//       } catch (error) {
-//         done(error);
-//       }
-//     });
-//   });
+    test("Socket location", (done) => {
+      const data = {
+        id: 1,
+        data: "lokasi",
+      };
 
-//   test("Socket location", (done) => {
-//     const data = {
-//       message: "Makan ikan",
-//     };
+      socket.emit("join-room", data.id);
+      socketCustomer.emit("join-room", data.id);
 
-//     socket.emit("locationDriver", (payload) => {
-//       try {
-//         expect(payload).toHaveProperty("id");
-//         expect(payload).toHaveProperty("data");
-//         done();
-//       } catch (err) {
-//         done(err);
-//       }
-//     });
+      socket.on("success-join", (id) => {
+        socketCustomer.on("success-join", (id) => {
+          socket.emit("location", data);
 
-//     socket.on("location", (dataRes) => {
-//       try {
-//         expect(dataRes).toBe(dataRes);
-//         done();
-//       } catch (error) {
-//         done(error);
-//       }
-//     });
-//   });
-// });
+          console.log("HEREEE");
+          socketCustomer.on("locationDriver", (result) => {
+            try {
+              expect(result).toEqual(data.data);
+              done();
+            } catch (error) {
+              done(error);
+            }
+          });
+        });
+      });
+    });
+  });
+});
