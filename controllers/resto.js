@@ -386,7 +386,7 @@ class Controller {
                 include: [
                   {
                     model: Payment,
-                    order: [["id", "ASC"]],
+                    order: [["id", "DESC"]],
                     include: [User],
                   },
                 ],
