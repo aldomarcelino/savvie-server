@@ -19,7 +19,7 @@ describe("Restaurants Routes Test", () => {
         test("200 Success get all restaurants data, return array", (done) => {
         request(server)
             .get("/restaurants")
-            .set({access_token: user_access_token})
+            // .set({access_token: user_access_token})
             .then((response) => {
                 const { body, status } = response;
                 expect(status).toBe(200);
@@ -39,7 +39,7 @@ describe("Restaurants Routes Test", () => {
         test("200 Success get restaurants by radius 1500m, return array", (done) => {
         request(server)
             .get("/restaurants/search")
-            .set({access_token: user_access_token})
+            // .set({access_token: user_access_token})
             .then((response) => {
                 const { body, status } = response;
                 expect(status).toBe(200);
@@ -56,7 +56,7 @@ describe("Restaurants Routes Test", () => {
         test("200 Success get one restaurants data, return object", (done) => {
         request(server)
             .get("/restaurants/2")
-            .set({access_token: user_access_token})
+            // .set({access_token: user_access_token})
             .then((response) => {
                 const { body, status } = response;
                 expect(status).toBe(200);
@@ -74,8 +74,8 @@ describe("Restaurants Routes Test", () => {
 
         test("404 Failed get one restaurant data - data not found, return error", (done) => {
             request(server)
-                .get("/restaurants/100")
-                .set({access_token: user_access_token})
+                .get("/restaurants/1000")
+                // .set({access_token: user_access_token})
                 .then((response) => {
                     const { body, status } = response;
                     expect(status).toBe(404);
