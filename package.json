@@ -9,7 +9,7 @@
     "test": "jest --runInBand --forceExit --verbose --detectOpenHandles --coverage",
     "seed": "sequelize db:drop && sequelize-cli db:create && sequelize-cli db:migrate && sequelize-cli db:seed:all",
     "seed-test": "npx sequelize-cli db:drop --env test && npx sequelize-cli db:create --env test && npx sequelize-cli db:migrate --env test && npx sequelize-cli db:seed:all --env test",
-    "start": "nodemon ./bin/www"
+    "start": "node ./bin/www"
   },
   "keywords": [],
   "author": "",
